@@ -1,0 +1,22 @@
+{% extends './layout.html' %}
+{% block title %} Datos {% endblock %}
+{% block body %}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h2>Seleccionar Datos CSV</h2>
+        <div>
+          <form action="/upload-file" method="POST" enctype="multipart/form-data">
+            <div class="input-group mb-3">
+              <input type="file" class="custom-file-input" name="archivo" id="CSV">
+              
+            </div>
+            <button calss="btn btn-primary" type="submit">Subir archivo</button>
+          </form>
+        </div>
+        
+
+    </div>
+</div>
+
+{% endblock %}

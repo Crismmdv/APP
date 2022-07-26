@@ -1,0 +1,107 @@
+{% extends './layout.html' %}
+{% block title %} titulos 
+
+
+{% endblock %}
+
+{% block body %}
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+<py-env>
+    - pandas
+    - numpy
+</py-env>
+
+<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+<style>
+    .btn-text-left{
+        text-align: left;	
+    }
+    .btn-text-right{
+        text-align: right;
+    }
+     
+     
+    .btn-text-center{
+        text-align: center;	
+    }
+</style>
+
+
+<h2>Correlacione su tabla con los <br> {{cabecera}}</h2>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        
+        
+        <div class="table-responsive">
+            <table class="table table-striped" id="select1">
+                <thead>
+                    <tr>
+                       <th> mg/L</th>
+                       <th>Aniones y Cationes </th> 
+                       <th>Validación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <form  action="" method="post" id="Ftabval" enctype="multipart/form-data">
+                        {% for gp in elem %}
+                        
+                        <tr>
+                            <td>{{gp}}</td>
+                            <td>
+                                
+                                    <select id="{{gp}}" name="{{gp}}" class="form-select" aria-label="Default select example" required>
+                                        <option selected>Seleccione columna</option>
+                                        {% for e in tabla %}
+                                        <option value="{{e}}">{{e}}</option>
+                                        {% endfor %}
+                                    </select>
+                                
+                            </td>
+                            <td>
+                                <p id="a{{gp}}">Sin validar</p>
+                                
+                            </td>
+                            
+                        </tr>
+                        {% endfor %}
+                        
+                    </form>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+<br>
+<div class="btn-text-center">
+    <button id="run" type="button" class="btn btn-primary" pys-onClick="count">Validar</button>
+</div>
+<div class="btn-text-right">
+    <input id= "sgte" type="submit" form="Ftabval" value="Siguiente" disabled="disabled">
+    <!--<button id = "sgte" type="button" onclick= "window.location.href={{ url_for( 'Prueba') }};" disabled>Siguiente</button>-->
+</div>
+<py-script>
+    import pandas as pd
+    
+    dtipos= {{dtip}}
+    def count(*args, **kwargs):
+        check=list()
+        {% for i in elem %}
+        input_text = Element("{{i}}")    
+        fin="a"+"{{i}}"
+        op = Element(fin)
+        if dtipos[input_text.value] == "float64":
+            key= "Válido"
+            check.append(key)
+        else: key = "Revisar valores"
+        number = len(input_text.value)
+        op.write(key)
+        if len(check) == len({{elem}}): document.getElementById("sgte").disabled = False
+        if len(check) != len({{elem}}): document.getElementById("sgte").disabled = True
+        {% endfor %}
+        
+</py-script>           
+
+{% endblock %}

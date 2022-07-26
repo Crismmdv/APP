@@ -359,9 +359,8 @@ def plotpiper(df,
     print("Trilinear Piper plot created. Saving it to %s \n" %cwd)
     
     # Save the figure
-    #plt.savefig(figname + '.' + figformat, format=figformat, 
-                #bbox_inches='tight', dpi=300)
+    plt.savefig(figname + '.' + figformat, format=figformat,bbox_inches='tight', dpi=300)
     
-    return (fig)
+    return (figname)
 
 

@@ -1,6 +1,4 @@
-from distutils.debug import DEBUG
 import os
-from telnetlib import ENCRYPT
 from dotenv import load_dotenv
 from flask_wtf import FlaskForm
 #from requests import request as rqt
@@ -18,10 +16,10 @@ class Config:
     ENCRYPT_DB=True
 
     TEMPLATE_FOLDER ="views/templates/"
-    STATIC_FOLDER = "views/statics/"
+    STATIC_FOLDER = "views/static/"
 
     SECRET_KEY ='botonsecreto'
-    UPLOAD_FOLDER='static/cargas'
+    UPLOAD_FOLDER='views/static/cargas/'
 
 class UploadFileForm(FlaskForm):
     file= FileField("File", validators=[InputRequired()])

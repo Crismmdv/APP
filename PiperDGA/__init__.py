@@ -28,12 +28,14 @@ def principal():
 def Datos():
     if request.method=="POST":
         if request.files:
-            arch =request.files["CSV"]
-            ruta3= os.path.join(Config.UPLOAD_FOLDER, arch.filename)
+            arch =request.files['archivo']
+            ruta3= os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config["UPLOAD_FOLDER"], arch.filename)
+            ruta2 =os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config["UPLOAD_FOLDER"])
             arch.save(ruta3)
-            print (ruta3)
+            #print (ruta3)
 
             session["ruta"]=ruta3
+            session["ruta2"]=ruta2
             return redirect(url_for('Tablas'))
 
     return render_template('Datos.html')
@@ -118,13 +120,17 @@ def Validacion():
 @app.route('/Grafico', methods=['GET','POST'])
 def Grafico():
     dicc=session["llaves"]
+    
     ruta=session["ruta"] 
     tit = pd.read_csv(ruta)
-    Y_df=tit
-    format_df= creardf_piper(Y_df,'','',25, dicc)
+    df=tit
+    format_df= creardf_piper(Y_df=df,sz=25, di=dicc)
     filtro=''
     filtro2=''
-    img=plotpiper(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1)
+    dir=session["ruta2"]
+    img1=plotpiper(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1)
+    img=(os.path.join("C:\Users\cristobal.machuca\OneDrive - ug.uchile.cl\App piper" ,img1))
+    print (img)
     return render_template('clear.html',df=img)
 
 

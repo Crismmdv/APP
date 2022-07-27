@@ -158,11 +158,11 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict()):
         
         format_df=format_sf.copy()
 
-        format_df['Label'] = (Y_df['Contexto_H']).map(str)+' / '+((Y_df['Tipo_Pto'])).map(str)[0:15]
-        format_df['Sample'] = Y_df['Cod_Muestr'].copy
+        format_df['Label'] = (Y_df['SubCuenca'])+' / '+((Y_df['Tipo_Pto']))
+        format_df['Sample'] = Y_df['Cod_Muestr']
         format_df['Size'] = sz
         format_df['Alpha'] = 1
-
+        
         
 
 
@@ -187,6 +187,6 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict()):
         
 
         format_df.reset_index(inplace=True, drop=True)
-
+        print (format_df)
         
         return format_df

@@ -1,3 +1,3 @@
 from .funciones import creardf_piper
-from .piper import plotpiper
+from .piper import plot
  

@@ -5,6 +5,7 @@ from flask_wtf import FlaskForm
 from wtforms import FileField, SubmitField
 from wtforms.validators import InputRequired
 
+
 load_dotenv()
 
 class Config:
@@ -20,6 +21,7 @@ class Config:
 
     SECRET_KEY ='botonsecreto'
     UPLOAD_FOLDER='views/static/cargas/'
+    IMAGES_UPLOAD= "C:/Users/cristobal.machuca/OneDrive - ug.uchile.cl/App piper/PiperDGA/views/static/images/uploads/"
 
 class UploadFileForm(FlaskForm):
     file= FileField("File", validators=[InputRequired()])

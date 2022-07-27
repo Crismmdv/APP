@@ -1,10 +1,11 @@
 from distutils.command.config import config
 from distutils.command.upload import upload
+from posixpath import sep
 from config import Config, UploadFileForm
-from .routes import plotpiper, creardf_piper
+from .routes import creardf_piper, plot
 
 from contextlib import redirect_stderr
-from flask import Flask, render_template, request, redirect, url_for, session, Blueprint
+from flask import Flask, render_template, request, redirect, url_for, session, Response
 from flask_wtf import FlaskForm
 #from requests import request as rqt
 from wtforms import FileField, SubmitField
@@ -14,9 +15,9 @@ from wtforms.validators import InputRequired
 import pandas as pd
 
 import matplotlib.pyplot as plt
-
-
-
+from wqchartpy import piper
+import io
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 app = Flask(__name__, static_folder=Config.STATIC_FOLDER, template_folder=Config.TEMPLATE_FOLDER)
 app.config.from_object(Config)
 
@@ -81,7 +82,7 @@ def Tablas():
 @app.route('/Visor')
 def Visor():
     graficos=("Schoeller","Piper", "Stiff")
-    return render_template('visor.html', tipografico=graficos)
+    return render_template('clear.html', tipografico=graficos)
 
 @app.route('/Prueba')
 def Prueba():
@@ -113,25 +114,28 @@ def Validacion():
             #print (request.form[elm])
         next=True
         session["llaves"]=dict(llaves)
-        return redirect(url_for('Grafico'))
+        return redirect(url_for('Visor'))
         
     return render_template('carga.html',tabla=titulos,elem=elementos,cabecera='Parámetros '+tg, dtip=dtipo)
 
-@app.route('/Grafico', methods=['GET','POST'])
+@app.route('/Grafico.jpg', methods=['GET','POST'])
 def Grafico():
     dicc=session["llaves"]
     
     ruta=session["ruta"] 
-    tit = pd.read_csv(ruta)
+    tit = pd.read_csv(ruta,",")
     df=tit
-    format_df= creardf_piper(Y_df=df,sz=25, di=dicc)
+    format_df= creardf_piper(Y_df=df,sz=50, di=dicc)
     filtro=''
     filtro2=''
-    dir=session["ruta2"]
-    img1=plotpiper(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1)
-    img=(os.path.join("C:\Users\cristobal.machuca\OneDrive - ug.uchile.cl\App piper" ,img1))
-    print (img)
-    return render_template('clear.html',df=img)
+    format_df.to_csv("formato.csv",sep=";")
+    
+    fig=plot(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1)
+    output = io.BytesIO()
+    FigureCanvas(fig).print_jpg(output)
+    
+    
+    return Response(output.getvalue(), mimetype='image/png')
 
 
 

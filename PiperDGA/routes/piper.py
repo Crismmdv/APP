@@ -8,11 +8,12 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from config import Config
 
 from .ions import ions_WEIGHT, ions_CHARGE
 
 # Define the plotting function
-def plotpiper(df, 
+def plot(df, 
          unit='mg/L', 
          figname='triangle Piper diagram', 
          figformat='jpg',nc=1):
@@ -350,17 +351,45 @@ def plotpiper(df,
                           orientation='vertical', fraction=0.025, pad=0.05)
         cb.ax.set_ylabel('$TDS$' + ' ' + '$(mg/L)$', rotation=90, labelpad=-75, fontsize=10)
     
-    plt.legend(bbox_to_anchor=(0.15, 0.875), markerscale=1, fontsize=10,
-               frameon=False, 
+    lgd=plt.legend(bbox_to_anchor=(0, 1.05), markerscale=1, fontsize=10, borderaxespad=1,
+               frameon=False, loc="upper left",
                labelspacing=0.25, handletextpad=0.25,ncol=nc)
     
     # Display the info
-    cwd = os.getcwd()
+    #cwd = os.getcwd()
+    cwd = Config.IMAGES_UPLOAD
     print("Trilinear Piper plot created. Saving it to %s \n" %cwd)
-    
+    name=figname + '.' + figformat
     # Save the figure
-    plt.savefig(figname + '.' + figformat, format=figformat,bbox_inches='tight', dpi=300)
+    #plt.savefig(os.path.join(cwd,name), format=figformat,bbox_inches='tight', dpi=300)
     
-    return (figname)
+    return (fig) 
 
-
+if __name__ == '__main__':
+    # Example data
+    data = {'Sample' : ['sample1', 'sample2', 'sample3', 'sample4', 'sample5', 'sample6'],
+            'Label'  : ['C1', 'C2', 'C2', 'C3', 'C3', 'C1'],
+            'Color'  : ['red', 'green', 'green', 'blue', 'blue', 'red'],
+            'Marker' : ['o', 'o', 'o', 'o', 'o', 'o'],
+            'Size'   : [30, 30, 30, 30, 30, 30],
+            'Alpha'  : [0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+            'pH'     : [7.8, 7.6, 7.5, 7.7, 7.4, 7.1],
+            'Ca'     : [32, 46, 54, 50, 50, 134],
+            'Mg'     : [6, 11, 11, 11, 22, 21],
+            'Na'     : [28, 17, 16, 25, 25, 39],
+            'K'      : [2.8, 0.7, 2.4, 2.8, 0.5, 6.4],
+            'HCO3'   : [73, 201, 207, 244, 305, 275],
+            'CO3'    : [0, 0, 0, 0, 0, 0],
+            'Cl'     : [43, 14, 18, 18, 11, 96],
+            'SO4'    : [48, 9, 10, 9, 9, 100],
+            'TDS'    : [233, 299, 377, 360, 424, 673], 
+            }
+    df = pd.DataFrame(data)
+    # df = pd.read_csv('../data/data_template.csv')
+    # df = pd.read_csv('../data/Moreno_Merino _2021_Fig2b_dataset.csv')
+    # df.loc[df['Label']=='C1', 'Marker'] = 'o'
+    # df.loc[df['Label']=='C2', 'Marker'] = 's'
+    # df.loc[df['Label']=='C3', 'Marker'] = '^'
+    # df.loc[:, 'Color'] = df.loc[:, 'TDS'].values
+    plot(df, unit='mg/L', figname='triangle Piper diagram', figformat='jpg')
+    

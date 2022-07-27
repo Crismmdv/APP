@@ -82,7 +82,7 @@ def Tablas():
 @app.route('/Visor')
 def Visor():
     graficos=("Schoeller","Piper", "Stiff")
-    return render_template('clear.html', tipografico=graficos)
+    return render_template('colorsel.html', tipografico=graficos)
 
 @app.route('/Prueba')
 def Prueba():
@@ -109,11 +109,25 @@ def Validacion():
             
     if request.method=='POST':
         llaves=list()
+        if request.form["Clase1"]!="Ninguno" and request.form["Clase2"] !="Ninguno":
+            clasif=[("Clase1",request.form["Clase1"]),("Clase2",request.form["Clase2"])]
+            session["Clas"] = dict (clasif)
+        elif request.form["Clase1"]!="Ninguno" and request.form["Clase2"] =="Ninguno":
+            clasif=[("Clase1",request.form["Clase1"])]
+            session["Clas"] = dict (clasif)
+        elif request.form["Clase2"]!="Ninguno" and request.form["Clase1"] =="Ninguno":
+            clasif=[("Clase2",request.form["Clase2"])]
+            session["Clas"] = dict (clasif)
+        else: 
+            clasif=""
+            session["Clas"] = clasif
         for elm in elementos:
             llaves.append((elm,request.form[elm]))
+        
             #print (request.form[elm])
         next=True
         session["llaves"]=dict(llaves)
+        
         return redirect(url_for('Visor'))
         
     return render_template('carga.html',tabla=titulos,elem=elementos,cabecera='Parámetros '+tg, dtip=dtipo)
@@ -121,11 +135,12 @@ def Validacion():
 @app.route('/Grafico.jpg', methods=['GET','POST'])
 def Grafico():
     dicc=session["llaves"]
-    
+    clas=session["Clas"]
     ruta=session["ruta"] 
     tit = pd.read_csv(ruta,",")
     df=tit
-    format_df= creardf_piper(Y_df=df,sz=50, di=dicc)
+    print (clas)
+    format_df= creardf_piper(Y_df=df,sz=30, di=dicc,cla=clas)
     filtro=''
     filtro2=''
     format_df.to_csv("formato.csv",sep=";")
@@ -137,7 +152,10 @@ def Grafico():
     
     return Response(output.getvalue(), mimetype='image/png')
 
-
+@app.route('/Color')
+def Color():
+    
+    return render_template('colorsel.html')
 
 
 

@@ -351,7 +351,7 @@ def plot(df,
                           orientation='vertical', fraction=0.025, pad=0.05)
         cb.ax.set_ylabel('$TDS$' + ' ' + '$(mg/L)$', rotation=90, labelpad=-75, fontsize=10)
     
-    lgd=plt.legend(bbox_to_anchor=(0, 1.05), markerscale=1, fontsize=10, borderaxespad=1,
+    lgd=plt.legend(bbox_to_anchor=(-0.1, 1.05), markerscale=1, fontsize=10, borderaxespad=1,
                frameon=False, loc="upper left",
                labelspacing=0.25, handletextpad=0.25,ncol=nc)
     

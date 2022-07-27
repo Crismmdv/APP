@@ -132,7 +132,7 @@ def creardf_sc(Y_df,filtro='',filtro2='',sz=8):
     b=filtro2
     return format_df#,a,b
 
-def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict()):
+def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla=""):
     format_sf = pd.DataFrame()
     #filtro='F.A.E'
     #filtro2=''
@@ -157,8 +157,85 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict()):
         
         
         format_df=format_sf.copy()
+        if cla=="":
+            format_df['Label'] = "Muestras"
+            format_df['Color'] = "gray"
+            format_df['Marker'] = "o"
+        elif len(cla)==2:
+            
+            colores=['red','darkorange','lime','darkviolet','blue','cyan','pink','olive','mediumpurple','blueviolet',
+                'gold','gray','black','white','green','gray','magenta','skyblue', 'indigo','purple','brown','indigo','darkcyan']
+            simbolos =["*","d","o","s","v"]
 
-        format_df['Label'] = (Y_df['SubCuenca'])+' / '+((Y_df['Tipo_Pto']))
+            format_df['Label'] = (Y_df[cla['Clase1']])+' / '+((Y_df[cla['Clase2']]))
+            
+            clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())
+            clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
+            dict_col=dict(zip(clases1,colores))
+            dict_sim=dict(zip(clases2,simbolos))
+
+            y_seven = Y_df[cla['Clase1']].copy()
+            y_t = Y_df[cla['Clase2']].copy()
+
+            for i in clases1:
+                format_df.loc[y_seven==i, 'Color'] = dict_col[i]
+            for i in clases2:
+                format_df.loc[y_t==i, 'Marker'] = dict_sim[i]
+            
+        elif len(cla)==1:
+            for i in cla.keys():
+                if i == "Clase1":
+                    colores=['red','darkorange','lime','darkviolet','blue','cyan','pink','olive','mediumpurple','blueviolet',
+                        'gold','gray','black','white','green','gray','magenta','skyblue', 'indigo','purple','brown','indigo','darkcyan']
+                    #simbolos =["s","o","v","d","*"]
+
+                    format_df['Label'] = (Y_df[cla['Clase1']])#+' / '+((Y_df[cla['Clase2']]))
+                    
+                    clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())
+                    #clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
+                    dict_col=dict(zip(clases1,colores))
+                    #dict_sim=dict(zip(clases2,simbolos))
+
+                    y_seven = Y_df[cla['Clase1']].copy()
+                    #y_t = Y_df['Clase2'].copy()
+                    for i in clases1:
+                        format_df.loc[y_seven==i, 'Color'] = dict_col[i]
+                    format_df['Marker'] = 'o'
+                else:
+                    #colores=['red','darkorange','lime','darkviolet','blue','cyan','pink','olive','mediumpurple','blueviolet',
+                    #   'gold','gray','black','white','green','gray','magenta','skyblue', 'indigo','purple','brown','indigo','darkcyan']
+                    simbolos =["*","d","o","s","v"]
+
+                    format_df['Label'] = (Y_df[cla['Clase2']])#+' / '+((Y_df[cla['Clase2']]))
+                    
+                    #clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())
+                    clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
+                    #dict_col=dict(zip(clases1,colores))
+                    dict_sim=dict(zip(clases2,simbolos))
+
+                    #y_seven = Y_df[cla['Clase1']].copy()
+                    y_t = Y_df[cla['Clase2']].copy()
+                    for i in clases2:
+                        format_df.loc[y_t==i, 'Marker'] = dict_sim[i]
+                    format_df['Color'] = "grey"
+        else: 
+            format_df['Label'] = (Y_df['SubCuenca'])+' / '+((Y_df['Tipo_Pto']))
+            format_df.loc[y_seven=='Rio Grande Medio', 'Color'] = 'yellow'#; format_df.loc[y_2==filtro, 'Marker'] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
+            format_df.loc[y_seven=='Río Guatulame', 'Color'] = 'blue'#; format_df.loc[y_2==filtro, 'Marker'] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
+            format_df.loc[y_seven=='Rio Limari', 'Color'] = 'lime'#; format_df.loc[y_2==filtro ,'Marker' ] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
+            format_df.loc[y_seven=='Rio Hurtado', 'Color'] = 'cyan'#; format_df.loc[y_2==filtro ,'Marker' ] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
+            format_df.loc[y_seven=='Rio Grande Bajo', 'Color'] = 'magenta'#; format_df.loc[y_2==filtro ,'Marker' ] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
+            format_df.loc[y_seven=='Rio Grande Alto', 'Color'] = 'red'#; format_df.loc[y_2==filtro ,'Marker' ] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
+            format_df.loc[y_seven=='Fuera del Area de Estudio', 'Color'] = 'white'
+
+            
+            format_df.loc[y_t=='Superficial','Marker'] = 's'
+            format_df.loc[y_t=='Subterranea','Marker'] = 'o'
+            format_df.loc[y_t=='Vertiente','Marker'] = 'v'
+            format_df.loc[y_t=='Precipitacion','Marker'] = 'd'
+            format_df.loc[y_t=='Criosfera','Marker'] = '*'
+        
+        
         format_df['Sample'] = Y_df['Cod_Muestr']
         format_df['Size'] = sz
         format_df['Alpha'] = 1
@@ -166,20 +243,7 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict()):
         
 
 
-        format_df.loc[y_seven=='Rio Grande Medio', 'Color'] = 'yellow'#; format_df.loc[y_2==filtro, 'Marker'] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
-        format_df.loc[y_seven=='Río Guatulame', 'Color'] = 'blue'#; format_df.loc[y_2==filtro, 'Marker'] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
-        format_df.loc[y_seven=='Rio Limari', 'Color'] = 'lime'#; format_df.loc[y_2==filtro ,'Marker' ] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
-        format_df.loc[y_seven=='Rio Hurtado', 'Color'] = 'cyan'#; format_df.loc[y_2==filtro ,'Marker' ] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
-        format_df.loc[y_seven=='Rio Grande Bajo', 'Color'] = 'magenta'#; format_df.loc[y_2==filtro ,'Marker' ] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
-        format_df.loc[y_seven=='Rio Grande Alto', 'Color'] = 'red'#; format_df.loc[y_2==filtro ,'Marker' ] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
-        format_df.loc[y_seven=='Fuera del Area de Estudio', 'Color'] = 'white'
-
         
-        format_df.loc[y_t=='Superficial','Marker'] = 's'
-        format_df.loc[y_t=='Subterranea','Marker'] = 'o'
-        format_df.loc[y_t=='Vertiente','Marker'] = 'v'
-        format_df.loc[y_t=='Precipitacion','Marker'] = 'd'
-        format_df.loc[y_t=='Criosfera','Marker'] = '*'
 
         
         format_df=format_df.dropna(how='any')

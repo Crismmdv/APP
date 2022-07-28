@@ -1,12 +1,12 @@
 import os
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 from flask_wtf import FlaskForm
 #from requests import request as rqt
 from wtforms import FileField, SubmitField
 from wtforms.validators import InputRequired
 
 
-load_dotenv()
+#load_dotenv()
 
 class Config:
     SERVER_NAME = 'localhost:5000'

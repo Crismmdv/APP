@@ -15,7 +15,7 @@ from wtforms.validators import InputRequired
 import pandas as pd
 
 import matplotlib.pyplot as plt
-from wqchartpy import piper
+#from wqchartpy import piper
 import io
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 app = Flask(__name__, static_folder=Config.STATIC_FOLDER, template_folder=Config.TEMPLATE_FOLDER)

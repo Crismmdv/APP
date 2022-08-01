@@ -10,7 +10,7 @@ from wtforms.validators import InputRequired
 
 class Config:
     SERVER_NAME = 'localhost:5000'
-    DEBUG = True
+    DEBUG = False
 
     DATABASE_PATH = "Piper/database/qca.db"
     DB_TOKEN = os.environ.get("DB_TOKEN","")

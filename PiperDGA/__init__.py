@@ -22,7 +22,7 @@ from flask_cors import CORS
 
 app = Flask(__name__, static_folder=Config.STATIC_FOLDER, template_folder=Config.TEMPLATE_FOLDER)
 app.config.from_object(Config)
-
+CORS(app)
 
 @app.route('/')
 def principal():

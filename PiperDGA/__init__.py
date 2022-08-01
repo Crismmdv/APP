@@ -23,6 +23,8 @@ from flask_cors import CORS
 app = Flask(__name__, static_folder=Config.STATIC_FOLDER, template_folder=Config.TEMPLATE_FOLDER)
 app.config.from_object(Config)
 CORS(app)
+if __name__ =="__main__":
+    app.run()
 
 @app.route('/')
 def principal():

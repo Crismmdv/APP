@@ -150,7 +150,7 @@ def Grafico():
     fig=plot(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1)
     output = io.BytesIO()
     FigureCanvas(fig).print_jpg(output)
-    
+    os.remove(session["ruta"])
     
     return Response(output.getvalue(), mimetype='image/png')
 
@@ -159,5 +159,5 @@ def Color():
     
     return render_template('colorsel.html')
 
-os.remove(session["ruta"])
+
 

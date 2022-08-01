@@ -18,9 +18,11 @@ import matplotlib.pyplot as plt
 #from wqchartpy import piper
 import io
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from flask_cors import CORS
+
 app = Flask(__name__, static_folder=Config.STATIC_FOLDER, template_folder=Config.TEMPLATE_FOLDER)
 app.config.from_object(Config)
-
+CORS(app)
 
 @app.route('/')
 def principal():
@@ -143,7 +145,7 @@ def Grafico():
     format_df= creardf_piper(Y_df=df,sz=30, di=dicc,cla=clas)
     filtro=''
     filtro2=''
-    format_df.to_csv("formato.csv",sep=";")
+    #format_df.to_csv("formato.csv",sep=";")
     
     fig=plot(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1)
     output = io.BytesIO()
@@ -157,5 +159,5 @@ def Color():
     
     return render_template('colorsel.html')
 
-
+os.remove(session["ruta"])
 

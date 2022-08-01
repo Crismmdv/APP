@@ -1,1 +1,1 @@
-web: gunicorn PiperDGA:app
+web: gunicorn app:app

@@ -140,7 +140,7 @@ def Grafico():
     dicc=session["llaves"]
     clas=session["Clas"]
     ruta=session["ruta"] 
-    tit = pd.read_csv(ruta,",")
+    tit = pd.read_csv(ruta)
     df=tit
     print (clas)
     format_df= creardf_piper(Y_df=df,sz=30, di=dicc,cla=clas)
@@ -151,7 +151,7 @@ def Grafico():
     fig=plot(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1)
     output = io.BytesIO()
     FigureCanvas(fig).print_jpg(output)
-    os.remove(session["ruta"])
+    #os.remove(session["ruta"])
     
     return Response(output.getvalue(), mimetype='image/png')
 

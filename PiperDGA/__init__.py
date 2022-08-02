@@ -27,7 +27,7 @@ CORS(app)
 
 @app.route('/')
 def principal():
-    return ("Herachi") #render_template('index.html')
+    return render_template('index.html')
 @app.route('/Datos', methods=['GET','POST'])
 def Datos():
     if request.method=="POST":
@@ -36,7 +36,7 @@ def Datos():
             ruta3= os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config["UPLOAD_FOLDER"], arch.filename)
             ruta2 =os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config["UPLOAD_FOLDER"])
             arch.save(ruta3)
-            #print (ruta3)
+            print (ruta3)
 
             session["ruta"]=ruta3
             session["ruta2"]=ruta2
@@ -151,7 +151,7 @@ def Grafico():
     fig=plot(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1)
     output = io.BytesIO()
     FigureCanvas(fig).print_jpg(output)
-    #os.remove(session["ruta"])
+    os.remove(session["ruta"])
     
     return Response(output.getvalue(), mimetype='image/png')
 

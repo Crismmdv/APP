@@ -357,8 +357,8 @@ def plot(df,
     
     # Display the info
     #cwd = os.getcwd()
-    cwd = Config.IMAGES_UPLOAD
-    print("Trilinear Piper plot created. Saving it to %s \n" %cwd)
+    #cwd = Config.IMAGES_UPLOAD
+    #print("Trilinear Piper plot created. Saving it to %s \n" %cwd)
     name=figname + '.' + figformat
     # Save the figure
     #plt.savefig(os.path.join(cwd,name), format=figformat,bbox_inches='tight', dpi=300)

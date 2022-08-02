@@ -1,4 +1,4 @@
-from app import app
+from PiperDGA import app
 #from flask_cors import CORS
 
 #CORS(app)

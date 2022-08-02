@@ -27,7 +27,7 @@ CORS(app)
 
 @app.route('/')
 def principal():
-    return render_template('index.html')
+    return ("Herachi") #render_template('index.html')
 @app.route('/Datos', methods=['GET','POST'])
 def Datos():
     if request.method=="POST":

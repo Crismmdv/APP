@@ -133,13 +133,13 @@ def creardf_sc(Y_df,filtro='',filtro2='',sz=8):
     return format_df#,a,b
 
 def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla=""):
-    format_sf = pd.DataFrame()
+    format_df = pd.DataFrame()
     #filtro='F.A.E'
     #filtro2=''
     diccion=di
     for i in diccion.keys():
         
-        format_sf[i]=Y_df[diccion[i]].copy()
+        format_df[i]=Y_df[diccion[i]].copy()
     
     if False:
         return (Y_df)
@@ -150,13 +150,13 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla=""):
     #    format_df=format_sf.groupby([filtro,filtro2])
     #    return (format_df)
     else:
-        y_tds=Y_df['STD_mg_l'].copy()
-        y_seven = Y_df['SubCuenca'].copy() 
-        y_2 = Y_df['Contexto_H'].copy()
-        y_t = Y_df['Tipo_Pto'].copy()
+        #y_tds=Y_df['STD_mg_l'].copy()
+        #y_seven = Y_df['SubCuenca'].copy() 
+        #y_2 = Y_df['Contexto_H'].copy()
+        #y_t = Y_df['Tipo_Pto'].copy()
         
         
-        format_df=format_sf.copy()
+        #format_df=format_sf.copy()
         if cla=="":
             format_df['Label'] = "Muestras"
             format_df['Color'] = "gray"
@@ -236,7 +236,7 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla=""):
             format_df.loc[y_t=='Criosfera','Marker'] = '*'
         
         
-        format_df['Sample'] = Y_df['Cod_Muestr']
+        format_df['Sample'] = format_df['Cod'].copy()
         format_df['Size'] = sz
         format_df['Alpha'] = 1
         
@@ -251,6 +251,6 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla=""):
         
 
         format_df.reset_index(inplace=True, drop=True)
-        print (format_df)
+        #print (format_df)
         
         return format_df

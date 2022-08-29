@@ -87,7 +87,24 @@
                 </thead>
                 <tbody>
                     
-                                                
+                    <tr>
+                        <td>Código Muestra</td>
+                        <td>
+                                
+                            <select id="Cod" name="Cod" class="form-select" aria-label="Default select example" required>
+                                <option selected>Ninguno</option>
+                                {% for e in tabla %}
+                                <option value="{{e}}">{{e}}</option>
+                                {% endfor %}
+                            </select>
+                                
+                        </td>
+                        <td>
+                            <p id="aCod">Sin validar</p>
+                                
+                        </td>
+                            
+                    </tr>                            
                     <tr>
                         <td>Clase 1</td>
                         <td>
@@ -124,6 +141,7 @@
                         </td>
                             
                     </tr>
+                    
                         
                         
                     

@@ -112,6 +112,8 @@ def Validacion():
             
     if request.method=='POST':
         llaves=list()
+        if request.form["Cod"]!="Ninguno":
+            llaves.append(("Cod",request.form["Cod"]))
         if request.form["Clase1"]!="Ninguno" and request.form["Clase2"] !="Ninguno":
             clasif=[("Clase1",request.form["Clase1"]),("Clase2",request.form["Clase2"])]
             session["Clas"] = dict (clasif)
@@ -142,7 +144,7 @@ def Grafico():
     ruta=session["ruta"] 
     tit = pd.read_csv(ruta)
     df=tit
-    print (clas)
+    #print (df)
     format_df= creardf_piper(Y_df=df,sz=30, di=dicc,cla=clas)
     filtro=''
     filtro2=''

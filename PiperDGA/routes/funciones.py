@@ -217,7 +217,7 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla=""):
                     y_t = Y_df[cla['Clase2']].copy()
                     for i in clases2:
                         format_df.loc[y_t==i, 'Marker'] = dict_sim[i]
-                    format_df['Color'] = "grey"
+                    format_df['Color'] = "blue"
         else: 
             format_df['Label'] = (Y_df['SubCuenca'])+' / '+((Y_df['Tipo_Pto']))
             format_df.loc[y_seven=='Rio Grande Medio', 'Color'] = 'yellow'#; format_df.loc[y_2==filtro, 'Marker'] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6

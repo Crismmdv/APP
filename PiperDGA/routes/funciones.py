@@ -132,7 +132,7 @@ def creardf_sc(Y_df,filtro='',filtro2='',sz=8):
     b=filtro2
     return format_df#,a,b
 
-def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla=""):
+def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla="",std=False):
     format_df = pd.DataFrame()
     #filtro='F.A.E'
     #filtro2=''
@@ -238,6 +238,8 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla=""):
         
         format_df['Sample'] = format_df['Cod'].copy()
         format_df['Size'] = sz
+        if std:
+            format_df=escala_TDS(format_df,'TDS',sz,sz*4)
         format_df['Alpha'] = 1
         
         
@@ -254,3 +256,9 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla=""):
         #print (format_df)
         
         return format_df
+
+def escala_TDS(df,col,s_min=25,s_max=100):
+    v_min=min(df[col])
+    v_max=max(df[col])
+    df['Size']=s_min+df[col]/v_max*(s_max-s_min)
+    return df

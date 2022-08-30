@@ -68,7 +68,7 @@ def Tablas():
         if tg == "Schoeller":
             elementos = ('Cu', 'Cr','F', 'Fe', 'Mn', 'Mg', 'Se', 'Zn','As','Cd','Hg','NO3','Pb','Cl','SO4','TDS')
         elif tg== "Piper":
-            elementos= ('Cl','SO4','HCO3','CO3','Na','Ca','Mg','K')
+            elementos= ('Cl','SO4','HCO3','CO3','Na','Ca','Mg','K','TDS')
         elif tg== "Gibbs":
             elementos= ('Cl','HCO3','Na','Ca','TDS')
         session["elementos"]=elementos
@@ -82,9 +82,21 @@ def Tablas():
     return render_template('cargapiper.html',tabla=titulos,elem=elementos)   
 
 
-@app.route('/Visor')
+@app.route('/Visor', methods=['GET','POST'])
 def Visor():
     graficos=("Schoeller","Piper", "Stiff")
+    if request.method=='POST':
+        print ('check')
+        val=request.form["TDS_check"]
+        if val=="True":
+            session["TDS"]=True
+        else:
+            session["TDS"]=False
+        #return render_template('colorsel.html', tipografico=graficos)
+    else: 
+        session["TDS"]=False
+        #return render_template('colorsel.html', tipografico=graficos)
+
     return render_template('colorsel.html', tipografico=graficos)
 
 @app.route('/Prueba')
@@ -139,13 +151,14 @@ def Validacion():
 
 @app.route('/Grafico.jpg', methods=['GET','POST'])
 def Grafico():
+    tds=session["TDS"]
     dicc=session["llaves"]
     clas=session["Clas"]
     ruta=session["ruta"] 
     tit = pd.read_csv(ruta)
     df=tit
     #print (df)
-    format_df= creardf_piper(Y_df=df,sz=30, di=dicc,cla=clas)
+    format_df= creardf_piper(Y_df=df,sz=30, di=dicc,cla=clas,std=tds)
     filtro=''
     filtro2=''
     #format_df.to_csv("formato.csv",sep=";")

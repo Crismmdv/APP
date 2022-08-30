@@ -1,6 +1,12 @@
-﻿Nombre,Ca,Mg,Na,K,SO4,Cl,NO3,HCO3,CO3,Fecha,Hora,Este,Norte,Nombre largo,pH,eH,ORP,Do,ppmDO,Conductividad eléctrica uS/cm,Resistividad Mohm*cm,Solidos Disueltos Totales TDS,T
-SOC-FF-01 Q,290,80,146.3,7.7,815.2,212.6,20.6,124.3,0.0,44788,0.7,374463,6961980,Gaby 4 en nivel 270 en galeria de producción,7.8,-45.9,198.9,40.8,3.4,2637,0,1319,22.2
-SOC-FF-02 Q,340,75,156,8.8,900.5,295.5,7.7,101.4,0.0,44788,0.7,374516,6962012,Gaby 12 en nivel 270 frente a GP,7.2,-13.2,-26.6,34.2,3.9,2877,0,1439,22.1
-SOC-FF-03 Q,457.5,87.5,172.8,11.8,1270.7,253.6,28,74.7,0.0,44788,0.8,373915,6962563,Acopio de agua en fondo mina. nivel 60,7.1,-10,178.9,49.9,4.2,3289,0,1644,22.4
+﻿Nombre,Ca,Mg,Na,K,SO4,Cl,NO3,HCO3,CO3,Fecha,Hora,Este,Norte,Nombre largo,pH,eH,ORP,Do,ppmDO,Conductividad eléctrica uS/cm,Tipo,Solidos Disueltos Totales TDS,T
+SOC-FF-01 Q,290,80,146.3,7.7,815.2,212.6,20.6,124.3,0,15-08-2022,16:48,374463,6961980,Gaby 4 en nivel 270 en galeria de producción,7.8,-45.9,198.9,40.8,3.4,2637,Interior Mina n. 270,1319.0,22.2
+SOC-FF-02 Q,340,75,156,8.8,900.5,295.5,7.7,101.4,0,15-08-2022,16:48,374516,6962012,Gaby 12 en nivel 270 frente a GP,7.2,-13.2,-26.6,34.2,3.9,2877,Interior Mina n. 270,1439.0,22.1
+SOC-FF-03 Q,457.5,87.5,172.8,11.8,1270.7,253.6,28,74.7,0,15-08-2022,19:12,373915,6962563,Acopio de agua en fondo mina. nivel 60,7.1,-10,178.9,49.9,4.2,3289,Interior Mina n. 60,1644.0,22.4
+SOC-CM-01 Q,103,45,93,4.5,481.101,111.817,1.5,42,0,19-08-2022,17:03,374838,6962270,Agrícola Copayapu pozo 478,7.27,0,25,0,0,1088,Pozo,544.0,19.68
+SOC-CM-02 Q,175,45,92.5,4.4,461.688,134.599,3.051,188,0,21-08-2022,11:41,374530,6961290,Pozo 12 Alcaparrosa,6.65,0,79.2,0,0,1333,Pozo,737.0,19.98
+SOC-CM-03 Q,255,45,132.5,5.3,628.946,210.307,20.478,215,0,21-08-2022,15:50,374652,6958601,Pozo 8 Pucobre en planta San José,6.7,0,89.1,0,0,2402,Pozo,1204.0,23.7
+SOC-FF-04 Q,187,67.5,90,4.1,555.021,87.654,14.376,169,6.7,18-08-2022,18:36,378451,6939311,Río Copiapó en puente Pabellón,8.1,0,91.4,0,0,1310,Río,665.0,19.36
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,

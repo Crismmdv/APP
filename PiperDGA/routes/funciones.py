@@ -204,7 +204,7 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla=""):
                 else:
                     #colores=['red','darkorange','lime','darkviolet','blue','cyan','pink','olive','mediumpurple','blueviolet',
                     #   'gold','gray','black','white','green','gray','magenta','skyblue', 'indigo','purple','brown','indigo','darkcyan']
-                    simbolos =["*","d","o","s","v"]
+                    simbolos =["D","d","o","s","v"]
 
                     format_df['Label'] = (Y_df[cla['Clase2']])#+' / '+((Y_df[cla['Clase2']]))
                     

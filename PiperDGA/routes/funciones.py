@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
+from matplotlib.lines import Line2D
+
 def func_tilde(x):
     di={'Limari':'Limarí', 'Rio':'Río', 'Fuera':'F.A.E','Campana':'Campaña','Vina':'Viña','Caren':'Carén','quebrada':'Quebrada','Guatulame':'Cogotí'}
     a=x.split(' ')
@@ -165,8 +167,9 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla="",std=False):
             
             colores=['red','darkorange','lime','darkviolet','blue','cyan','pink','olive','mediumpurple','blueviolet',
                 'gold','gray','black','white','green','gray','magenta','skyblue', 'indigo','purple','brown','indigo','darkcyan']
-            simbolos =["D","d","o","s","v"]
-
+            
+            #simbolos =["D","d","o","s","v"]
+            simbolos=list(Line2D.markers.keys())
             format_df['Label'] = (Y_df[cla['Clase1']])+' / '+((Y_df[cla['Clase2']]))
             
             clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())

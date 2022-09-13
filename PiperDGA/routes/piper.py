@@ -95,7 +95,7 @@ def plot(df,
     diamond_y = h * (np.array([1, 2, 1, 0, 1])) + (offset * np.tan(np.pi / 3))
     
     # Plot the traingles and diamond
-    fig = plt.figure(figsize=(10, 10), dpi=100)
+    fig = plt.figure(figsize=(10, 10), dpi=300)
     ax = fig.add_subplot(111, aspect='equal', frameon=False, 
                          xticks=[], yticks=[])
     ax.plot(ltriangle_x, ltriangle_y, '-k', lw=1.0)

@@ -165,7 +165,7 @@ def Grafico():
     
     fig=plot(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1)
     output = io.BytesIO()
-    FigureCanvas(fig).print_jpg(output)
+    FigureCanvas(fig).print_jpg(output, dpi=1000, quality=100)
     #os.remove(session["ruta"])
     
     return Response(output.getvalue(), mimetype='image/png')

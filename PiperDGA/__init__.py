@@ -49,7 +49,7 @@ def Tablas():
     if "ruta" in session:
         ruta=session["ruta"] 
         try: 
-            tit = pd.read_csv(ruta)
+            tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
             #session["CSV"]=tit
             dtipo= tit.dtypes
             dindex=list(dtipo.index)

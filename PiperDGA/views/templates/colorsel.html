@@ -38,34 +38,24 @@
           </div>
         </div>
     </nav>
-    <h2> Customizar </h2>
-    <div class = "container">
-    <input id = "color-picker1" type = "text" placeholder = "find color code in HEX"  />
-    <input id = "color-picker2" type = "text" placeholder = "find color code in RGB"  />
-    <script>
-    $(function () {
-    $('#color-picker1').colorpicker();
-    });
-    $(function () {
-    $('#color-picker2').colorpicker({
-    format: 'rgba'
-    });
-    });
-    </script>
+    
     </div>
     <div>
         <h1>Grafico Piper</h1>   
     </div>
     <form action="" method="post" id="CHECK">
-      <div class="form-check">
-      
-        <input onChange="this.form.submit()" class="form-check-input" type="checkbox" value="True" name="TDS_check" id="TDS_check"></input>
+      <div class="form-check form-switch">
+        {% if not check %}
+          <input onChange="this.form.submit()" class="form-check-input" type="checkbox" value=-1 name="TDS_check" id="TDS_check"></input>
+        {% else %}
+          <input onChange="this.form.submit()" class="form-check-input" type="checkbox" value=-1 name="TDS_check" id="TDS_check" checked>-1</input>
+        {% endif %}
         <label class="form-check-label" for="defaultCheck1">
           Tamaño proporcional a TDS
         </label>
       </div>
     </form>
-      
+    
     
     
     

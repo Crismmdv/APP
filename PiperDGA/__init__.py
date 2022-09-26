@@ -49,7 +49,7 @@ def Tablas():
     if "ruta" in session:
         ruta=session["ruta"] 
         try: 
-            tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
+            tit = pd.read_csv(ruta, encoding='latin 1', sep=',')
             #session["CSV"]=tit
             dtipo= tit.dtypes
             dindex=list(dtipo.index)
@@ -84,20 +84,24 @@ def Tablas():
 
 @app.route('/Visor', methods=['GET','POST'])
 def Visor():
+    session["check"]=-1
     graficos=("Schoeller","Piper", "Stiff")
     if request.method=='POST':
-        print ('check')
-        val=request.form["TDS_check"]
-        if val=="True":
-            session["TDS"]=True
-        else:
-            session["TDS"]=False
+        #print ('check')
+        try: 
+            val=request.form["TDS_check"]
+            session["check"]=1
+        except: session["check"]=-1
+        #session["check"]*=float(val)
+        print (session["check"])
+        session["TDS"]=(session["check"]>0)
+        
         #return render_template('colorsel.html', tipografico=graficos)
     else: 
         session["TDS"]=False
         #return render_template('colorsel.html', tipografico=graficos)
 
-    return render_template('colorsel.html', tipografico=graficos)
+    return render_template('colorsel.html', tipografico=graficos , check=session["TDS"])
 
 @app.route('/Prueba')
 def Prueba():
@@ -155,7 +159,7 @@ def Grafico():
     dicc=session["llaves"]
     clas=session["Clas"]
     ruta=session["ruta"] 
-    tit = pd.read_csv(ruta)
+    tit = pd.read_csv(ruta, encoding='latin 1', sep=',')
     df=tit
     #print (df)
     format_df= creardf_piper(Y_df=df,sz=30, di=dicc,cla=clas,std=tds)

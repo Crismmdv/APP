@@ -24,8 +24,8 @@
                 <table class="table table-striped" id="select1">
                     <thead>
                         <tr>
-                        <th> mg/L</th>
-                        <th>Aniones y Cationes </th> 
+                        <th> Aniones y Cationes</th>
+                        <th>ingrese columna en mg/l </th> 
                         <th>Validación</th>
                         </tr>
                     </thead>
@@ -38,7 +38,8 @@
                             <td>
                                     
                                     <select id="{{gp}}" name="{{gp}}" class="form-select" aria-label="Default select example" required>
-                                        <option selected>Seleccione columna</option>
+                                        <option value="Sup" selected>Seleccione columna</option>
+                                        
                                         {% for e in tabla %}
                                         <option value="{{e}}">{{e}}</option>
                                         {% endfor %}
@@ -165,7 +166,7 @@
 
 <py-script>
     import pandas as pd
-    
+    tipograf= "{{cabecera}}"=="Parámetros Schoeller"
     dtipos= {{dtip}}
     def count(*args, **kwargs):
         check=list()
@@ -173,14 +174,18 @@
         input_text = Element("{{i}}")    
         fin="a"+"{{i}}"
         op = Element(fin)
-        if dtipos[input_text.value] == "float64":
+        try: GG= dtipos[input_text.value]== "float64"
+        except: GG= False
+        if GG or tipograf:
             key= "Válido"
+            if input_text.value == "Sup":
+                key= "Se elimina"
             check.append(key)
         else: key = "Revisar valores"
         number = len(input_text.value)
         op.write(key)
-        if len(check) == len({{elem}}): document.getElementById("sgte").disabled = False
-        if len(check) != len({{elem}}): document.getElementById("sgte").disabled = True
+        if len(check) == len({{elem}}) or tipograf: document.getElementById("sgte").disabled = False
+        elif len(check) != len({{elem}}): document.getElementById("sgte").disabled = True
         {% endfor %}
     
     def count2(*args, **kwargs):

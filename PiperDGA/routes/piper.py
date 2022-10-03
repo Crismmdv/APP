@@ -13,7 +13,7 @@ from config import Config
 from .ions import ions_WEIGHT, ions_CHARGE
 
 # Define the plotting function
-def plot(df, 
+def plot_piper(df, 
          unit='mg/L', 
          figname='triangle Piper diagram', 
          figformat='jpg',nc=1):
@@ -391,5 +391,5 @@ if __name__ == '__main__':
     # df.loc[df['Label']=='C2', 'Marker'] = 's'
     # df.loc[df['Label']=='C3', 'Marker'] = '^'
     # df.loc[:, 'Color'] = df.loc[:, 'TDS'].values
-    plot(df, unit='mg/L', figname='triangle Piper diagram', figformat='jpg')
+    plot_piper(df, unit='mg/L', figname='triangle Piper diagram', figformat='jpg')
     

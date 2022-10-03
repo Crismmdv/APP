@@ -2,7 +2,7 @@ from distutils.command.config import config
 from distutils.command.upload import upload
 from posixpath import sep
 from config import Config, UploadFileForm
-from .routes import creardf_piper, plot
+from .routes import creardf_piper, plot_piper, plot_scholler
 
 from contextlib import redirect_stderr
 from flask import Flask, render_template, request, redirect, url_for, session, Response
@@ -13,6 +13,7 @@ from werkzeug.utils import secure_filename
 import os
 from wtforms.validators import InputRequired
 import pandas as pd
+import numpy as np
 
 import matplotlib.pyplot as plt
 #from wqchartpy import piper
@@ -36,7 +37,7 @@ def Datos():
             ruta3= os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config["UPLOAD_FOLDER"], arch.filename)
             ruta2 =os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config["UPLOAD_FOLDER"])
             arch.save(ruta3)
-            print (ruta3)
+            #print (ruta3)
 
             session["ruta"]=ruta3
             session["ruta2"]=ruta2
@@ -47,14 +48,17 @@ def Datos():
 def Tablas():
     elementos=()
     if "ruta" in session:
-        ruta=session["ruta"] 
+        ruta=session["ruta"]
+        session["keys"]=''
+        session["elm_ley"]=list()
         try: 
-            tit = pd.read_csv(ruta, encoding='latin 1', sep=',')
+            tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
             #session["CSV"]=tit
             dtipo= tit.dtypes
             dindex=list(dtipo.index)
             dvalues=list(dtipo.values.astype(str))
             dtipo= dict( pd.Series(dvalues, index= dindex))
+            #dtipo=dtipo | dict(zip(['Eliminar'],['object']))
             session['dtipo']=dtipo
         except: titulos=''
     else: titulos='error'
@@ -66,7 +70,7 @@ def Tablas():
         tg= request.form['tipog']
         session["tipograf"]=tg
         if tg == "Schoeller":
-            elementos = ('Cu', 'Cr','F', 'Fe', 'Mn', 'Mg', 'Se', 'Zn','As','Cd','Hg','NO3','Pb','Cl','SO4','TDS')
+            elementos = ('Al','Cu', 'Cr','F', 'Fe', 'Mn', 'Mg', 'Se', 'Zn','As','Cd','Hg','NO3','Pb','Cl','SO4','TDS')
         elif tg== "Piper":
             elementos= ('Cl','SO4','HCO3','CO3','Na','Ca','Mg','K','TDS')
         elif tg== "Gibbs":
@@ -85,6 +89,8 @@ def Tablas():
 @app.route('/Visor', methods=['GET','POST'])
 def Visor():
     session["check"]=-1
+    #lista=list()
+    session["elm_ley"]=list()
     graficos=("Schoeller","Piper", "Stiff")
     if request.method=='POST':
         #print ('check')
@@ -93,15 +99,20 @@ def Visor():
             session["check"]=1
         except: session["check"]=-1
         #session["check"]*=float(val)
-        print (session["check"])
+        #print (session["check"])
         session["TDS"]=(session["check"]>0)
-        
+        if session["keys"]!='':
+            for i in session["keys"]:
+                try: session["elm_ley"].append(request.form[i])
+                except: continue
+            
+            print ('ELM_LEY',session["elm_ley"])
         #return render_template('colorsel.html', tipografico=graficos)
     else: 
         session["TDS"]=False
         #return render_template('colorsel.html', tipografico=graficos)
-
-    return render_template('colorsel.html', tipografico=graficos , check=session["TDS"])
+    #print (session["keys"])
+    return render_template('colorsel.html', tipografico=graficos , check=session["TDS"], key=session["keys"], chekes=session["elm_ley"])
 
 @app.route('/Prueba')
 def Prueba():
@@ -125,6 +136,7 @@ def Validacion():
     dtipo= session["dtipo"]
     tg=session["tipograf"]
     session["tipograf"]=tg
+    session["keys"]=''
             
     if request.method=='POST':
         llaves=list()
@@ -143,9 +155,10 @@ def Validacion():
             clasif=""
             session["Clas"] = clasif
         for elm in elementos:
-            llaves.append((elm,request.form[elm]))
+            if request.form[elm]=="Sup": continue
+            else: llaves.append((elm,request.form[elm]))
         
-            #print (request.form[elm])
+        #print (llaves)
         next=True
         session["llaves"]=dict(llaves)
         
@@ -159,17 +172,35 @@ def Grafico():
     dicc=session["llaves"]
     clas=session["Clas"]
     ruta=session["ruta"] 
-    tit = pd.read_csv(ruta, encoding='latin 1', sep=',')
+    tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
     df=tit
     #print (df)
     format_df= creardf_piper(Y_df=df,sz=30, di=dicc,cla=clas,std=tds)
     filtro=''
     filtro2=''
+    indexes=list(format_df.index.values)
+    gb=format_df.groupby('Label')
+    session["keys"]=list(gb.groups.keys())
+    ley=session["elm_ley"]
+    filt_ley=list()
+    filt_ley2=list()
+    if ley!='' and len(ley)>0:
+        for i in ley:
+            k=list(gb.indices[i])
+            filt_ley.append(k)
+        for h in filt_ley:
+            filt_ley2+=h
+        format_df=format_df.filter(items=filt_ley2, axis=0)
+    print ('FILT_LEY',filt_ley)
     #format_df.to_csv("formato.csv",sep=";")
-    
-    fig=plot(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1)
+    if session['tipograf']=='Piper': 
+        fig=plot_piper(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1)
+    elif session['tipograf']=='Schoeller': 
+        fig= plot_scholler(format_df, unit='mg/L', figname='Scholler', figformat='jpg',ms= 8,n=True,nch='Nch 409')
+    elif session['tipograf']=='Gibbs':
+        fig=''
     output = io.BytesIO()
-    FigureCanvas(fig).print_jpg(output, dpi=1000, quality=100)
+    FigureCanvas(fig).print_jpg(output, dpi=200, quality=100)
     #os.remove(session["ruta"])
     
     return Response(output.getvalue(), mimetype='image/png')

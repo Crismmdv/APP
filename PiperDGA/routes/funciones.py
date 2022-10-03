@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 from matplotlib.lines import Line2D
+import random
 
 def func_tilde(x):
     di={'Limari':'Limarí', 'Rio':'Río', 'Fuera':'F.A.E','Campana':'Campaña','Vina':'Viña','Caren':'Carén','quebrada':'Quebrada','Guatulame':'Cogotí'}
@@ -121,11 +122,11 @@ def creardf_sc(Y_df,filtro='',filtro2='',sz=8):
     format_df['SO4'] = M_df['SO4_mg_l']
     format_df['TDS']= M_df['TDS']*1.000
 
-    format_df=format_df.dropna(how='any')
+    #format_df=format_df.dropna(how='any')
     format_df = format_df.sort_values(by='Label')
     # Reset the index
     #format_df['SO4'] = pd.to_numeric(format_df['SO4'], errors='coerce')
-
+    
     format_df.reset_index(inplace=True, drop=True)
 
     #format_df.to_csv(r'C:/Users/crist/Desktop/Sernageomin/GIS LIMARI/QGIS/HICT_Rio_Grande.csv', index=False)
@@ -172,11 +173,18 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla="",std=False):
             simbolos=list(Line2D.markers.keys())
             format_df['Label'] = (Y_df[cla['Clase1']])+' / '+((Y_df[cla['Clase2']]))
             
+                
             clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())
             clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
+            if len(clases1) > len(colores):
+                colores=list()
+                for i in range(0, len(clases1)):
+                    color = ["#"+''.join([random.choice('0123456789ABCDEF') for j in range(6)])]
+                    colores.append(color)
+
             dict_col=dict(zip(clases1,colores))
             dict_sim=dict(zip(clases2,simbolos))
-
+            #print (len(clases1), len(colores))
             y_seven = Y_df[cla['Clase1']].copy()
             y_t = Y_df[cla['Clase2']].copy()
 
@@ -207,7 +215,7 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla="",std=False):
                 else:
                     #colores=['red','darkorange','lime','darkviolet','blue','cyan','pink','olive','mediumpurple','blueviolet',
                     #   'gold','gray','black','white','green','gray','magenta','skyblue', 'indigo','purple','brown','indigo','darkcyan']
-                    simbolos =["D","d","o","s","v"]
+                    simbolos=list(Line2D.markers.keys())
 
                     format_df['Label'] = (Y_df[cla['Clase2']])#+' / '+((Y_df[cla['Clase2']]))
                     
@@ -251,7 +259,7 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla="",std=False):
         
 
         
-        format_df=format_df.dropna(how='any')
+        #format_df=format_df.dropna(how='any')
         format_df = format_df.sort_values(by='Label')
         
 

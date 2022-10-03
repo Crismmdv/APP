@@ -41,16 +41,16 @@
     
     </div>
     <div>
-        <h1>Grafico Piper</h1>   
+        <h1>Grafico </h1>   
     </div>
     <form action="" method="post" id="CHECK">
       <div class="form-check form-switch">
         {% if not check %}
           <input onChange="this.form.submit()" class="form-check-input" type="checkbox" value=-1 name="TDS_check" id="TDS_check"></input>
         {% else %}
-          <input onChange="this.form.submit()" class="form-check-input" type="checkbox" value=-1 name="TDS_check" id="TDS_check" checked>-1</input>
+          <input onChange="this.form.submit()" class="form-check-input" type="checkbox" value=-1 name="TDS_check" id="TDS_check" checked></input>
         {% endif %}
-        <label class="form-check-label" for="defaultCheck1">
+        <label class="form-check-label" for="TDS_check">
           Tamaño proporcional a TDS
         </label>
       </div>
@@ -60,8 +60,45 @@
     
     
     <div id="plot">
-        <img src="/Grafico.jpg" alt="piper">
+        <img id="Graph" src="/Grafico.jpg" alt="imagen">
         
     </div>
+    <form action="" method="post" id="CHECK2">
+      <div class="form-check form-switch">
+        {% if key == '' %}
+        <input onChange= "this.form.submit()" class="form-check-input" type="checkbox" name="E" id="E"></input>
+        {% else %}
+        <input onChange= "this.form.submit()" class="form-check-input" type="checkbox" name="E" id="E" checked></input>
+        {% endif %}
+        <label class="form-check-label" for="{{i}}"> Selección de grupos </label>
+      </div>
+    </form>
+
+    <form action="" method="post" id="CHECK3"></form>
+      {% if key != '' %}
+      <div class="btn-text-center">
+      <input id= "refresh" type="submit" class="btn btn-primary" form="CHECK3" value="Actualizar"></input>
+      <!--<button id = "sgte" type="button" onclick= "window.location.href={{ url_for( 'Prueba') }};" disabled>Siguiente</button>-->
+      </div>
+        {% for i in key %}
+          {% if i in chekes %}
+          <input class="form-check-input" type="checkbox" form="CHECK3" name="{{i}}" id="{{i}}" value="{{i}}" checked></input>
+          {% else %}
+          <input class="form-check-input" type="checkbox" form="CHECK3" name="{{i}}" id="{{i}}" value="{{i}}"></input>
+          {% endif %}
+          <label class="form-check-label" for="{{i}}"> {{i}} </label>
+          <br>
+          
+        {% endfor %}
+      {% endif %}
+      </div>
+    </form>
 </body>
+<script>
+  function setImageVisible(id) {
+    var img = document.getElementById(id);
+    var visible= (img.style.visibility == 'hidden');
+    img.style.visibility = (visible ? 'visible' : 'hidden');
+    }
+</script>
 </html>

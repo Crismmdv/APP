@@ -191,7 +191,7 @@ def Grafico():
         for h in filt_ley:
             filt_ley2+=h
         format_df=format_df.filter(items=filt_ley2, axis=0)
-    print ('FILT_LEY',filt_ley)
+    #print ('FILT_LEY',filt_ley)
     #format_df.to_csv("formato.csv",sep=";")
     if session['tipograf']=='Piper': 
         fig=plot_piper(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1)

@@ -43,6 +43,7 @@ def plot_piper(df,
            of water analyses. EOS, Transactions American Geophysical 
            Union 25, no. 6: 914–928.    
     """
+    df.reset_index(inplace=True, drop=True)
     # Basic data check 
     # -------------------------------------------------------------------------
     # Determine if the required geochemical parameters are defined. 
@@ -95,7 +96,7 @@ def plot_piper(df,
     diamond_y = h * (np.array([1, 2, 1, 0, 1])) + (offset * np.tan(np.pi / 3))
     
     # Plot the traingles and diamond
-    fig = plt.figure(figsize=(10, 10), dpi=300)
+    fig = plt.figure(figsize=(10, 10), dpi=150) #DPI cambia el tamaño y resolución de la fig.
     ax = fig.add_subplot(111, aspect='equal', frameon=False, 
                          xticks=[], yticks=[])
     ax.plot(ltriangle_x, ltriangle_y, '-k', lw=1.0)

@@ -2,7 +2,7 @@ from distutils.command.config import config
 from distutils.command.upload import upload
 from posixpath import sep
 from config import Config, UploadFileForm
-from .routes import creardf_piper, plot_piper, plot_scholler
+from .routes import creardf_piper, plot_piper, plot_scholler, corregir_BD
 
 from contextlib import redirect_stderr
 from flask import Flask, render_template, request, redirect, url_for, session, Response
@@ -38,6 +38,10 @@ def Datos():
             ruta2 =os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config["UPLOAD_FOLDER"])
             arch.save(ruta3)
             #print (ruta3)
+            try:
+                if request.form['corregir']=="1": session['corregir']=True
+            except:
+                session['corregir']=False
 
             session["ruta"]=ruta3
             session["ruta2"]=ruta2
@@ -55,6 +59,10 @@ def Tablas():
             tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
             #session["CSV"]=tit
             if len(tit.columns.values[0])>30: tit = pd.read_csv(ruta, encoding='utf-8', sep=';')
+            if session['corregir']: 
+                tit=corregir_BD(tit)
+                tit.to_csv(ruta, encoding='utf-8', sep=',')
+            #print (session['corregir'])
             dtipo= tit.dtypes
             dindex=list(dtipo.index)
             dvalues=list(dtipo.values.astype(str))
@@ -111,7 +119,7 @@ def Visor():
                 try: session["elm_ley"].append(request.form[i])
                 except: continue
             
-            print ('ELM_LEY',session["elm_ley"])
+            #print ('ELM_LEY',session["elm_ley"])
         #return render_template('colorsel.html', tipografico=graficos)
     else: 
         session["TDS"]=False

@@ -6,13 +6,19 @@
     <div class="col-md-6 offset-md-3">
         <h2>Seleccionar Datos CSV</h2>
         <div>
-          <form action="/Datos" method="POST" enctype="multipart/form-data">
+          <form action="/Datos" method="POST" enctype="multipart/form-data" id="uniq">
             <div class="input-group mb-3">
               <input type="file" class="custom-file-input" name="archivo" id="CSV">
               
             </div>
             <div class="btn-text-center">
               <button class="btn btn-primary" type="submit">Subir archivo</button>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" form="uniq" name="corregir" id="corregir" value="1"></input>
+              <label class="form-check-label" for="corregir">
+              Reemplazar valores bajo el nivel de detección (ej: remplaza < 0,1 por 0.05)
+              </label>
             </div>
           </form>
         </div>

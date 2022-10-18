@@ -141,7 +141,7 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla="",std=False):
     #filtro2=''
     diccion=di
     for i in diccion.keys():
-        
+        #print (Y_df.columns.values)
         format_df[i]=Y_df[diccion[i]].copy()
     
     if False:
@@ -273,5 +273,33 @@ def escala_TDS(df,col,s_min=25,s_max=100):
     v_max=max(df[col])
     df['Size']=s_min+(df[col]-v_min)/(v_max-v_min)*(s_max-s_min)
     df.dropna(how='any', subset='Size', inplace=True)
-    print (df['Size'])
+    #print (df['Size'])
     return df
+
+def corregir_BD(DATA3):
+    for k in DATA3.columns:
+        if ',,' in k: DATA3.drop(columns=k, inplace=True)
+    for k in DATA3.columns:
+        if 'mg/l' in k:
+            
+            for i in list(DATA3.index):
+                m=DATA3.at[i,k]
+                if  type(m)==str:
+                    try:
+                        n=float(m)
+                        DATA3.at[i,k]=n
+                    except:
+                        if '<' in m:
+                            if ',' in m:
+                                num=m[1:].split(',')
+                                n=float(num[0]+'.'+num[1])/2
+                                DATA3.at[i,k]=n
+                            else:
+                                num=m[1:]
+                                n=float(num)/2
+                                DATA3.at[i,k]=n
+            cop=DATA3[k].copy()
+            DATA3[k]=cop.astype('float')
+            if 'carbonat' in k or 'CO3' in k:
+                DATA3[k].fillna(value=0,inplace=True)
+    return DATA3

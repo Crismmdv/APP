@@ -300,6 +300,6 @@ def corregir_BD(DATA3):
                                 DATA3.at[i,k]=n
             cop=DATA3[k].copy()
             DATA3[k]=cop.astype('float')
-            if 'carbonat' in k or 'CO3' in k:
+            if 'arbonat' in k or 'CO3' in k:
                 DATA3[k].fillna(value=0,inplace=True)
     return DATA3

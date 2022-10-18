@@ -271,5 +271,7 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla="",std=False):
 def escala_TDS(df,col,s_min=25,s_max=100):
     v_min=min(df[col])
     v_max=max(df[col])
-    df['Size']=s_min+df[col]/v_max*(s_max-s_min)
+    df['Size']=s_min+(df[col]-v_min)/(v_max-v_min)*(s_max-s_min)
+    df.dropna(how='any', subset='Size', inplace=True)
+    print (df['Size'])
     return df

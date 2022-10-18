@@ -54,15 +54,20 @@ def Tablas():
         try: 
             tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
             #session["CSV"]=tit
+            if len(tit.columns.values[0])>30: tit = pd.read_csv(ruta, encoding='utf-8', sep=';')
             dtipo= tit.dtypes
             dindex=list(dtipo.index)
             dvalues=list(dtipo.values.astype(str))
             dtipo= dict( pd.Series(dvalues, index= dindex))
             #dtipo=dtipo | dict(zip(['Eliminar'],['object']))
             session['dtipo']=dtipo
-        except: titulos=''
+        except:
+            titulos=''
+                
     else: titulos='error'
+    
     titulos= tit.columns.values
+    
     if request.method =='POST':
         
         lista_de_tabla=list()    

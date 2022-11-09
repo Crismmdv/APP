@@ -209,7 +209,7 @@ def Grafico():
     if session['tipograf']=='Piper': 
         fig=plot_piper(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1)
     elif session['tipograf']=='Schoeller': 
-        fig= plot_scholler(format_df, unit='mg/L', figname='Scholler', figformat='jpg',ms= 8,n=True,nch='Nch 409')
+        fig= plot_scholler(format_df, unit='mg/L', figname='Diagrama de Scholler de elementos normados', figformat='jpg',ms= 8,n=True,nch='Nch 409')
     elif session['tipograf']=='Gibbs':
         fig=''
     output = io.BytesIO()

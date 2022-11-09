@@ -267,7 +267,9 @@ def plot_scholler(dft,
         ax.set_yticks([0.001,0.01,0.1,1,10,50,1000,10000],minor=False)
     ax.yaxis.set_major_formatter(mticker.ScalarFormatter())
     ax.get_yaxis().set_major_formatter(y_format)
-    if n: ax.set_title(figname) 
+    if n: 
+        ax.set_title(figname)
+        ax.title.set_size(22)
 
     if n: ylab='Normalizado [Nch 409]'
     else: ylab='Concentración [mg/l]' 

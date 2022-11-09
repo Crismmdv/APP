@@ -2,6 +2,8 @@
 import pandas as pd
 from matplotlib.lines import Line2D
 import random
+import random as rm
+import matplotlib.colors as mcol
 
 def func_tilde(x):
     di={'Limari':'Limarí', 'Rio':'Río', 'Fuera':'F.A.E','Campana':'Campaña','Vina':'Viña','Caren':'Carén','quebrada':'Quebrada','Guatulame':'Cogotí'}
@@ -165,17 +167,17 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla="",std=False):
             format_df['Color'] = "gray"
             format_df['Marker'] = "o"
         elif len(cla)==2:
-            
-            colores=['red','darkorange','lime','darkviolet','blue','cyan','pink','olive','mediumpurple','blueviolet',
-                'gold','gray','black','white','green','gray','magenta','skyblue', 'indigo','purple','brown','indigo','darkcyan']
+            clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())
+            clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
+
+            colores=ncolorandom(len(clases1))
             
             #simbolos =["D","d","o","s","v"]
             simbolos=list(Line2D.markers.keys())
             format_df['Label'] = (Y_df[cla['Clase1']])+' / '+((Y_df[cla['Clase2']]))
             
                 
-            clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())
-            clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
+            
             if len(clases1) > len(colores):
                 colores=list()
                 for i in range(0, len(clases1)):
@@ -187,7 +189,7 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla="",std=False):
             #print (len(clases1), len(colores))
             y_seven = Y_df[cla['Clase1']].copy()
             y_t = Y_df[cla['Clase2']].copy()
-
+            
             for i in clases1:
                 format_df.loc[y_seven==i, 'Color'] = dict_col[i]
             for i in clases2:
@@ -303,3 +305,11 @@ def corregir_BD(DATA3):
             if 'arbonat' in k or 'CO3' in k:
                 DATA3[k].fillna(value=0,inplace=True)
     return DATA3
+
+def ncolorandom(j):
+    colores=list(mcol.cnames.items())
+    n=len(colores)
+    ret=list()
+    for i in rm.sample(range(0,n),k=j):
+        ret.append(colores[i][0])
+    return ret

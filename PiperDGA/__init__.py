@@ -187,7 +187,7 @@ def Grafico():
     ruta=session["ruta"] 
     tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
     df=tit
-    #print (df)
+    #print ("diccionario ",dicc)
     format_df= creardf_piper(Y_df=df,sz=30, di=dicc,cla=clas,std=tds)
     filtro=''
     filtro2=''

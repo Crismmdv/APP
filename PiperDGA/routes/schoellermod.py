@@ -118,7 +118,8 @@ def plot_scholler(dft,
            Hydrogeology Journal 10(4):455-474
            https://doi.org/10.1007/s10040-002-0196-6
     """
-    plt.style.use('default')
+    #plt.style.use('default')
+    plt.style.use('ggplot') or plt.style.use('ggplot')
     plt.rcParams['font.size'] = 18
     plt.rcParams['axes.labelsize'] = 18
     plt.rcParams['axes.labelweight'] = 'normal'
@@ -266,8 +267,11 @@ def plot_scholler(dft,
         ax.set_yticks([0.001,0.01,0.1,1,10,50,1000,10000],minor=False)
     ax.yaxis.set_major_formatter(mticker.ScalarFormatter())
     ax.get_yaxis().set_major_formatter(y_format)
-    if n: ax.set_title(figname)   
-    ax.set_ylabel(nch, fontsize=18, weight='normal')#mod
+    if n: ax.set_title(figname) 
+
+    if n: ylab='Normalizado [Nch 409]'
+    else: ylab='Concentración [mg/l]' 
+    ax.set_ylabel(ylab, fontsize=18, weight='normal')#mod
     
     # Set the limits
     #ax.set_xlim([1, 16])

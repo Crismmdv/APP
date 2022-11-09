@@ -41,13 +41,13 @@
     
     </div>
     <div>
-        <h1>Grafico </h1>   
+        <h1>Gráfico </h1>   
     </div>
     <div id="plot">
       <img id="Graph" src="/Grafico.jpg" alt="imagen">
       
     </div>
-    
+
     <form action="" method="post" id="CHECK">
       <div class="form-check form-switch">
         {% if not check %}
@@ -81,14 +81,19 @@
       <!--<button id = "sgte" type="button" onclick= "window.location.href={{ url_for( 'Prueba') }};" disabled>Siguiente</button>-->
       </div>
         {% for i in key %}
-          {% if i in chekes %}
-          <input class="form-check-input" type="checkbox" form="CHECK3" name="{{i}}" id="{{i}}" value="{{i}}" checked></input>
+          {% if len_function(chekes)!=0 %}
+            {% if i in chekes %}
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="{{i}}" id="{{i}}" value="{{i}}" checked></input>
+            {% else %}
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="{{i}}" id="{{i}}" value="{{i}}"></input>
+            {% endif %}
+            <label class="form-check-label" for="{{i}}"> {{i}} </label>
+            <br>
           {% else %}
-          <input class="form-check-input" type="checkbox" form="CHECK3" name="{{i}}" id="{{i}}" value="{{i}}"></input>
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="{{i}}" id="{{i}}" value="{{i}}" checked></input>
+            <label class="form-check-label" for="{{i}}"> {{i}} </label>
+            <br>
           {% endif %}
-          <label class="form-check-label" for="{{i}}"> {{i}} </label>
-          <br>
-          
         {% endfor %}
       {% endif %}
       </div>

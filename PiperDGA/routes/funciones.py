@@ -4,6 +4,9 @@ from matplotlib.lines import Line2D
 import random
 import random as rm
 import matplotlib.colors as mcol
+from datetime import datetime as dt
+import matplotlib.dates as mdates
+import datetime
 
 def func_tilde(x):
     di={'Limari':'Limarí', 'Rio':'Río', 'Fuera':'F.A.E','Campana':'Campaña','Vina':'Viña','Caren':'Carén','quebrada':'Quebrada','Guatulame':'Cogotí'}
@@ -167,23 +170,14 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla="",std=False):
             format_df['Color'] = "gray"
             format_df['Marker'] = "o"
         elif len(cla)==2:
+            
+            simbolos=list(Line2D.markers.keys())
+            simbolos.remove(',')
             clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())
             clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
-
             colores=ncolorandom(len(clases1))
+            #print (colores)            
             
-            #simbolos =["D","d","o","s","v"]
-            simbolos=list(Line2D.markers.keys())
-            format_df['Label'] = (Y_df[cla['Clase1']])+' / '+((Y_df[cla['Clase2']]))
-            
-                
-            
-            if len(clases1) > len(colores):
-                colores=list()
-                for i in range(0, len(clases1)):
-                    color = ["#"+''.join([random.choice('0123456789ABCDEF') for j in range(6)])]
-                    colores.append(color)
-
             dict_col=dict(zip(clases1,colores))
             dict_sim=dict(zip(clases2,simbolos))
             #print (len(clases1), len(colores))
@@ -194,6 +188,22 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla="",std=False):
                 format_df.loc[y_seven==i, 'Color'] = dict_col[i]
             for i in clases2:
                 format_df.loc[y_t==i, 'Marker'] = dict_sim[i]
+            
+            try:
+                for idx in Y_df.index: 
+                    date=Y_df.at[idx,cla['Clase1']]
+                    Y_df.at[idx,'fecha1']=dt.strptime(date, "%d-%m-%Y %H:%M:%S")
+                    Y_df.at[idx,'Lb']=conv_fecha(Y_df.at[idx,'fecha1'])
+                    Y_df.at[idx,'Lb2']=conv_fecha(Y_df.at[idx,'fecha1'],v=False)
+                format_df['Label'] =((Y_df[cla['Clase2']])) +' / '+(Y_df['Lb'])
+                format_df['Label_layout']= ((Y_df[cla['Clase2']]))+' / '+ (Y_df['Lb2'])  
+                #print (format_df.loc[Y_df[cla['Clase2']]=='HA01','Marker'])
+                
+            except: 
+                format_df['Label'] = (Y_df[cla['Clase1']])+' / '+((Y_df[cla['Clase2']]))
+                format_df['Label_layout']= format_df['Label']
+                #simbolos =["D","d","o","s","v"]
+                
             
         elif len(cla)==1:
             for i in cla.keys():
@@ -313,3 +323,11 @@ def ncolorandom(j):
     for i in rm.sample(range(0,n),k=j):
         ret.append(colores[i][0])
     return ret
+
+def conv_fecha(i,v=True):
+    mm=str(i)[5:7]
+    dd=str(i)[8:10]
+    aa=str(i)[2:4]
+    #print (i,mm+dd+aa)
+    if v: return (dd+'-'+mm+'-'+aa)
+    else: return (aa+'-'+mm+'-'+dd)

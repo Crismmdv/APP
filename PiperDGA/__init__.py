@@ -192,7 +192,7 @@ def Grafico():
     filtro=''
     filtro2=''
     indexes=list(format_df.index.values)
-    gb=format_df.groupby('Label')
+    gb=format_df.groupby('Label_layout')
     session["keys"]=list(gb.groups.keys())
     ley=session["elm_ley"]
     filt_ley=list()
@@ -223,5 +223,8 @@ def Color():
     
     return render_template('colorsel.html')
 
+def len_function(y):
+    return len(y)
 
+app.jinja_env.globals.update(len_function=len_function)
 

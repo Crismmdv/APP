@@ -2,7 +2,7 @@ from distutils.command.config import config
 from distutils.command.upload import upload
 from posixpath import sep
 from config import Config, UploadFileForm
-from .routes import creardf_piper, plot_piper, plot_scholler, corregir_BD
+from .routes import creardf_piper, plot_piper, plot_scholler, corregir_BD,ncolran_dic
 
 from contextlib import redirect_stderr
 from flask import Flask, render_template, request, redirect, url_for, session, Response
@@ -99,33 +99,6 @@ def Tablas():
     return render_template('cargapiper.html',tabla=titulos,elem=elementos)   
 
 
-@app.route('/Visor', methods=['GET','POST'])
-def Visor():
-    session["check"]=-1
-    #lista=list()
-    session["elm_ley"]=list()
-    graficos=("Schoeller","Piper", "Stiff")
-    if request.method=='POST':
-        #print ('check')
-        try: 
-            val=request.form["TDS_check"]
-            session["check"]=1
-        except: session["check"]=-1
-        #session["check"]*=float(val)
-        #print (session["check"])
-        session["TDS"]=(session["check"]>0)
-        if session["keys"]!='':
-            for i in session["keys"]:
-                try: session["elm_ley"].append(request.form[i])
-                except: continue
-            
-            #print ('ELM_LEY',session["elm_ley"])
-        #return render_template('colorsel.html', tipografico=graficos)
-    else: 
-        session["TDS"]=False
-        #return render_template('colorsel.html', tipografico=graficos)
-    #print (session["keys"])
-    return render_template('colorsel.html', tipografico=graficos , check=session["TDS"], key=session["keys"], chekes=session["elm_ley"])
 
 @app.route('/Prueba')
 def Prueba():
@@ -150,14 +123,23 @@ def Validacion():
     tg=session["tipograf"]
     session["tipograf"]=tg
     session["keys"]=''
-            
+
+    # Crear diccionario de colores y simbolos 
+    #---------------------------------------
+    ruta=session["ruta"] 
+    tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
+    df=tit
+    session["dic_col_sim"]=("","")
+    #---------------------------------------     
     if request.method=='POST':
         llaves=list()
         if request.form["Cod"]!="Ninguno":
             llaves.append(("Cod",request.form["Cod"]))
         if request.form["Clase1"]!="Ninguno" and request.form["Clase2"] !="Ninguno":
-            clasif=[("Clase1",request.form["Clase1"]),("Clase2",request.form["Clase2"])]
-            session["Clas"] = dict (clasif)
+            clasif=dict([("Clase1",request.form["Clase1"]),("Clase2",request.form["Clase2"])])
+            session["Clas"] = clasif
+            col, simb= ncolran_dic(df,clasif) #diccionarios de col , simb
+            session["dic_col_sim"]=(col,simb)
         elif request.form["Clase1"]!="Ninguno" and request.form["Clase2"] =="Ninguno":
             clasif=[("Clase1",request.form["Clase1"])]
             session["Clas"] = dict (clasif)
@@ -178,17 +160,64 @@ def Validacion():
         return redirect(url_for('Visor'))
         
     return render_template('carga.html',tabla=titulos,elem=elementos,cabecera='Parámetros '+tg, dtip=dtipo)
+@app.route('/Visor', methods=['GET','POST'])
+def Visor():
+
+    # Crear diccionario de colores y simbolos 
+    #---------------------------------------
+    ruta=session["ruta"] 
+    tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
+    df=tit
+    clasif=session["Clas"]
+    #---------------------------------------     
+
+    session["check"]=-1
+    #lista=list()
+    session["elm_ley"]=list()
+    graficos=("Schoeller","Piper", "Stiff")
+    if request.method=='POST':
+        #print ('check')
+        try: 
+            val=request.form["TDS_check"]
+            session["check"]=1
+        except: session["check"]=-1
+        #session["check"]*=float(val)
+        #print (session["check"])
+        session["TDS"]=(session["check"]>0)
+        if session["keys"]!='':
+            try:
+                val=request.form["COLOR"]
+                if val =="ok":
+                    col, simb= ncolran_dic(df,clasif) #diccionarios de col , simb
+                    session["dic_col_sim"]=(col,simb)
+            except:
+                val=0
+
+            for i in session["keys"]:
+                try: session["elm_ley"].append(request.form[i])
+                except: continue
+            
+            #print ('ELM_LEY',session["elm_ley"])
+        #return render_template('colorsel.html', tipografico=graficos)
+    else: 
+        session["TDS"]=False
+        #return render_template('colorsel.html', tipografico=graficos)
+    #print (session["keys"])
+    return render_template('colorsel.html', tipografico=graficos , check=session["TDS"], key=session["keys"], chekes=session["elm_ley"])
+
+
 
 @app.route('/Grafico.jpg', methods=['GET','POST'])
 def Grafico():
     tds=session["TDS"]
     dicc=session["llaves"]
     clas=session["Clas"]
-    ruta=session["ruta"] 
+    ruta=session["ruta"]
+    dcol, dsim =session["dic_col_sim"] 
     tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
     df=tit
     #print ("diccionario ",dicc)
-    format_df= creardf_piper(Y_df=df,sz=30, di=dicc,cla=clas,std=tds)
+    format_df= creardf_piper(Y_df=df,sz=30, di=dicc,cla=clas,std=tds,dict_col=dcol,dict_sim=dsim)
     filtro=''
     filtro2=''
     indexes=list(format_df.index.values)

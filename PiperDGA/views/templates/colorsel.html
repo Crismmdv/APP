@@ -80,6 +80,9 @@
       <input id= "refresh" type="submit" class="btn btn-primary" form="CHECK3" value="Actualizar"></input>
       <!--<button id = "sgte" type="button" onclick= "window.location.href={{ url_for( 'Prueba') }};" disabled>Siguiente</button>-->
       </div>
+      <input class="form-check-input" type="checkbox" form="CHECK3" name="COLOR" id="COLOR" value="ok"></input>
+      <label class="form-check-label" for="COLOR"> Cambiar Color </label>
+      <br>
         {% for i in key %}
           {% if len_function(chekes)!=0 %}
             {% if i in chekes %}

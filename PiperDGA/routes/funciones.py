@@ -140,7 +140,7 @@ def creardf_sc(Y_df,filtro='',filtro2='',sz=8):
     b=filtro2
     return format_df#,a,b
 
-def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla="",std=False):
+def creardf_piper(Y_df,sz=25, di=dict(),cla="",std=False, dict_col="", dict_sim=""):
     format_df = pd.DataFrame()
     #filtro='F.A.E'
     #filtro2=''
@@ -177,9 +177,9 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla="",std=False):
             clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
             colores=ncolorandom(len(clases1))
             #print (colores)            
-            
-            dict_col=dict(zip(clases1,colores))
-            dict_sim=dict(zip(clases2,simbolos))
+            if dict_col=="" and dict_sim=="":
+                dict_col, dict_sim=ncolran_dic(Y_df,cla)
+            #dict_sim=dict(zip(clases2,simbolos))
             #print (len(clases1), len(colores))
             y_seven = Y_df[cla['Clase1']].copy()
             y_t = Y_df[cla['Clase2']].copy()
@@ -225,8 +225,7 @@ def creardf_piper(Y_df,filtro='',filtro2='',sz=25, di=dict(),cla="",std=False):
                         format_df.loc[y_seven==i, 'Color'] = dict_col[i]
                     format_df['Marker'] = 'o'
                 else:
-                    #colores=['red','darkorange','lime','darkviolet','blue','cyan','pink','olive','mediumpurple','blueviolet',
-                    #   'gold','gray','black','white','green','gray','magenta','skyblue', 'indigo','purple','brown','indigo','darkcyan']
+                    
                     simbolos=list(Line2D.markers.keys())
 
                     format_df['Label'] = (Y_df[cla['Clase2']])#+' / '+((Y_df[cla['Clase2']]))
@@ -316,13 +315,33 @@ def corregir_BD(DATA3):
                 DATA3[k].fillna(value=0,inplace=True)
     return DATA3
 
-def ncolorandom(j):
-    colores=list(mcol.cnames.items())
-    n=len(colores)
+def ncolorandom(j,lista=list(mcol.cnames.items())):
+    val=isinstance(lista[0],tuple)
+    n=len(lista)
     ret=list()
-    for i in rm.sample(range(0,n),k=j):
-        ret.append(colores[i][0])
+    if val:
+        for i in rm.sample(range(0,n),k=j):
+            ret.append(lista[i][0])
+    else:
+        for i in rm.sample(range(0,n),k=j):
+            ret.append(lista[i])
     return ret
+
+def ncolran_dic(Y_df,cla):
+    col=list(mcol.cnames.items())
+    simb=list(Line2D.markers.keys())
+    simb.remove(',')
+
+    clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())
+    clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
+
+    colores=ncolorandom(len(clases1),col)
+    simbolos=ncolorandom(len(clases2),simb)
+    #print (colores)            
+            
+    dict_col=dict(zip(clases1,colores))
+    dict_sim=dict(zip(clases2,simbolos))
+    return dict_col, dict_sim
 
 def conv_fecha(i,v=True):
     mm=str(i)[5:7]

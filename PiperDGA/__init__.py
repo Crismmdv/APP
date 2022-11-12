@@ -129,7 +129,7 @@ def Validacion():
     ruta=session["ruta"] 
     tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
     df=tit
-    session["dic_col_sim"]=("","")
+    session["dic_col_sim"]=["",""]
     #---------------------------------------     
     if request.method=='POST':
         llaves=list()
@@ -139,7 +139,7 @@ def Validacion():
             clasif=dict([("Clase1",request.form["Clase1"]),("Clase2",request.form["Clase2"])])
             session["Clas"] = clasif
             col, simb= ncolran_dic(df,clasif) #diccionarios de col , simb
-            session["dic_col_sim"]=(col,simb)
+            session["dic_col_sim"]=[col,simb]
         elif request.form["Clase1"]!="Ninguno" and request.form["Clase2"] =="Ninguno":
             clasif=[("Clase1",request.form["Clase1"])]
             session["Clas"] = dict (clasif)
@@ -189,10 +189,16 @@ def Visor():
                 val=request.form["COLOR"]
                 if val =="ok":
                     col, simb= ncolran_dic(df,clasif) #diccionarios de col , simb
-                    session["dic_col_sim"]=(col,simb)
+                    session["dic_col_sim"][0]=col
             except:
                 val=0
-
+            try:
+                val=request.form["SIMB"]
+                if val =="ok":
+                    col, simb= ncolran_dic(df,clasif) #diccionarios de col , simb
+                    session["dic_col_sim"][1]=simb
+            except:
+                val=0
             for i in session["keys"]:
                 try: session["elm_ley"].append(request.form[i])
                 except: continue
@@ -213,7 +219,8 @@ def Grafico():
     dicc=session["llaves"]
     clas=session["Clas"]
     ruta=session["ruta"]
-    dcol, dsim =session["dic_col_sim"] 
+    dcol, dsim =tuple(session["dic_col_sim"])
+    
     tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
     df=tit
     #print ("diccionario ",dicc)

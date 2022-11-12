@@ -330,7 +330,10 @@ def ncolorandom(j,lista=list(mcol.cnames.items())):
 def ncolran_dic(Y_df,cla):
     col=list(mcol.cnames.items())
     simb=list(Line2D.markers.keys())
-    simb.remove(',')
+    remv=[',','None',' ']
+    for r in remv:
+        simb.remove(r)
+    
 
     clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())
     clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())

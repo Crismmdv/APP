@@ -224,7 +224,7 @@ def Grafico():
     tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
     df=tit
     #print ("diccionario ",dicc)
-    format_df= creardf_piper(Y_df=df,sz=30, di=dicc,cla=clas,std=tds,dict_col=dcol,dict_sim=dsim)
+    format_df,lyd= creardf_piper(Y_df=df,sz=30, di=dicc,cla=clas,std=tds,dict_col=dcol,dict_sim=dsim)
     filtro=''
     filtro2=''
     indexes=list(format_df.index.values)
@@ -243,7 +243,7 @@ def Grafico():
     #print ('FILT_LEY',filt_ley)
     #format_df.to_csv("formato.csv",sep=";")
     if session['tipograf']=='Piper': 
-        fig=plot_piper(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1)
+        fig=plot_piper(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1,lyd=lyd)
     elif session['tipograf']=='Schoeller': 
         fig= plot_scholler(format_df, unit='mg/L', figname='Diagrama de Scholler de elementos normados', figformat='jpg',ms= 8,n=True,nch='Nch 409')
     elif session['tipograf']=='Gibbs':

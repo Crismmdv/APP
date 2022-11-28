@@ -16,7 +16,7 @@ from .ions import ions_WEIGHT, ions_CHARGE
 def plot_piper(df, 
          unit='mg/L', 
          figname='triangle Piper diagram', 
-         figformat='jpg',nc=1):
+         figformat='jpg',nc=1,lyd=list()):
     """Plot the Piper diagram.
     
     Parameters
@@ -351,11 +351,14 @@ def plot_piper(df,
         cb = plt.colorbar(cf, extend='both', spacing='uniform',
                           orientation='vertical', fraction=0.025, pad=0.05)
         cb.ax.set_ylabel('$TDS$' + ' ' + '$(mg/L)$', rotation=90, labelpad=-75, fontsize=10)
-    
-    lgd=plt.legend(bbox_to_anchor=(-0.1, 1.05), markerscale=1, fontsize=10, borderaxespad=1,
-               frameon=False, loc="upper left",
-               labelspacing=0.25, handletextpad=0.25,ncol=nc)
-    
+    if lyd==list():
+        lgd=plt.legend(bbox_to_anchor=(-0.1, 1.05), markerscale=1, fontsize=10, borderaxespad=1,
+                frameon=False, loc="upper left",
+                labelspacing=0.25, handletextpad=0.25,ncol=nc)
+    else:
+        lgd=plt.legend(handles=lyd,bbox_to_anchor=(-0.1, 1.05), markerscale=1, fontsize=10, borderaxespad=1,
+                frameon=False, loc="upper left",
+                labelspacing=0.25, handletextpad=0.25,ncol=nc)
     # Display the info
     #cwd = os.getcwd()
     #cwd = Config.IMAGES_UPLOAD

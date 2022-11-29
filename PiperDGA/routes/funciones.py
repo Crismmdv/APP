@@ -852,12 +852,12 @@ def leyenda_2S(cla,dic_mar,dic_tmp):
                 if isinstance(dc,datetime.date): ndc= conv_fecha(dc)
                 else: ndc=dc
                 
-                lgdM.append(mlines.Line2D([],[],markerfacecolor=dic_tmp[dc][0],markeredgecolor='k',marker=dic_mar[dc],linestyle='None', markersize=10, label=ndc))
+                lgdM.append(mlines.Line2D([],[],markerfacecolor=dic_tmp[dc][0],markeredgecolor='k',marker=dic_mar[dc],linestyle='None', markersize=8, label=ndc))
     else:
         for dc in dic_mar.keys():
             if isinstance(dc,datetime.date): ndc= conv_fecha(dc)
             else: ndc=dc
-            lgdM.append(mlines.Line2D([],[],markerfacecolor='none',markeredgecolor='k',marker=dic_mar[dc],linestyle='None', markersize=10, label=ndc))
+            lgdM.append(mlines.Line2D([],[],markerfacecolor='none',markeredgecolor='k',marker=dic_mar[dc],linestyle='None', markersize=8, label=ndc))
         for dc in dic_tmp.keys():
             if isinstance(dc,datetime.date): ndc= conv_fecha(dc)
             else: ndc=dc

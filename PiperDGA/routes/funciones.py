@@ -69,7 +69,7 @@ def func(xx, pos):  # formatter function takes tick label and tick position
     if xx<0: return '-'+s + '.'.join(reversed(groups))+coma+dc[2:]   
     else: return s + '.'.join(reversed(groups))+coma+dc[2:]
 
-def creardf_piper(Y_df,sz=25, di=dict(),cla="",std=False, dict_col="", dict_sim=""):
+def creardf_piper(Y_df,sz=60, di=dict(),cla="",std=False, dict_col="", dict_sim=""):
     format_df = pd.DataFrame()
     #filtro='F.A.E'
     #filtro2=''

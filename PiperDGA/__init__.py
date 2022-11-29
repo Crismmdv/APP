@@ -224,7 +224,7 @@ def Grafico():
     tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
     df=tit
     #print ("diccionario ",dicc)
-    format_df,lyd= creardf_piper(Y_df=df,sz=30, di=dicc,cla=clas,std=tds,dict_col=dcol,dict_sim=dsim)
+    format_df,lyd= creardf_piper(Y_df=df,sz=50, di=dicc,cla=clas,std=tds,dict_col=dcol,dict_sim=dsim)
     filtro=''
     filtro2=''
     indexes=list(format_df.index.values)

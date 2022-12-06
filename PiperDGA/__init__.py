@@ -1,21 +1,20 @@
-from distutils.command.config import config
-from distutils.command.upload import upload
 from posixpath import sep
-from config import Config, UploadFileForm
+from config import Config
 from .routes import creardf_piper, plot_piper, plot_scholler, corregir_BD,ncolran_dic
 
-from contextlib import redirect_stderr
+
 from flask import Flask, render_template, request, redirect, url_for, session, Response
-from flask_wtf import FlaskForm
+
 #from requests import request as rqt
-from wtforms import FileField, SubmitField
+
 from werkzeug.utils import secure_filename
 import os
-from wtforms.validators import InputRequired
-import pandas as pd
-import numpy as np
 
-import matplotlib.pyplot as plt
+import pandas as pd
+
+from matplotlib.lines import Line2D
+
+
 #from wqchartpy import piper
 import io
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
@@ -170,7 +169,7 @@ def Visor():
     df=tit
     clasif=session["Clas"]
     #---------------------------------------     
-
+    col, simb= ncolran_dic(df,clasif)
     session["check"]=-1
     #lista=list()
     session["elm_ley"]=list()
@@ -185,18 +184,16 @@ def Visor():
         #print (session["check"])
         session["TDS"]=(session["check"]>0)
         if session["keys"]!='':
+            post_sim=list()
             try:
-                val=request.form["COLOR"]
-                if val =="ok":
-                    col, simb= ncolran_dic(df,clasif) #diccionarios de col , simb
-                    session["dic_col_sim"][0]=col
-            except:
-                val=0
-            try:
-                val=request.form["SIMB"]
-                if val =="ok":
-                    col, simb= ncolran_dic(df,clasif) #diccionarios de col , simb
-                    session["dic_col_sim"][1]=simb
+                for h in list(simb.keys()):
+                    val=request.form[h]
+                    if val=='Seleccione símbolo...':
+                        cont=True
+                    else: cont=False
+                    post_sim.append((h,val))
+                if not cont:
+                    session["dic_col_sim"][1]=dict(post_sim)
             except:
                 val=0
             for i in session["keys"]:
@@ -209,7 +206,13 @@ def Visor():
         session["TDS"]=False
         #return render_template('colorsel.html', tipografico=graficos)
     #print (session["keys"])
-    return render_template('colorsel.html', tipografico=graficos , check=session["TDS"], key=session["keys"], chekes=session["elm_ley"])
+    if session["keys"] !="":
+        grup_simb=list(simb.keys())
+        simbolos=list(Line2D.filled_markers)
+    else:
+        grup_simb=list()
+        simbolos=list()
+    return render_template('colorsel.html', tipografico=graficos , check=session["TDS"], key=session["keys"], chekes=session["elm_ley"],grup_sel=grup_simb,simb=simbolos)
 
 
 
@@ -220,7 +223,7 @@ def Grafico():
     clas=session["Clas"]
     ruta=session["ruta"]
     dcol, dsim =tuple(session["dic_col_sim"])
-    
+    print (dsim)
     tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
     df=tit
     #print ("diccionario ",dicc)

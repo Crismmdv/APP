@@ -243,12 +243,14 @@ def Grafico():
         for h in filt_ley:
             filt_ley2+=h
         format_df=format_df.filter(items=filt_ley2, axis=0)
+        _,lyd=creardf_piper(Y_df=format_df,sz=50, di=dicc,cla=clas,std=tds,dict_col=dcol,dict_sim=dsim)
     #print ('FILT_LEY',filt_ley)
     #format_df.to_csv("formato.csv",sep=";")
     if session['tipograf']=='Piper': 
         fig=plot_piper(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1,lyd=lyd)
-    elif session['tipograf']=='Schoeller': 
-        fig= plot_scholler(format_df, unit='mg/L', figname='Diagrama de Scholler de elementos normados', figformat='jpg',ms= 8,n=True,nch='Nch 409')
+    elif session['tipograf']=='Schoeller':
+        
+        fig= plot_scholler(format_df, unit='mg/L', figname='Diagrama de Scholler de elementos normados', figformat='jpg',ms= 8,n=True,nch='Nch 409',lyd=lyd)
     elif session['tipograf']=='Gibbs':
         fig=''
     output = io.BytesIO()

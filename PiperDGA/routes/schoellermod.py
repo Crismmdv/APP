@@ -86,7 +86,7 @@ def norma(df,s,t,v):
 def plot_scholler(dft, 
          unit='mg/L', 
          figname='Diagrama Schoeller ', 
-         figformat='jpg',ms=4,n=False, nch='Nch 409',fg='' ):
+         figformat='jpg',ms=4,n=False, nch='Nch 409',fg='',lyd=list() ):
     n2=n or (not n and nch=='Nch 1333')
     df,norm= norma(dft,1,n2,nch)
     dflb,normlb= norma(dft,1,False,nch)#para la leyenda doble
@@ -264,7 +264,7 @@ def plot_scholler(dft,
         #ax.set_xticklabels(['Cu', 'Cr', 'F$^-$', 'Fe$_{tot}$', 'Mn', 'Mg$^{2+}$', 'Se', 'Zn','As','Cd','Hg','NO$_{3}$','Pb','Cl$^-$','SO$_4^{2-}$','TDS'])
         ax.set_xticks(nticks)
         ax.set_xticklabels(Lticks)
-        ax.set_yticks([0.001,0.01,0.1,1,10,50,1000,10000],minor=False)
+        ax.set_yticks([0.0001,0.001,0.01,0.1,1,10,100,1000,10000],minor=False)
     ax.yaxis.set_major_formatter(mticker.ScalarFormatter())
     ax.get_yaxis().set_major_formatter(y_format)
     if n: 
@@ -279,7 +279,7 @@ def plot_scholler(dft,
     #ax.set_xlim([1, 16])
     #print (np.min(meqL), np.max(meqL))
     #if n:
-    ax.set_ylim([0.001, 10000])
+    ax.set_ylim([0.00001, 10000])
     #else:
     #    ax.set_ylim([0.0001, 1000])
     # Plot the vertical lines
@@ -292,9 +292,17 @@ def plot_scholler(dft,
             
     # Creat the legend
     if not n:
-        lgd= ax.legend(bbox_to_anchor=(0.5, -0.1),borderaxespad=1,loc='upper center', markerscale=1, frameon=True, fontsize=16,
-                  labelspacing=0.25,ncol=4,edgecolor='black',framealpha=0.3)
-    
+        #print (lyd==list())
+        # lgd= ax.legend(bbox_to_anchor=(0.5, -0.1),borderaxespad=1,loc='upper center', markerscale=1, frameon=True, fontsize=16,
+        #           labelspacing=0.25,ncol=4,edgecolor='black',framealpha=0.3)
+        if lyd==list():
+            lgd=plt.legend(bbox_to_anchor=(0.5, -0.1), markerscale=1, fontsize=16, borderaxespad=1,
+                    frameon=True, loc="upper center",
+                    labelspacing=0.25, handletextpad=0.25,ncol=4,edgecolor='black',framealpha=0.3)
+        else:
+            lgd=plt.legend(handles=lyd,bbox_to_anchor=(0.5, -0.1), markerscale=1, fontsize=16, borderaxespad=1,
+                    frameon=True, loc="upper center",
+                    labelspacing=0.25, handletextpad=0.25,ncol=4,edgecolor='black',framealpha=0.3)
     # Display the info
     cwd = os.getcwd()
     #print("Schoeller diagram created. Saving it to %s \n" %cwd)
@@ -305,7 +313,7 @@ def plot_scholler(dft,
     
     if n:
         #fig.savefig(figname + '.' + figformat, format=figformat, dpi=300)
-        return plot_scholler(dft, unit='mg/L', figname='Diagrama Schoeller ', figformat='jpg',ms=ms,n=False, nch='Nch 409',fg=fig)
+        return plot_scholler(dft, unit='mg/L', figname='Diagrama Schoeller ', figformat='jpg',ms=ms,n=False, nch='Nch 409',fg=fig,lyd=lyd)
     else:
         #fig.savefig(figname + '.' + figformat,bbox_extra_artists=(lgd,), bbox_inches='tight', format=figformat, dpi=300)
         return fig

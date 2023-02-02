@@ -77,7 +77,8 @@ def creardf_piper(Y_df,sz=60, di=dict(),cla="",std=False, dict_col="", dict_sim=
     for i in diccion.keys():
         #print (Y_df.columns.values)
         format_df[i]=Y_df[diccion[i]].copy()
-    
+    for h in [cla[x] for x in cla.keys()]:
+        format_df[h]=Y_df[h]  
     if False:
         return (Y_df)
     #if filtro!='' and filtro2 == '':

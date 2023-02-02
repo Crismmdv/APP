@@ -236,15 +236,26 @@ def Grafico():
     ley=session["elm_ley"]
     filt_ley=list()
     filt_ley2=list()
+    # print ('prefiltro',len(lyd), dcol.keys(), dsim.keys())
     if ley!='' and len(ley)>0:
         for i in ley:
             k=list(gb.indices[i])
             filt_ley.append(k)
         for h in filt_ley:
             filt_ley2+=h
+        
         format_df=format_df.filter(items=filt_ley2, axis=0)
-        _,lyd=creardf_piper(Y_df=format_df,sz=50, di=dicc,cla=clas,std=tds,dict_col=dcol,dict_sim=dsim)
-    #print ('FILT_LEY',filt_ley)
+        rcol=format_df.groupby([clas['Clase1']]).groups.keys()
+        rsim=format_df.groupby([clas['Clase2']]).groups.keys()
+        bcol=[x for x in dcol.keys() if x in rcol]
+        bsim=[x for x in dsim.keys() if x in rsim]
+        dcol2=dict()
+        dsim2=dict()
+        for j in bcol: dcol2[j]=dcol[j]
+        for j in bsim: dsim2[j]=dsim[j]
+        _,lyd=creardf_piper(Y_df=format_df,sz=50, di=dicc,cla=clas,std=tds,dict_col=dcol2,dict_sim=dsim2)
+        
+        # print ('filtro',len(lyd), dcol.keys(), dsim.keys())
     #format_df.to_csv("formato.csv",sep=";")
     if session['tipograf']=='Piper': 
         fig=plot_piper(format_df, unit='mg/L', figname='Piper '+filtro+'_'+filtro2+'_Subcuenca', figformat='jpg',nc=1,lyd=lyd)

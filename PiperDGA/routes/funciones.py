@@ -236,7 +236,7 @@ def corregir_BD(DATA3):
 
 def ncolorandom2(j):
     colores=list()
-    clp=cm.get_cmap('Spectral')
+    clp=cm.get_cmap('tab20') if j <=20 else cm.get_cmap('gist_rainbow')
     for i in range (0,j):
         colores.append([list(clp(i/j)),])
     #n=len(colores)

@@ -223,7 +223,7 @@ def Grafico():
     clas=session["Clas"]
     ruta=session["ruta"]
     dcol, dsim =tuple(session["dic_col_sim"])
-    print (dsim)
+    #print (dsim)
     tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
     df=tit
     #print ("diccionario ",dicc)
@@ -253,7 +253,7 @@ def Grafico():
         dsim2=dict()
         for j in bcol: dcol2[j]=dcol[j]
         for j in bsim: dsim2[j]=dsim[j]
-        _,lyd=creardf_piper(Y_df=format_df,sz=50, di=dicc,cla=clas,std=tds,dict_col=dcol2,dict_sim=dsim2)
+        _,lyd=creardf_piper(Y_df=format_df,sz=50, di=dict(),cla=clas,std=tds,dict_col=dcol2,dict_sim=dsim2)
         
         # print ('filtro',len(lyd), dcol.keys(), dsim.keys())
     #format_df.to_csv("formato.csv",sep=";")

@@ -74,141 +74,129 @@ def creardf_piper(Y_df,sz=60, di=dict(),cla="",std=False, dict_col="", dict_sim=
     #filtro='F.A.E'
     #filtro2=''
     diccion=di
-    for i in diccion.keys():
-        #print (Y_df.columns.values)
-        format_df[i]=Y_df[diccion[i]].copy()
-    for h in [cla[x] for x in cla.keys()]:
-        format_df[h]=Y_df[h]  
-    if False:
-        return (Y_df)
-    #if filtro!='' and filtro2 == '':
-    #    format_df=format_sf.groupby([filtro])
-    #    return (format_df)
-    #elif filtro !='' and filtro2 !='':
-    #    format_df=format_sf.groupby([filtro,filtro2])
-    #    return (format_df)
+    if diccion== dict():
+        format_df=Y_df
     else:
-        #y_tds=Y_df['STD_mg_l'].copy()
-        #y_seven = Y_df['SubCuenca'].copy() 
-        #y_2 = Y_df['Contexto_H'].copy()
-        #y_t = Y_df['Tipo_Pto'].copy()
+        for i in diccion.keys():
+            #print (Y_df.columns.values)
+            format_df[i]=Y_df[diccion[i]].copy()
+        for h in [cla[x] for x in cla.keys()]:
+            format_df[h]=Y_df[h]  
         
+    if cla=="":
+        format_df['Label'] = "Muestras"
+        format_df['Color'] = "gray"
+        format_df['Marker'] = "o"
+    elif len(cla)==2:
         
-        #format_df=format_sf.copy()
-        if cla=="":
-            format_df['Label'] = "Muestras"
-            format_df['Color'] = "gray"
-            format_df['Marker'] = "o"
-        elif len(cla)==2:
+        simbolos=list(Line2D.markers.keys())
+        simbolos.remove(',')
+        clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())
+        clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
+        colores=ncolorandom(len(clases1))
+        #print (colores)            
+        if dict_col=="" and dict_sim=="":
+            dict_col, dict_sim=ncolran_dic(Y_df,cla)
+        lyd=leyenda_2S(cla,dic_mar=dict_sim, dic_tmp=dict_col)
+    
+        y_seven = Y_df[cla['Clase1']].copy()
+        y_t = Y_df[cla['Clase2']].copy()
+        
+        for i in clases1:
             
-            simbolos=list(Line2D.markers.keys())
-            simbolos.remove(',')
-            clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())
-            clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
-            colores=ncolorandom(len(clases1))
-            #print (colores)            
-            if dict_col=="" and dict_sim=="":
-                dict_col, dict_sim=ncolran_dic(Y_df,cla)
-            lyd=leyenda_2S(cla,dic_mar=dict_sim, dic_tmp=dict_col)
+            format_df.loc[y_seven==i, 'Color'] = '#%02x%02x%02x' % (int(dict_col[i][0][0]*255),int(dict_col[i][0][1]*255),int(dict_col[i][0][2]*255))
+        for i in clases2:
+            format_df.loc[y_t==i, 'Marker'] = dict_sim[i]
         
-            y_seven = Y_df[cla['Clase1']].copy()
-            y_t = Y_df[cla['Clase2']].copy()
+        try:
+            for idx in Y_df.index: 
+                date=Y_df.at[idx,cla['Clase1']]
+                Y_df.at[idx,'fecha1']=dt.strptime(date, "%d-%m-%Y %H:%M:%S")
+                Y_df.at[idx,'Lb']=conv_fecha(Y_df.at[idx,'fecha1'])
+                Y_df.at[idx,'Lb2']=conv_fecha(Y_df.at[idx,'fecha1'],v=False)
+            format_df['Label'] =((Y_df[cla['Clase2']])) +' / '+(Y_df['Lb'])
+            format_df['Label_layout']= ((Y_df[cla['Clase2']]))+' / '+ (Y_df['Lb2'])  
+            #print (format_df.loc[Y_df[cla['Clase2']]=='HA01','Marker'])
             
-            for i in clases1:
+        except: 
+            format_df['Label'] = (Y_df[cla['Clase1']])+' / '+((Y_df[cla['Clase2']]))
+            format_df['Label_layout']= format_df['Label']
+            #simbolos =["D","d","o","s","v"]
+            
+        
+    elif len(cla)==1:
+        for i in cla.keys():
+            if i == "Clase1":
+                colores=['red','darkorange','lime','darkviolet','blue','cyan','pink','olive','mediumpurple','blueviolet',
+                    'gold','gray','black','white','green','gray','magenta','skyblue', 'indigo','purple','brown','indigo','darkcyan']
+                #simbolos =["s","o","v","d","*"]
+
+                format_df['Label'] = (Y_df[cla['Clase1']])#+' / '+((Y_df[cla['Clase2']]))
                 
-                format_df.loc[y_seven==i, 'Color'] = '#%02x%02x%02x' % (int(dict_col[i][0][0]*255),int(dict_col[i][0][1]*255),int(dict_col[i][0][2]*255))
-            for i in clases2:
-                format_df.loc[y_t==i, 'Marker'] = dict_sim[i]
-            
-            try:
-                for idx in Y_df.index: 
-                    date=Y_df.at[idx,cla['Clase1']]
-                    Y_df.at[idx,'fecha1']=dt.strptime(date, "%d-%m-%Y %H:%M:%S")
-                    Y_df.at[idx,'Lb']=conv_fecha(Y_df.at[idx,'fecha1'])
-                    Y_df.at[idx,'Lb2']=conv_fecha(Y_df.at[idx,'fecha1'],v=False)
-                format_df['Label'] =((Y_df[cla['Clase2']])) +' / '+(Y_df['Lb'])
-                format_df['Label_layout']= ((Y_df[cla['Clase2']]))+' / '+ (Y_df['Lb2'])  
-                #print (format_df.loc[Y_df[cla['Clase2']]=='HA01','Marker'])
+                clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())
+                #clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
+                dict_col=dict(zip(clases1,colores))
+                #dict_sim=dict(zip(clases2,simbolos))
+
+                y_seven = Y_df[cla['Clase1']].copy()
+                #y_t = Y_df['Clase2'].copy()
+                for i in clases1:
+                    format_df.loc[y_seven==i, 'Color'] = dict_col[i]
+                format_df['Marker'] = 'o'
+            else:
                 
-            except: 
-                format_df['Label'] = (Y_df[cla['Clase1']])+' / '+((Y_df[cla['Clase2']]))
-                format_df['Label_layout']= format_df['Label']
-                #simbolos =["D","d","o","s","v"]
+                simbolos=list(Line2D.markers.keys())
+
+                format_df['Label'] = (Y_df[cla['Clase2']])#+' / '+((Y_df[cla['Clase2']]))
                 
-            
-        elif len(cla)==1:
-            for i in cla.keys():
-                if i == "Clase1":
-                    colores=['red','darkorange','lime','darkviolet','blue','cyan','pink','olive','mediumpurple','blueviolet',
-                        'gold','gray','black','white','green','gray','magenta','skyblue', 'indigo','purple','brown','indigo','darkcyan']
-                    #simbolos =["s","o","v","d","*"]
+                #clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())
+                clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
+                #dict_col=dict(zip(clases1,colores))
+                dict_sim=dict(zip(clases2,simbolos))
 
-                    format_df['Label'] = (Y_df[cla['Clase1']])#+' / '+((Y_df[cla['Clase2']]))
-                    
-                    clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())
-                    #clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
-                    dict_col=dict(zip(clases1,colores))
-                    #dict_sim=dict(zip(clases2,simbolos))
-
-                    y_seven = Y_df[cla['Clase1']].copy()
-                    #y_t = Y_df['Clase2'].copy()
-                    for i in clases1:
-                        format_df.loc[y_seven==i, 'Color'] = dict_col[i]
-                    format_df['Marker'] = 'o'
-                else:
-                    
-                    simbolos=list(Line2D.markers.keys())
-
-                    format_df['Label'] = (Y_df[cla['Clase2']])#+' / '+((Y_df[cla['Clase2']]))
-                    
-                    #clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())
-                    clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
-                    #dict_col=dict(zip(clases1,colores))
-                    dict_sim=dict(zip(clases2,simbolos))
-
-                    #y_seven = Y_df[cla['Clase1']].copy()
-                    y_t = Y_df[cla['Clase2']].copy()
-                    for i in clases2:
-                        format_df.loc[y_t==i, 'Marker'] = dict_sim[i]
-                    format_df['Color'] = "blue"
-        else: 
-            format_df['Label'] = (Y_df['SubCuenca'])+' / '+((Y_df['Tipo_Pto']))
-            format_df.loc[y_seven=='Rio Grande Medio', 'Color'] = 'yellow'#; format_df.loc[y_2==filtro, 'Marker'] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
-            format_df.loc[y_seven=='Río Guatulame', 'Color'] = 'blue'#; format_df.loc[y_2==filtro, 'Marker'] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
-            format_df.loc[y_seven=='Rio Limari', 'Color'] = 'lime'#; format_df.loc[y_2==filtro ,'Marker' ] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
-            format_df.loc[y_seven=='Rio Hurtado', 'Color'] = 'cyan'#; format_df.loc[y_2==filtro ,'Marker' ] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
-            format_df.loc[y_seven=='Rio Grande Bajo', 'Color'] = 'magenta'#; format_df.loc[y_2==filtro ,'Marker' ] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
-            format_df.loc[y_seven=='Rio Grande Alto', 'Color'] = 'red'#; format_df.loc[y_2==filtro ,'Marker' ] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
-            format_df.loc[y_seven=='Fuera del Area de Estudio', 'Color'] = 'white'
-
-            
-            format_df.loc[y_t=='Superficial','Marker'] = 's'
-            format_df.loc[y_t=='Subterranea','Marker'] = 'o'
-            format_df.loc[y_t=='Vertiente','Marker'] = 'v'
-            format_df.loc[y_t=='Precipitacion','Marker'] = 'd'
-            format_df.loc[y_t=='Criosfera','Marker'] = '*'
-        
-        
-        format_df['Sample'] = format_df['Cod'].copy()
-        format_df['Size'] = sz
-        if std:
-            format_df=escala_TDS(format_df,'TDS',sz,sz*4)
-        format_df['Alpha'] = 1
-        
-        
-
+                #y_seven = Y_df[cla['Clase1']].copy()
+                y_t = Y_df[cla['Clase2']].copy()
+                for i in clases2:
+                    format_df.loc[y_t==i, 'Marker'] = dict_sim[i]
+                format_df['Color'] = "blue"
+    else: 
+        format_df['Label'] = (Y_df['SubCuenca'])+' / '+((Y_df['Tipo_Pto']))
+        format_df.loc[y_seven=='Rio Grande Medio', 'Color'] = 'yellow'#; format_df.loc[y_2==filtro, 'Marker'] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
+        format_df.loc[y_seven=='Río Guatulame', 'Color'] = 'blue'#; format_df.loc[y_2==filtro, 'Marker'] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
+        format_df.loc[y_seven=='Rio Limari', 'Color'] = 'lime'#; format_df.loc[y_2==filtro ,'Marker' ] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
+        format_df.loc[y_seven=='Rio Hurtado', 'Color'] = 'cyan'#; format_df.loc[y_2==filtro ,'Marker' ] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
+        format_df.loc[y_seven=='Rio Grande Bajo', 'Color'] = 'magenta'#; format_df.loc[y_2==filtro ,'Marker' ] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
+        format_df.loc[y_seven=='Rio Grande Alto', 'Color'] = 'red'#; format_df.loc[y_2==filtro ,'Marker' ] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
+        format_df.loc[y_seven=='Fuera del Area de Estudio', 'Color'] = 'white'
 
         
+        format_df.loc[y_t=='Superficial','Marker'] = 's'
+        format_df.loc[y_t=='Subterranea','Marker'] = 'o'
+        format_df.loc[y_t=='Vertiente','Marker'] = 'v'
+        format_df.loc[y_t=='Precipitacion','Marker'] = 'd'
+        format_df.loc[y_t=='Criosfera','Marker'] = '*'
+    
+    
+    format_df['Sample'] = format_df['Cod'].copy()
+    format_df['Size'] = sz
+    if std:
+        format_df=escala_TDS(format_df,'TDS',sz,sz*4)
+    format_df['Alpha'] = 1
+    
+    
 
-        
-        #format_df=format_df.dropna(how='any')
-        format_df = format_df.sort_values(by='Label')
-        
 
-        format_df.reset_index(inplace=True, drop=True)
-        #print (format_df)
-        
-        return format_df, lyd
+    
+
+    
+    #format_df=format_df.dropna(how='any')
+    format_df = format_df.sort_values(by='Label')
+    
+
+    format_df.reset_index(inplace=True, drop=True)
+    #print (format_df)
+    
+    return format_df, lyd
 
 def escala_TDS(df,col,s_min=25,s_max=100):
     v_min=min(df[col])

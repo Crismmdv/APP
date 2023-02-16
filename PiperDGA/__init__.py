@@ -9,7 +9,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, R
 
 from werkzeug.utils import secure_filename
 import os
-
+import sys
 import pandas as pd
 
 from matplotlib.lines import Line2D
@@ -19,10 +19,28 @@ from matplotlib.lines import Line2D
 import io
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from flask_cors import CORS
+import jinja2
 
-app = Flask(__name__, static_folder=Config.STATIC_FOLDER, template_folder=Config.TEMPLATE_FOLDER)
+
+#import webview
+if getattr(sys,'frozen', False):
+    template_folder=os.path.join(sys._MEIPASS, os.path.normpath(Config.TEMPLATE_FOLDER))
+    static_folder=os.path.join(sys._MEIPASS, os.path.normpath(Config.STATIC_FOLDER))
+    upload_folder=os.path.join(sys._MEIPASS, os.path.normpath(Config.UPLOAD_FOLDER))
+    # print (template_folder)
+    # print (static_folder)
+    loader = jinja2.FileSystemLoader(template_folder)
+    environment = jinja2.Environment(loader=loader)
+    loader2 = jinja2.FileSystemLoader(static_folder)
+    environment2 = jinja2.Environment(loader=loader2)
+    app = Flask(__name__, static_folder=static_folder, template_folder=template_folder)
+else: 
+    app = Flask(__name__, static_folder=Config.STATIC_FOLDER, template_folder=Config.TEMPLATE_FOLDER)
+    upload_folder=Config.UPLOAD_FOLDER
 app.config.from_object(Config)
 CORS(app)
+
+
 
 
 @app.route('/')
@@ -33,8 +51,8 @@ def Datos():
     if request.method=="POST":
         if request.files:
             arch =request.files['archivo']
-            ruta3= os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config["UPLOAD_FOLDER"], arch.filename)
-            ruta2 =os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config["UPLOAD_FOLDER"])
+            ruta3= os.path.join(os.path.abspath(os.path.dirname(__file__)),upload_folder, arch.filename)
+            ruta2 =os.path.join(os.path.abspath(os.path.dirname(__file__)),upload_folder)
             arch.save(ruta3)
             #print (ruta3)
             try:

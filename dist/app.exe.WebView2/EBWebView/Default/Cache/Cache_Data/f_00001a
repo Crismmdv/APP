@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color</title>
+
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.2.0/js/bootstrap-colorpicker.js" > </script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.2.0/js/bootstrap-colorpicker.min.js" > </script>
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.2.0/css/bootstrap-colorpicker.min.css"/>
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.2.0/css/bootstrap-colorpicker.css"/>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Herramientas Hidroquímica</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/Datos">Subir Datos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/Visor">Visor</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+    
+    </div>
+    <div>
+        <h1>Gráfico </h1>   
+    </div>
+    <div id="plot">
+      <img id="Graph" src="/Grafico.jpg" alt="imagen">
+      
+    </div>
+
+    <form action="" method="post" id="CHECK">
+      <div class="form-check form-switch">
+        
+          <input onChange="this.form.submit()" class="form-check-input" type="checkbox" value=-1 name="TDS_check" id="TDS_check" checked></input>
+        
+        <label class="form-check-label" for="TDS_check">
+          Tamaño proporcional a TDS
+        </label>
+      </div>
+    </form>
+        
+    
+    
+    <form action="" method="post" id="CHECK2">
+      <div class="form-check form-switch">
+        
+        <input onChange= "this.form.submit()" class="form-check-input" type="checkbox" name="E" id="E" checked></input>
+        
+        <label class="form-check-label" for=""> Selección de grupos </label>
+      </div>
+    </form>
+
+    <form action="" method="post" id="CHECK3"></form>
+      
+        <div class="btn-text-center">
+        <input id= "refresh" type="submit" class="btn btn-primary" form="CHECK3" value="Actualizar"></input>
+        <!--<button id = "sgte" type="button" onclick= "window.location.href=/Prueba;" disabled>Siguiente</button>-->
+        </div>
+        <div class="input-group mb-3">
+          
+            
+          <label class="input-group-text" for="inputGroupSelect01">Criosfera</label>
+          <select form="CHECK3" class="form-select" id=Criosfera name=Criosfera>
+            <option selected>Seleccione símbolo...</option>
+            
+            <option value="o">o</option> 
+            
+            <option value="v">v</option> 
+            
+            <option value="^">^</option> 
+            
+            <option value="&lt;">&lt;</option> 
+            
+            <option value="&gt;">&gt;</option> 
+            
+            <option value="8">8</option> 
+            
+            <option value="s">s</option> 
+            
+            <option value="p">p</option> 
+            
+            <option value="*">*</option> 
+            
+            <option value="h">h</option> 
+            
+            <option value="H">H</option> 
+            
+            <option value="D">D</option> 
+            
+            <option value="d">d</option> 
+            
+            <option value="P">P</option> 
+            
+            <option value="X">X</option> 
+            
+          
+          </select>
+          <br>  
+          
+            
+          <label class="input-group-text" for="inputGroupSelect01">Precipitacion</label>
+          <select form="CHECK3" class="form-select" id=Precipitacion name=Precipitacion>
+            <option selected>Seleccione símbolo...</option>
+            
+            <option value="o">o</option> 
+            
+            <option value="v">v</option> 
+            
+            <option value="^">^</option> 
+            
+            <option value="&lt;">&lt;</option> 
+            
+            <option value="&gt;">&gt;</option> 
+            
+            <option value="8">8</option> 
+            
+            <option value="s">s</option> 
+            
+            <option value="p">p</option> 
+            
+            <option value="*">*</option> 
+            
+            <option value="h">h</option> 
+            
+            <option value="H">H</option> 
+            
+            <option value="D">D</option> 
+            
+            <option value="d">d</option> 
+            
+            <option value="P">P</option> 
+            
+            <option value="X">X</option> 
+            
+          
+          </select>
+          <br>  
+          
+            
+          <label class="input-group-text" for="inputGroupSelect01">Subterranea</label>
+          <select form="CHECK3" class="form-select" id=Subterranea name=Subterranea>
+            <option selected>Seleccione símbolo...</option>
+            
+            <option value="o">o</option> 
+            
+            <option value="v">v</option> 
+            
+            <option value="^">^</option> 
+            
+            <option value="&lt;">&lt;</option> 
+            
+            <option value="&gt;">&gt;</option> 
+            
+            <option value="8">8</option> 
+            
+            <option value="s">s</option> 
+            
+            <option value="p">p</option> 
+            
+            <option value="*">*</option> 
+            
+            <option value="h">h</option> 
+            
+            <option value="H">H</option> 
+            
+            <option value="D">D</option> 
+            
+            <option value="d">d</option> 
+            
+            <option value="P">P</option> 
+            
+            <option value="X">X</option> 
+            
+          
+          </select>
+          <br>  
+          
+            
+          <label class="input-group-text" for="inputGroupSelect01">Superficial</label>
+          <select form="CHECK3" class="form-select" id=Superficial name=Superficial>
+            <option selected>Seleccione símbolo...</option>
+            
+            <option value="o">o</option> 
+            
+            <option value="v">v</option> 
+            
+            <option value="^">^</option> 
+            
+            <option value="&lt;">&lt;</option> 
+            
+            <option value="&gt;">&gt;</option> 
+            
+            <option value="8">8</option> 
+            
+            <option value="s">s</option> 
+            
+            <option value="p">p</option> 
+            
+            <option value="*">*</option> 
+            
+            <option value="h">h</option> 
+            
+            <option value="H">H</option> 
+            
+            <option value="D">D</option> 
+            
+            <option value="d">d</option> 
+            
+            <option value="P">P</option> 
+            
+            <option value="X">X</option> 
+            
+          
+          </select>
+          <br>  
+          
+            
+          <label class="input-group-text" for="inputGroupSelect01">Vertiente</label>
+          <select form="CHECK3" class="form-select" id=Vertiente name=Vertiente>
+            <option selected>Seleccione símbolo...</option>
+            
+            <option value="o">o</option> 
+            
+            <option value="v">v</option> 
+            
+            <option value="^">^</option> 
+            
+            <option value="&lt;">&lt;</option> 
+            
+            <option value="&gt;">&gt;</option> 
+            
+            <option value="8">8</option> 
+            
+            <option value="s">s</option> 
+            
+            <option value="p">p</option> 
+            
+            <option value="*">*</option> 
+            
+            <option value="h">h</option> 
+            
+            <option value="H">H</option> 
+            
+            <option value="D">D</option> 
+            
+            <option value="d">d</option> 
+            
+            <option value="P">P</option> 
+            
+            <option value="X">X</option> 
+            
+          
+          </select>
+          <br>  
+          
+        </div>
+        <div>
+        <br>
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Fuera / Precipitacion" id="Fuera / Precipitacion" value="Fuera / Precipitacion" checked></input>
+            <label class="form-check-label" for="Fuera / Precipitacion"> Fuera / Precipitacion </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Fuera / Subterranea" id="Fuera / Subterranea" value="Fuera / Subterranea" checked></input>
+            <label class="form-check-label" for="Fuera / Subterranea"> Fuera / Subterranea </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Fuera / Vertiente" id="Fuera / Vertiente" value="Fuera / Vertiente" checked></input>
+            <label class="form-check-label" for="Fuera / Vertiente"> Fuera / Vertiente </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Grande Alto / Precipitacion" id="Rio Grande Alto / Precipitacion" value="Rio Grande Alto / Precipitacion" checked></input>
+            <label class="form-check-label" for="Rio Grande Alto / Precipitacion"> Rio Grande Alto / Precipitacion </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Grande Alto / Superficial" id="Rio Grande Alto / Superficial" value="Rio Grande Alto / Superficial" checked></input>
+            <label class="form-check-label" for="Rio Grande Alto / Superficial"> Rio Grande Alto / Superficial </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Grande Bajo / Precipitacion" id="Rio Grande Bajo / Precipitacion" value="Rio Grande Bajo / Precipitacion" checked></input>
+            <label class="form-check-label" for="Rio Grande Bajo / Precipitacion"> Rio Grande Bajo / Precipitacion </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Grande Bajo / Subterranea" id="Rio Grande Bajo / Subterranea" value="Rio Grande Bajo / Subterranea" checked></input>
+            <label class="form-check-label" for="Rio Grande Bajo / Subterranea"> Rio Grande Bajo / Subterranea </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Grande Bajo / Superficial" id="Rio Grande Bajo / Superficial" value="Rio Grande Bajo / Superficial" checked></input>
+            <label class="form-check-label" for="Rio Grande Bajo / Superficial"> Rio Grande Bajo / Superficial </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Grande Medio / Precipitacion" id="Rio Grande Medio / Precipitacion" value="Rio Grande Medio / Precipitacion" checked></input>
+            <label class="form-check-label" for="Rio Grande Medio / Precipitacion"> Rio Grande Medio / Precipitacion </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Grande Medio / Subterranea" id="Rio Grande Medio / Subterranea" value="Rio Grande Medio / Subterranea" checked></input>
+            <label class="form-check-label" for="Rio Grande Medio / Subterranea"> Rio Grande Medio / Subterranea </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Grande Medio / Superficial" id="Rio Grande Medio / Superficial" value="Rio Grande Medio / Superficial" checked></input>
+            <label class="form-check-label" for="Rio Grande Medio / Superficial"> Rio Grande Medio / Superficial </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Grande Medio / Vertiente" id="Rio Grande Medio / Vertiente" value="Rio Grande Medio / Vertiente" checked></input>
+            <label class="form-check-label" for="Rio Grande Medio / Vertiente"> Rio Grande Medio / Vertiente </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Guatulame / Precipitacion" id="Rio Guatulame / Precipitacion" value="Rio Guatulame / Precipitacion" checked></input>
+            <label class="form-check-label" for="Rio Guatulame / Precipitacion"> Rio Guatulame / Precipitacion </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Guatulame / Subterranea" id="Rio Guatulame / Subterranea" value="Rio Guatulame / Subterranea" checked></input>
+            <label class="form-check-label" for="Rio Guatulame / Subterranea"> Rio Guatulame / Subterranea </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Guatulame / Superficial" id="Rio Guatulame / Superficial" value="Rio Guatulame / Superficial" checked></input>
+            <label class="form-check-label" for="Rio Guatulame / Superficial"> Rio Guatulame / Superficial </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Guatulame / Vertiente" id="Rio Guatulame / Vertiente" value="Rio Guatulame / Vertiente" checked></input>
+            <label class="form-check-label" for="Rio Guatulame / Vertiente"> Rio Guatulame / Vertiente </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Hurtado / Criosfera" id="Rio Hurtado / Criosfera" value="Rio Hurtado / Criosfera" checked></input>
+            <label class="form-check-label" for="Rio Hurtado / Criosfera"> Rio Hurtado / Criosfera </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Hurtado / Precipitacion" id="Rio Hurtado / Precipitacion" value="Rio Hurtado / Precipitacion" checked></input>
+            <label class="form-check-label" for="Rio Hurtado / Precipitacion"> Rio Hurtado / Precipitacion </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Hurtado / Subterranea" id="Rio Hurtado / Subterranea" value="Rio Hurtado / Subterranea" checked></input>
+            <label class="form-check-label" for="Rio Hurtado / Subterranea"> Rio Hurtado / Subterranea </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Hurtado / Superficial" id="Rio Hurtado / Superficial" value="Rio Hurtado / Superficial" checked></input>
+            <label class="form-check-label" for="Rio Hurtado / Superficial"> Rio Hurtado / Superficial </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Hurtado / Vertiente" id="Rio Hurtado / Vertiente" value="Rio Hurtado / Vertiente" checked></input>
+            <label class="form-check-label" for="Rio Hurtado / Vertiente"> Rio Hurtado / Vertiente </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Limari / Precipitacion" id="Rio Limari / Precipitacion" value="Rio Limari / Precipitacion" checked></input>
+            <label class="form-check-label" for="Rio Limari / Precipitacion"> Rio Limari / Precipitacion </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Limari / Subterranea" id="Rio Limari / Subterranea" value="Rio Limari / Subterranea" checked></input>
+            <label class="form-check-label" for="Rio Limari / Subterranea"> Rio Limari / Subterranea </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Limari / Superficial" id="Rio Limari / Superficial" value="Rio Limari / Superficial" checked></input>
+            <label class="form-check-label" for="Rio Limari / Superficial"> Rio Limari / Superficial </label>
+            <br>
+          
+        
+          
+            <input class="form-check-input" type="checkbox" form="CHECK3" name="Rio Limari / Vertiente" id="Rio Limari / Vertiente" value="Rio Limari / Vertiente" checked></input>
+            <label class="form-check-label" for="Rio Limari / Vertiente"> Rio Limari / Vertiente </label>
+            <br>
+          
+        
+      
+      </div>
+    </form>
+</body>
+<script>
+  function setImageVisible(id) {
+    var img = document.getElementById(id);
+    var visible= (img.style.visibility == 'hidden');
+    img.style.visibility = (visible ? 'visible' : 'hidden');
+    }
+</script>
+</html>

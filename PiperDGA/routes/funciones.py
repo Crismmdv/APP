@@ -72,21 +72,34 @@ def func(xx, pos):  # formatter function takes tick label and tick position
 def creardf_piper(Y_df,sz=60, di=dict(),cla="",std=False, dict_col="", dict_sim=""):
     format_df = pd.DataFrame()
     #filtro='F.A.E'
-    #filtro2=''
+    filtro_1=list()
     diccion=di
     if diccion== dict():
         format_df=Y_df
-    else:
+    elif isinstance(cla, dict):
         for i in diccion.keys():
             #print (Y_df.columns.values)
             format_df[i]=Y_df[diccion[i]].copy()
         for h in [cla[x] for x in cla.keys()]:
             format_df[h]=Y_df[h]  
+    else:
+        for i in diccion.keys():
+            format_df[i]=Y_df[diccion[i]].copy()
+    for k in [x for x in format_df.columns if x!='TDS']:
+        filtro_1+=[x for x in list(format_df.loc[format_df[k]==-99].index) if x not in filtro_1]
+    try:
         
+        format_df=format_df.drop(index=filtro_1)
+        format_df=format_df.dropna(axis=0)
+        
+    except: 
+        filtro_1=list()
     if cla=="":
         format_df['Label'] = "Muestras"
         format_df['Color'] = "gray"
         format_df['Marker'] = "o"
+        lyd=dict()
+        format_df['Label_layout']= format_df['Label']
     elif len(cla)==2:
         
         simbolos=list(Line2D.markers.keys())
@@ -137,12 +150,14 @@ def creardf_piper(Y_df,sz=60, di=dict(),cla="",std=False, dict_col="", dict_sim=
                 #clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
                 dict_col=dict(zip(clases1,colores))
                 #dict_sim=dict(zip(clases2,simbolos))
-
+                lyd=dict()
                 y_seven = Y_df[cla['Clase1']].copy()
                 #y_t = Y_df['Clase2'].copy()
                 for i in clases1:
                     format_df.loc[y_seven==i, 'Color'] = dict_col[i]
                 format_df['Marker'] = 'o'
+                format_df['Label'] = (Y_df[cla['Clase1']])
+                format_df['Label_layout']= format_df['Label']
             else:
                 
                 simbolos=list(Line2D.markers.keys())
@@ -153,12 +168,14 @@ def creardf_piper(Y_df,sz=60, di=dict(),cla="",std=False, dict_col="", dict_sim=
                 clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
                 #dict_col=dict(zip(clases1,colores))
                 dict_sim=dict(zip(clases2,simbolos))
-
+                lyd=dict()
                 #y_seven = Y_df[cla['Clase1']].copy()
                 y_t = Y_df[cla['Clase2']].copy()
                 for i in clases2:
                     format_df.loc[y_t==i, 'Marker'] = dict_sim[i]
                 format_df['Color'] = "blue"
+                format_df['Label'] = (Y_df[cla['Clase2']])
+                format_df['Label_layout']= format_df['Label']
     else: 
         format_df['Label'] = (Y_df['SubCuenca'])+' / '+((Y_df['Tipo_Pto']))
         format_df.loc[y_seven=='Rio Grande Medio', 'Color'] = 'yellow'#; format_df.loc[y_2==filtro, 'Marker'] = dtipo[filtro2]; format_df.loc[y_t==filtro2, 'Alpha']= 0.6
@@ -210,15 +227,15 @@ def corregir_BD(DATA3):
     for k in DATA3.columns:
         if ',,' in k: DATA3.drop(columns=k, inplace=True)
     for k in DATA3.columns:
-        if 'mg/l' in k:
-            
-            for i in list(DATA3.index):
-                m=DATA3.at[i,k]
-                if  type(m)==str:
+                    
+        for i in list(DATA3.index):
+            m=DATA3.at[i,k]
+            if  type(m)==str:
+                try:
+                    n=float(m)
+                    DATA3.at[i,k]=n
+                except:
                     try:
-                        n=float(m)
-                        DATA3.at[i,k]=n
-                    except:
                         if '<' in m:
                             if ',' in m:
                                 num=m[1:].split(',')
@@ -228,10 +245,22 @@ def corregir_BD(DATA3):
                                 num=m[1:]
                                 n=float(num)/2
                                 DATA3.at[i,k]=n
-            cop=DATA3[k].copy()
-            DATA3[k]=cop.astype('float')
+                        elif ',' in m:
+                                num=m[1:].split(',')
+                                n=float(num[0]+'.'+num[1])
+                                DATA3.at[i,k]=n
+                    except: DATA3.at[i,k]=m
+            
             if 'arbonat' in k or 'CO3' in k:
                 DATA3[k].fillna(value=0,inplace=True)
+            
+        try:
+            DATA3[k].fillna(value=-99,inplace=True)
+            cop=DATA3[k].copy()
+            #print (k ,cop.dtype)
+            #DATA3[k]=cop.astype('float')
+            DATA3[k]=cop.astype('float')
+        except: continue
     return DATA3
 
 def ncolorandom2(j):

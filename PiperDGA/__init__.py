@@ -87,7 +87,19 @@ def Tablas():
             #dtipo=dtipo | dict(zip(['Eliminar'],['object']))
             session['dtipo']=dtipo
         except:
-            titulos=''
+            tit = pd.read_csv(ruta, encoding='utf-8', sep=';')
+            #session["CSV"]=tit
+            if len(tit.columns.values[0])>30: tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
+            if session['corregir']: 
+                tit=corregir_BD(tit)
+            tit.to_csv(ruta, encoding='utf-8', sep=',')
+            #print (session['corregir'])
+            dtipo= tit.dtypes
+            dindex=list(dtipo.index)
+            dvalues=list(dtipo.values.astype(str))
+            dtipo= dict( pd.Series(dvalues, index= dindex))
+            #dtipo=dtipo | dict(zip(['Eliminar'],['object']))
+            session['dtipo']=dtipo
                 
     else: titulos='error'
     
@@ -186,8 +198,9 @@ def Visor():
     tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
     df=tit
     clasif=session["Clas"]
-    #---------------------------------------     
-    col, simb= ncolran_dic(df,clasif)
+    #---------------------------------------
+    if len(clasif)>1:     
+        col, simb= ncolran_dic(df,clasif)
     session["check"]=-1
     #lista=list()
     session["elm_ley"]=list()

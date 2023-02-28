@@ -1,0 +1,2344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="/static/css/base.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    
+      
+    <title> titulos 
+
+
+</title>
+    
+</head>
+<body>
+  <style>
+    .btn-text-left{
+        text-align: left;	
+    }
+    .btn-text-right{
+        text-align: right;
+    }
+     
+     
+    .btn-text-center{
+        text-align: center;	
+    }
+  </style>
+  
+  <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Herramientas Hidroquímica</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/Datos">Subir Datos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/Visor">Visor</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </nav>
+  <a href="javascript:history.go(-1)">Atrás</a>
+  <div class="container py-3" >
+      
+<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+<py-env>
+    - pandas
+    - numpy
+</py-env>
+
+
+<!--Tabla de Seleccion elementos-->
+
+<form  action="" method="post" id="Ftabval" enctype="multipart/form-data">
+    <h2>Correlacione su tabla con los <br> Parámetros Piper</h2>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            
+            
+            <div class="table-responsive">
+                <table class="table table-striped" id="select1">
+                    <thead>
+                        <tr>
+                        <th> Aniones y Cationes</th>
+                        <th>ingrese columna en mg/l </th> 
+                        <th>Validación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        
+                            
+                        <tr>
+                            <td>Cl</td>
+                            <td>
+                                    
+                                    <select id="Cl" name="Cl" class="form-select" aria-label="Default select example" required>
+                                        <option value="Sup" selected>Seleccione columna</option>
+                                        
+                                        
+                                        <option value="ALCALINIDAD">ALCALINIDAD</option>
+                                        
+                                        <option value="AMONIO">AMONIO</option>
+                                        
+                                        <option value="Ag">Ag</option>
+                                        
+                                        <option value="Al">Al</option>
+                                        
+                                        <option value="As_">As_</option>
+                                        
+                                        <option value="B">B</option>
+                                        
+                                        <option value="BICARBONATO">BICARBONATO</option>
+                                        
+                                        <option value="Ba">Ba</option>
+                                        
+                                        <option value="Be">Be</option>
+                                        
+                                        <option value="Br">Br</option>
+                                        
+                                        <option value="CARBONATO">CARBONATO</option>
+                                        
+                                        <option value="CLORURO">CLORURO</option>
+                                        
+                                        <option value="CODIGO_MUESTRA">CODIGO_MUESTRA</option>
+                                        
+                                        <option value="COD_SNGM">COD_SNGM</option>
+                                        
+                                        <option value="CONDUCT_LAB">CONDUCT_LAB</option>
+                                        
+                                        <option value="COT">COT</option>
+                                        
+                                        <option value="Ca">Ca</option>
+                                        
+                                        <option value="Cd">Cd</option>
+                                        
+                                        <option value="Ce">Ce</option>
+                                        
+                                        <option value="Co">Co</option>
+                                        
+                                        <option value="Cr">Cr</option>
+                                        
+                                        <option value="Cs">Cs</option>
+                                        
+                                        <option value="Cu">Cu</option>
+                                        
+                                        <option value="DIAG_STIFF">DIAG_STIFF</option>
+                                        
+                                        <option value="DIOXIDO_CARBONO">DIOXIDO_CARBONO</option>
+                                        
+                                        <option value="Dy">Dy</option>
+                                        
+                                        <option value="Er">Er</option>
+                                        
+                                        <option value="Eu">Eu</option>
+                                        
+                                        <option value="F">F</option>
+                                        
+                                        <option value="Fe">Fe</option>
+                                        
+                                        <option value="Gd">Gd</option>
+                                        
+                                        <option value="Hf">Hf</option>
+                                        
+                                        <option value="Hg">Hg</option>
+                                        
+                                        <option value="Ho">Ho</option>
+                                        
+                                        <option value="K">K</option>
+                                        
+                                        <option value="La">La</option>
+                                        
+                                        <option value="Li">Li</option>
+                                        
+                                        <option value="Lu">Lu</option>
+                                        
+                                        <option value="Mg">Mg</option>
+                                        
+                                        <option value="Mn">Mn</option>
+                                        
+                                        <option value="Mo">Mo</option>
+                                        
+                                        <option value="NITRATO">NITRATO</option>
+                                        
+                                        <option value="NITRITO">NITRITO</option>
+                                        
+                                        <option value="Na">Na</option>
+                                        
+                                        <option value="Nd">Nd</option>
+                                        
+                                        <option value="Ni">Ni</option>
+                                        
+                                        <option value="P">P</option>
+                                        
+                                        <option value="PH_LAB">PH_LAB</option>
+                                        
+                                        <option value="Pb">Pb</option>
+                                        
+                                        <option value="Pr">Pr</option>
+                                        
+                                        <option value="REFERENCIA">REFERENCIA</option>
+                                        
+                                        <option value="Ru">Ru</option>
+                                        
+                                        <option value="SALINIDAD">SALINIDAD</option>
+                                        
+                                        <option value="SDT">SDT</option>
+                                        
+                                        <option value="SULFATO">SULFATO</option>
+                                        
+                                        <option value="Sb">Sb</option>
+                                        
+                                        <option value="Se">Se</option>
+                                        
+                                        <option value="SiO2">SiO2</option>
+                                        
+                                        <option value="Sm">Sm</option>
+                                        
+                                        <option value="Sn">Sn</option>
+                                        
+                                        <option value="Sr">Sr</option>
+                                        
+                                        <option value="TEMP_LAB">TEMP_LAB</option>
+                                        
+                                        <option value="TIPO_AGUA">TIPO_AGUA</option>
+                                        
+                                        <option value="Ta">Ta</option>
+                                        
+                                        <option value="Tb">Tb</option>
+                                        
+                                        <option value="Th">Th</option>
+                                        
+                                        <option value="Tl">Tl</option>
+                                        
+                                        <option value="Tm">Tm</option>
+                                        
+                                        <option value="U">U</option>
+                                        
+                                        <option value="Unnamed: 0">Unnamed: 0</option>
+                                        
+                                        <option value="V">V</option>
+                                        
+                                        <option value="Y">Y</option>
+                                        
+                                        <option value="Yb">Yb</option>
+                                        
+                                        <option value="Zn">Zn</option>
+                                        
+                                        <option value="l">l</option>
+                                        
+                                    </select>
+                                    
+                            </td>
+                            <td>
+                                <p id="aCl">Sin validar</p>
+                                    
+                            </td>
+                                
+                        </tr>
+                        
+                            
+                        <tr>
+                            <td>SO4</td>
+                            <td>
+                                    
+                                    <select id="SO4" name="SO4" class="form-select" aria-label="Default select example" required>
+                                        <option value="Sup" selected>Seleccione columna</option>
+                                        
+                                        
+                                        <option value="ALCALINIDAD">ALCALINIDAD</option>
+                                        
+                                        <option value="AMONIO">AMONIO</option>
+                                        
+                                        <option value="Ag">Ag</option>
+                                        
+                                        <option value="Al">Al</option>
+                                        
+                                        <option value="As_">As_</option>
+                                        
+                                        <option value="B">B</option>
+                                        
+                                        <option value="BICARBONATO">BICARBONATO</option>
+                                        
+                                        <option value="Ba">Ba</option>
+                                        
+                                        <option value="Be">Be</option>
+                                        
+                                        <option value="Br">Br</option>
+                                        
+                                        <option value="CARBONATO">CARBONATO</option>
+                                        
+                                        <option value="CLORURO">CLORURO</option>
+                                        
+                                        <option value="CODIGO_MUESTRA">CODIGO_MUESTRA</option>
+                                        
+                                        <option value="COD_SNGM">COD_SNGM</option>
+                                        
+                                        <option value="CONDUCT_LAB">CONDUCT_LAB</option>
+                                        
+                                        <option value="COT">COT</option>
+                                        
+                                        <option value="Ca">Ca</option>
+                                        
+                                        <option value="Cd">Cd</option>
+                                        
+                                        <option value="Ce">Ce</option>
+                                        
+                                        <option value="Co">Co</option>
+                                        
+                                        <option value="Cr">Cr</option>
+                                        
+                                        <option value="Cs">Cs</option>
+                                        
+                                        <option value="Cu">Cu</option>
+                                        
+                                        <option value="DIAG_STIFF">DIAG_STIFF</option>
+                                        
+                                        <option value="DIOXIDO_CARBONO">DIOXIDO_CARBONO</option>
+                                        
+                                        <option value="Dy">Dy</option>
+                                        
+                                        <option value="Er">Er</option>
+                                        
+                                        <option value="Eu">Eu</option>
+                                        
+                                        <option value="F">F</option>
+                                        
+                                        <option value="Fe">Fe</option>
+                                        
+                                        <option value="Gd">Gd</option>
+                                        
+                                        <option value="Hf">Hf</option>
+                                        
+                                        <option value="Hg">Hg</option>
+                                        
+                                        <option value="Ho">Ho</option>
+                                        
+                                        <option value="K">K</option>
+                                        
+                                        <option value="La">La</option>
+                                        
+                                        <option value="Li">Li</option>
+                                        
+                                        <option value="Lu">Lu</option>
+                                        
+                                        <option value="Mg">Mg</option>
+                                        
+                                        <option value="Mn">Mn</option>
+                                        
+                                        <option value="Mo">Mo</option>
+                                        
+                                        <option value="NITRATO">NITRATO</option>
+                                        
+                                        <option value="NITRITO">NITRITO</option>
+                                        
+                                        <option value="Na">Na</option>
+                                        
+                                        <option value="Nd">Nd</option>
+                                        
+                                        <option value="Ni">Ni</option>
+                                        
+                                        <option value="P">P</option>
+                                        
+                                        <option value="PH_LAB">PH_LAB</option>
+                                        
+                                        <option value="Pb">Pb</option>
+                                        
+                                        <option value="Pr">Pr</option>
+                                        
+                                        <option value="REFERENCIA">REFERENCIA</option>
+                                        
+                                        <option value="Ru">Ru</option>
+                                        
+                                        <option value="SALINIDAD">SALINIDAD</option>
+                                        
+                                        <option value="SDT">SDT</option>
+                                        
+                                        <option value="SULFATO">SULFATO</option>
+                                        
+                                        <option value="Sb">Sb</option>
+                                        
+                                        <option value="Se">Se</option>
+                                        
+                                        <option value="SiO2">SiO2</option>
+                                        
+                                        <option value="Sm">Sm</option>
+                                        
+                                        <option value="Sn">Sn</option>
+                                        
+                                        <option value="Sr">Sr</option>
+                                        
+                                        <option value="TEMP_LAB">TEMP_LAB</option>
+                                        
+                                        <option value="TIPO_AGUA">TIPO_AGUA</option>
+                                        
+                                        <option value="Ta">Ta</option>
+                                        
+                                        <option value="Tb">Tb</option>
+                                        
+                                        <option value="Th">Th</option>
+                                        
+                                        <option value="Tl">Tl</option>
+                                        
+                                        <option value="Tm">Tm</option>
+                                        
+                                        <option value="U">U</option>
+                                        
+                                        <option value="Unnamed: 0">Unnamed: 0</option>
+                                        
+                                        <option value="V">V</option>
+                                        
+                                        <option value="Y">Y</option>
+                                        
+                                        <option value="Yb">Yb</option>
+                                        
+                                        <option value="Zn">Zn</option>
+                                        
+                                        <option value="l">l</option>
+                                        
+                                    </select>
+                                    
+                            </td>
+                            <td>
+                                <p id="aSO4">Sin validar</p>
+                                    
+                            </td>
+                                
+                        </tr>
+                        
+                            
+                        <tr>
+                            <td>HCO3</td>
+                            <td>
+                                    
+                                    <select id="HCO3" name="HCO3" class="form-select" aria-label="Default select example" required>
+                                        <option value="Sup" selected>Seleccione columna</option>
+                                        
+                                        
+                                        <option value="ALCALINIDAD">ALCALINIDAD</option>
+                                        
+                                        <option value="AMONIO">AMONIO</option>
+                                        
+                                        <option value="Ag">Ag</option>
+                                        
+                                        <option value="Al">Al</option>
+                                        
+                                        <option value="As_">As_</option>
+                                        
+                                        <option value="B">B</option>
+                                        
+                                        <option value="BICARBONATO">BICARBONATO</option>
+                                        
+                                        <option value="Ba">Ba</option>
+                                        
+                                        <option value="Be">Be</option>
+                                        
+                                        <option value="Br">Br</option>
+                                        
+                                        <option value="CARBONATO">CARBONATO</option>
+                                        
+                                        <option value="CLORURO">CLORURO</option>
+                                        
+                                        <option value="CODIGO_MUESTRA">CODIGO_MUESTRA</option>
+                                        
+                                        <option value="COD_SNGM">COD_SNGM</option>
+                                        
+                                        <option value="CONDUCT_LAB">CONDUCT_LAB</option>
+                                        
+                                        <option value="COT">COT</option>
+                                        
+                                        <option value="Ca">Ca</option>
+                                        
+                                        <option value="Cd">Cd</option>
+                                        
+                                        <option value="Ce">Ce</option>
+                                        
+                                        <option value="Co">Co</option>
+                                        
+                                        <option value="Cr">Cr</option>
+                                        
+                                        <option value="Cs">Cs</option>
+                                        
+                                        <option value="Cu">Cu</option>
+                                        
+                                        <option value="DIAG_STIFF">DIAG_STIFF</option>
+                                        
+                                        <option value="DIOXIDO_CARBONO">DIOXIDO_CARBONO</option>
+                                        
+                                        <option value="Dy">Dy</option>
+                                        
+                                        <option value="Er">Er</option>
+                                        
+                                        <option value="Eu">Eu</option>
+                                        
+                                        <option value="F">F</option>
+                                        
+                                        <option value="Fe">Fe</option>
+                                        
+                                        <option value="Gd">Gd</option>
+                                        
+                                        <option value="Hf">Hf</option>
+                                        
+                                        <option value="Hg">Hg</option>
+                                        
+                                        <option value="Ho">Ho</option>
+                                        
+                                        <option value="K">K</option>
+                                        
+                                        <option value="La">La</option>
+                                        
+                                        <option value="Li">Li</option>
+                                        
+                                        <option value="Lu">Lu</option>
+                                        
+                                        <option value="Mg">Mg</option>
+                                        
+                                        <option value="Mn">Mn</option>
+                                        
+                                        <option value="Mo">Mo</option>
+                                        
+                                        <option value="NITRATO">NITRATO</option>
+                                        
+                                        <option value="NITRITO">NITRITO</option>
+                                        
+                                        <option value="Na">Na</option>
+                                        
+                                        <option value="Nd">Nd</option>
+                                        
+                                        <option value="Ni">Ni</option>
+                                        
+                                        <option value="P">P</option>
+                                        
+                                        <option value="PH_LAB">PH_LAB</option>
+                                        
+                                        <option value="Pb">Pb</option>
+                                        
+                                        <option value="Pr">Pr</option>
+                                        
+                                        <option value="REFERENCIA">REFERENCIA</option>
+                                        
+                                        <option value="Ru">Ru</option>
+                                        
+                                        <option value="SALINIDAD">SALINIDAD</option>
+                                        
+                                        <option value="SDT">SDT</option>
+                                        
+                                        <option value="SULFATO">SULFATO</option>
+                                        
+                                        <option value="Sb">Sb</option>
+                                        
+                                        <option value="Se">Se</option>
+                                        
+                                        <option value="SiO2">SiO2</option>
+                                        
+                                        <option value="Sm">Sm</option>
+                                        
+                                        <option value="Sn">Sn</option>
+                                        
+                                        <option value="Sr">Sr</option>
+                                        
+                                        <option value="TEMP_LAB">TEMP_LAB</option>
+                                        
+                                        <option value="TIPO_AGUA">TIPO_AGUA</option>
+                                        
+                                        <option value="Ta">Ta</option>
+                                        
+                                        <option value="Tb">Tb</option>
+                                        
+                                        <option value="Th">Th</option>
+                                        
+                                        <option value="Tl">Tl</option>
+                                        
+                                        <option value="Tm">Tm</option>
+                                        
+                                        <option value="U">U</option>
+                                        
+                                        <option value="Unnamed: 0">Unnamed: 0</option>
+                                        
+                                        <option value="V">V</option>
+                                        
+                                        <option value="Y">Y</option>
+                                        
+                                        <option value="Yb">Yb</option>
+                                        
+                                        <option value="Zn">Zn</option>
+                                        
+                                        <option value="l">l</option>
+                                        
+                                    </select>
+                                    
+                            </td>
+                            <td>
+                                <p id="aHCO3">Sin validar</p>
+                                    
+                            </td>
+                                
+                        </tr>
+                        
+                            
+                        <tr>
+                            <td>CO3</td>
+                            <td>
+                                    
+                                    <select id="CO3" name="CO3" class="form-select" aria-label="Default select example" required>
+                                        <option value="Sup" selected>Seleccione columna</option>
+                                        
+                                        
+                                        <option value="ALCALINIDAD">ALCALINIDAD</option>
+                                        
+                                        <option value="AMONIO">AMONIO</option>
+                                        
+                                        <option value="Ag">Ag</option>
+                                        
+                                        <option value="Al">Al</option>
+                                        
+                                        <option value="As_">As_</option>
+                                        
+                                        <option value="B">B</option>
+                                        
+                                        <option value="BICARBONATO">BICARBONATO</option>
+                                        
+                                        <option value="Ba">Ba</option>
+                                        
+                                        <option value="Be">Be</option>
+                                        
+                                        <option value="Br">Br</option>
+                                        
+                                        <option value="CARBONATO">CARBONATO</option>
+                                        
+                                        <option value="CLORURO">CLORURO</option>
+                                        
+                                        <option value="CODIGO_MUESTRA">CODIGO_MUESTRA</option>
+                                        
+                                        <option value="COD_SNGM">COD_SNGM</option>
+                                        
+                                        <option value="CONDUCT_LAB">CONDUCT_LAB</option>
+                                        
+                                        <option value="COT">COT</option>
+                                        
+                                        <option value="Ca">Ca</option>
+                                        
+                                        <option value="Cd">Cd</option>
+                                        
+                                        <option value="Ce">Ce</option>
+                                        
+                                        <option value="Co">Co</option>
+                                        
+                                        <option value="Cr">Cr</option>
+                                        
+                                        <option value="Cs">Cs</option>
+                                        
+                                        <option value="Cu">Cu</option>
+                                        
+                                        <option value="DIAG_STIFF">DIAG_STIFF</option>
+                                        
+                                        <option value="DIOXIDO_CARBONO">DIOXIDO_CARBONO</option>
+                                        
+                                        <option value="Dy">Dy</option>
+                                        
+                                        <option value="Er">Er</option>
+                                        
+                                        <option value="Eu">Eu</option>
+                                        
+                                        <option value="F">F</option>
+                                        
+                                        <option value="Fe">Fe</option>
+                                        
+                                        <option value="Gd">Gd</option>
+                                        
+                                        <option value="Hf">Hf</option>
+                                        
+                                        <option value="Hg">Hg</option>
+                                        
+                                        <option value="Ho">Ho</option>
+                                        
+                                        <option value="K">K</option>
+                                        
+                                        <option value="La">La</option>
+                                        
+                                        <option value="Li">Li</option>
+                                        
+                                        <option value="Lu">Lu</option>
+                                        
+                                        <option value="Mg">Mg</option>
+                                        
+                                        <option value="Mn">Mn</option>
+                                        
+                                        <option value="Mo">Mo</option>
+                                        
+                                        <option value="NITRATO">NITRATO</option>
+                                        
+                                        <option value="NITRITO">NITRITO</option>
+                                        
+                                        <option value="Na">Na</option>
+                                        
+                                        <option value="Nd">Nd</option>
+                                        
+                                        <option value="Ni">Ni</option>
+                                        
+                                        <option value="P">P</option>
+                                        
+                                        <option value="PH_LAB">PH_LAB</option>
+                                        
+                                        <option value="Pb">Pb</option>
+                                        
+                                        <option value="Pr">Pr</option>
+                                        
+                                        <option value="REFERENCIA">REFERENCIA</option>
+                                        
+                                        <option value="Ru">Ru</option>
+                                        
+                                        <option value="SALINIDAD">SALINIDAD</option>
+                                        
+                                        <option value="SDT">SDT</option>
+                                        
+                                        <option value="SULFATO">SULFATO</option>
+                                        
+                                        <option value="Sb">Sb</option>
+                                        
+                                        <option value="Se">Se</option>
+                                        
+                                        <option value="SiO2">SiO2</option>
+                                        
+                                        <option value="Sm">Sm</option>
+                                        
+                                        <option value="Sn">Sn</option>
+                                        
+                                        <option value="Sr">Sr</option>
+                                        
+                                        <option value="TEMP_LAB">TEMP_LAB</option>
+                                        
+                                        <option value="TIPO_AGUA">TIPO_AGUA</option>
+                                        
+                                        <option value="Ta">Ta</option>
+                                        
+                                        <option value="Tb">Tb</option>
+                                        
+                                        <option value="Th">Th</option>
+                                        
+                                        <option value="Tl">Tl</option>
+                                        
+                                        <option value="Tm">Tm</option>
+                                        
+                                        <option value="U">U</option>
+                                        
+                                        <option value="Unnamed: 0">Unnamed: 0</option>
+                                        
+                                        <option value="V">V</option>
+                                        
+                                        <option value="Y">Y</option>
+                                        
+                                        <option value="Yb">Yb</option>
+                                        
+                                        <option value="Zn">Zn</option>
+                                        
+                                        <option value="l">l</option>
+                                        
+                                    </select>
+                                    
+                            </td>
+                            <td>
+                                <p id="aCO3">Sin validar</p>
+                                    
+                            </td>
+                                
+                        </tr>
+                        
+                            
+                        <tr>
+                            <td>Na</td>
+                            <td>
+                                    
+                                    <select id="Na" name="Na" class="form-select" aria-label="Default select example" required>
+                                        <option value="Sup" selected>Seleccione columna</option>
+                                        
+                                        
+                                        <option value="ALCALINIDAD">ALCALINIDAD</option>
+                                        
+                                        <option value="AMONIO">AMONIO</option>
+                                        
+                                        <option value="Ag">Ag</option>
+                                        
+                                        <option value="Al">Al</option>
+                                        
+                                        <option value="As_">As_</option>
+                                        
+                                        <option value="B">B</option>
+                                        
+                                        <option value="BICARBONATO">BICARBONATO</option>
+                                        
+                                        <option value="Ba">Ba</option>
+                                        
+                                        <option value="Be">Be</option>
+                                        
+                                        <option value="Br">Br</option>
+                                        
+                                        <option value="CARBONATO">CARBONATO</option>
+                                        
+                                        <option value="CLORURO">CLORURO</option>
+                                        
+                                        <option value="CODIGO_MUESTRA">CODIGO_MUESTRA</option>
+                                        
+                                        <option value="COD_SNGM">COD_SNGM</option>
+                                        
+                                        <option value="CONDUCT_LAB">CONDUCT_LAB</option>
+                                        
+                                        <option value="COT">COT</option>
+                                        
+                                        <option value="Ca">Ca</option>
+                                        
+                                        <option value="Cd">Cd</option>
+                                        
+                                        <option value="Ce">Ce</option>
+                                        
+                                        <option value="Co">Co</option>
+                                        
+                                        <option value="Cr">Cr</option>
+                                        
+                                        <option value="Cs">Cs</option>
+                                        
+                                        <option value="Cu">Cu</option>
+                                        
+                                        <option value="DIAG_STIFF">DIAG_STIFF</option>
+                                        
+                                        <option value="DIOXIDO_CARBONO">DIOXIDO_CARBONO</option>
+                                        
+                                        <option value="Dy">Dy</option>
+                                        
+                                        <option value="Er">Er</option>
+                                        
+                                        <option value="Eu">Eu</option>
+                                        
+                                        <option value="F">F</option>
+                                        
+                                        <option value="Fe">Fe</option>
+                                        
+                                        <option value="Gd">Gd</option>
+                                        
+                                        <option value="Hf">Hf</option>
+                                        
+                                        <option value="Hg">Hg</option>
+                                        
+                                        <option value="Ho">Ho</option>
+                                        
+                                        <option value="K">K</option>
+                                        
+                                        <option value="La">La</option>
+                                        
+                                        <option value="Li">Li</option>
+                                        
+                                        <option value="Lu">Lu</option>
+                                        
+                                        <option value="Mg">Mg</option>
+                                        
+                                        <option value="Mn">Mn</option>
+                                        
+                                        <option value="Mo">Mo</option>
+                                        
+                                        <option value="NITRATO">NITRATO</option>
+                                        
+                                        <option value="NITRITO">NITRITO</option>
+                                        
+                                        <option value="Na">Na</option>
+                                        
+                                        <option value="Nd">Nd</option>
+                                        
+                                        <option value="Ni">Ni</option>
+                                        
+                                        <option value="P">P</option>
+                                        
+                                        <option value="PH_LAB">PH_LAB</option>
+                                        
+                                        <option value="Pb">Pb</option>
+                                        
+                                        <option value="Pr">Pr</option>
+                                        
+                                        <option value="REFERENCIA">REFERENCIA</option>
+                                        
+                                        <option value="Ru">Ru</option>
+                                        
+                                        <option value="SALINIDAD">SALINIDAD</option>
+                                        
+                                        <option value="SDT">SDT</option>
+                                        
+                                        <option value="SULFATO">SULFATO</option>
+                                        
+                                        <option value="Sb">Sb</option>
+                                        
+                                        <option value="Se">Se</option>
+                                        
+                                        <option value="SiO2">SiO2</option>
+                                        
+                                        <option value="Sm">Sm</option>
+                                        
+                                        <option value="Sn">Sn</option>
+                                        
+                                        <option value="Sr">Sr</option>
+                                        
+                                        <option value="TEMP_LAB">TEMP_LAB</option>
+                                        
+                                        <option value="TIPO_AGUA">TIPO_AGUA</option>
+                                        
+                                        <option value="Ta">Ta</option>
+                                        
+                                        <option value="Tb">Tb</option>
+                                        
+                                        <option value="Th">Th</option>
+                                        
+                                        <option value="Tl">Tl</option>
+                                        
+                                        <option value="Tm">Tm</option>
+                                        
+                                        <option value="U">U</option>
+                                        
+                                        <option value="Unnamed: 0">Unnamed: 0</option>
+                                        
+                                        <option value="V">V</option>
+                                        
+                                        <option value="Y">Y</option>
+                                        
+                                        <option value="Yb">Yb</option>
+                                        
+                                        <option value="Zn">Zn</option>
+                                        
+                                        <option value="l">l</option>
+                                        
+                                    </select>
+                                    
+                            </td>
+                            <td>
+                                <p id="aNa">Sin validar</p>
+                                    
+                            </td>
+                                
+                        </tr>
+                        
+                            
+                        <tr>
+                            <td>Ca</td>
+                            <td>
+                                    
+                                    <select id="Ca" name="Ca" class="form-select" aria-label="Default select example" required>
+                                        <option value="Sup" selected>Seleccione columna</option>
+                                        
+                                        
+                                        <option value="ALCALINIDAD">ALCALINIDAD</option>
+                                        
+                                        <option value="AMONIO">AMONIO</option>
+                                        
+                                        <option value="Ag">Ag</option>
+                                        
+                                        <option value="Al">Al</option>
+                                        
+                                        <option value="As_">As_</option>
+                                        
+                                        <option value="B">B</option>
+                                        
+                                        <option value="BICARBONATO">BICARBONATO</option>
+                                        
+                                        <option value="Ba">Ba</option>
+                                        
+                                        <option value="Be">Be</option>
+                                        
+                                        <option value="Br">Br</option>
+                                        
+                                        <option value="CARBONATO">CARBONATO</option>
+                                        
+                                        <option value="CLORURO">CLORURO</option>
+                                        
+                                        <option value="CODIGO_MUESTRA">CODIGO_MUESTRA</option>
+                                        
+                                        <option value="COD_SNGM">COD_SNGM</option>
+                                        
+                                        <option value="CONDUCT_LAB">CONDUCT_LAB</option>
+                                        
+                                        <option value="COT">COT</option>
+                                        
+                                        <option value="Ca">Ca</option>
+                                        
+                                        <option value="Cd">Cd</option>
+                                        
+                                        <option value="Ce">Ce</option>
+                                        
+                                        <option value="Co">Co</option>
+                                        
+                                        <option value="Cr">Cr</option>
+                                        
+                                        <option value="Cs">Cs</option>
+                                        
+                                        <option value="Cu">Cu</option>
+                                        
+                                        <option value="DIAG_STIFF">DIAG_STIFF</option>
+                                        
+                                        <option value="DIOXIDO_CARBONO">DIOXIDO_CARBONO</option>
+                                        
+                                        <option value="Dy">Dy</option>
+                                        
+                                        <option value="Er">Er</option>
+                                        
+                                        <option value="Eu">Eu</option>
+                                        
+                                        <option value="F">F</option>
+                                        
+                                        <option value="Fe">Fe</option>
+                                        
+                                        <option value="Gd">Gd</option>
+                                        
+                                        <option value="Hf">Hf</option>
+                                        
+                                        <option value="Hg">Hg</option>
+                                        
+                                        <option value="Ho">Ho</option>
+                                        
+                                        <option value="K">K</option>
+                                        
+                                        <option value="La">La</option>
+                                        
+                                        <option value="Li">Li</option>
+                                        
+                                        <option value="Lu">Lu</option>
+                                        
+                                        <option value="Mg">Mg</option>
+                                        
+                                        <option value="Mn">Mn</option>
+                                        
+                                        <option value="Mo">Mo</option>
+                                        
+                                        <option value="NITRATO">NITRATO</option>
+                                        
+                                        <option value="NITRITO">NITRITO</option>
+                                        
+                                        <option value="Na">Na</option>
+                                        
+                                        <option value="Nd">Nd</option>
+                                        
+                                        <option value="Ni">Ni</option>
+                                        
+                                        <option value="P">P</option>
+                                        
+                                        <option value="PH_LAB">PH_LAB</option>
+                                        
+                                        <option value="Pb">Pb</option>
+                                        
+                                        <option value="Pr">Pr</option>
+                                        
+                                        <option value="REFERENCIA">REFERENCIA</option>
+                                        
+                                        <option value="Ru">Ru</option>
+                                        
+                                        <option value="SALINIDAD">SALINIDAD</option>
+                                        
+                                        <option value="SDT">SDT</option>
+                                        
+                                        <option value="SULFATO">SULFATO</option>
+                                        
+                                        <option value="Sb">Sb</option>
+                                        
+                                        <option value="Se">Se</option>
+                                        
+                                        <option value="SiO2">SiO2</option>
+                                        
+                                        <option value="Sm">Sm</option>
+                                        
+                                        <option value="Sn">Sn</option>
+                                        
+                                        <option value="Sr">Sr</option>
+                                        
+                                        <option value="TEMP_LAB">TEMP_LAB</option>
+                                        
+                                        <option value="TIPO_AGUA">TIPO_AGUA</option>
+                                        
+                                        <option value="Ta">Ta</option>
+                                        
+                                        <option value="Tb">Tb</option>
+                                        
+                                        <option value="Th">Th</option>
+                                        
+                                        <option value="Tl">Tl</option>
+                                        
+                                        <option value="Tm">Tm</option>
+                                        
+                                        <option value="U">U</option>
+                                        
+                                        <option value="Unnamed: 0">Unnamed: 0</option>
+                                        
+                                        <option value="V">V</option>
+                                        
+                                        <option value="Y">Y</option>
+                                        
+                                        <option value="Yb">Yb</option>
+                                        
+                                        <option value="Zn">Zn</option>
+                                        
+                                        <option value="l">l</option>
+                                        
+                                    </select>
+                                    
+                            </td>
+                            <td>
+                                <p id="aCa">Sin validar</p>
+                                    
+                            </td>
+                                
+                        </tr>
+                        
+                            
+                        <tr>
+                            <td>Mg</td>
+                            <td>
+                                    
+                                    <select id="Mg" name="Mg" class="form-select" aria-label="Default select example" required>
+                                        <option value="Sup" selected>Seleccione columna</option>
+                                        
+                                        
+                                        <option value="ALCALINIDAD">ALCALINIDAD</option>
+                                        
+                                        <option value="AMONIO">AMONIO</option>
+                                        
+                                        <option value="Ag">Ag</option>
+                                        
+                                        <option value="Al">Al</option>
+                                        
+                                        <option value="As_">As_</option>
+                                        
+                                        <option value="B">B</option>
+                                        
+                                        <option value="BICARBONATO">BICARBONATO</option>
+                                        
+                                        <option value="Ba">Ba</option>
+                                        
+                                        <option value="Be">Be</option>
+                                        
+                                        <option value="Br">Br</option>
+                                        
+                                        <option value="CARBONATO">CARBONATO</option>
+                                        
+                                        <option value="CLORURO">CLORURO</option>
+                                        
+                                        <option value="CODIGO_MUESTRA">CODIGO_MUESTRA</option>
+                                        
+                                        <option value="COD_SNGM">COD_SNGM</option>
+                                        
+                                        <option value="CONDUCT_LAB">CONDUCT_LAB</option>
+                                        
+                                        <option value="COT">COT</option>
+                                        
+                                        <option value="Ca">Ca</option>
+                                        
+                                        <option value="Cd">Cd</option>
+                                        
+                                        <option value="Ce">Ce</option>
+                                        
+                                        <option value="Co">Co</option>
+                                        
+                                        <option value="Cr">Cr</option>
+                                        
+                                        <option value="Cs">Cs</option>
+                                        
+                                        <option value="Cu">Cu</option>
+                                        
+                                        <option value="DIAG_STIFF">DIAG_STIFF</option>
+                                        
+                                        <option value="DIOXIDO_CARBONO">DIOXIDO_CARBONO</option>
+                                        
+                                        <option value="Dy">Dy</option>
+                                        
+                                        <option value="Er">Er</option>
+                                        
+                                        <option value="Eu">Eu</option>
+                                        
+                                        <option value="F">F</option>
+                                        
+                                        <option value="Fe">Fe</option>
+                                        
+                                        <option value="Gd">Gd</option>
+                                        
+                                        <option value="Hf">Hf</option>
+                                        
+                                        <option value="Hg">Hg</option>
+                                        
+                                        <option value="Ho">Ho</option>
+                                        
+                                        <option value="K">K</option>
+                                        
+                                        <option value="La">La</option>
+                                        
+                                        <option value="Li">Li</option>
+                                        
+                                        <option value="Lu">Lu</option>
+                                        
+                                        <option value="Mg">Mg</option>
+                                        
+                                        <option value="Mn">Mn</option>
+                                        
+                                        <option value="Mo">Mo</option>
+                                        
+                                        <option value="NITRATO">NITRATO</option>
+                                        
+                                        <option value="NITRITO">NITRITO</option>
+                                        
+                                        <option value="Na">Na</option>
+                                        
+                                        <option value="Nd">Nd</option>
+                                        
+                                        <option value="Ni">Ni</option>
+                                        
+                                        <option value="P">P</option>
+                                        
+                                        <option value="PH_LAB">PH_LAB</option>
+                                        
+                                        <option value="Pb">Pb</option>
+                                        
+                                        <option value="Pr">Pr</option>
+                                        
+                                        <option value="REFERENCIA">REFERENCIA</option>
+                                        
+                                        <option value="Ru">Ru</option>
+                                        
+                                        <option value="SALINIDAD">SALINIDAD</option>
+                                        
+                                        <option value="SDT">SDT</option>
+                                        
+                                        <option value="SULFATO">SULFATO</option>
+                                        
+                                        <option value="Sb">Sb</option>
+                                        
+                                        <option value="Se">Se</option>
+                                        
+                                        <option value="SiO2">SiO2</option>
+                                        
+                                        <option value="Sm">Sm</option>
+                                        
+                                        <option value="Sn">Sn</option>
+                                        
+                                        <option value="Sr">Sr</option>
+                                        
+                                        <option value="TEMP_LAB">TEMP_LAB</option>
+                                        
+                                        <option value="TIPO_AGUA">TIPO_AGUA</option>
+                                        
+                                        <option value="Ta">Ta</option>
+                                        
+                                        <option value="Tb">Tb</option>
+                                        
+                                        <option value="Th">Th</option>
+                                        
+                                        <option value="Tl">Tl</option>
+                                        
+                                        <option value="Tm">Tm</option>
+                                        
+                                        <option value="U">U</option>
+                                        
+                                        <option value="Unnamed: 0">Unnamed: 0</option>
+                                        
+                                        <option value="V">V</option>
+                                        
+                                        <option value="Y">Y</option>
+                                        
+                                        <option value="Yb">Yb</option>
+                                        
+                                        <option value="Zn">Zn</option>
+                                        
+                                        <option value="l">l</option>
+                                        
+                                    </select>
+                                    
+                            </td>
+                            <td>
+                                <p id="aMg">Sin validar</p>
+                                    
+                            </td>
+                                
+                        </tr>
+                        
+                            
+                        <tr>
+                            <td>K</td>
+                            <td>
+                                    
+                                    <select id="K" name="K" class="form-select" aria-label="Default select example" required>
+                                        <option value="Sup" selected>Seleccione columna</option>
+                                        
+                                        
+                                        <option value="ALCALINIDAD">ALCALINIDAD</option>
+                                        
+                                        <option value="AMONIO">AMONIO</option>
+                                        
+                                        <option value="Ag">Ag</option>
+                                        
+                                        <option value="Al">Al</option>
+                                        
+                                        <option value="As_">As_</option>
+                                        
+                                        <option value="B">B</option>
+                                        
+                                        <option value="BICARBONATO">BICARBONATO</option>
+                                        
+                                        <option value="Ba">Ba</option>
+                                        
+                                        <option value="Be">Be</option>
+                                        
+                                        <option value="Br">Br</option>
+                                        
+                                        <option value="CARBONATO">CARBONATO</option>
+                                        
+                                        <option value="CLORURO">CLORURO</option>
+                                        
+                                        <option value="CODIGO_MUESTRA">CODIGO_MUESTRA</option>
+                                        
+                                        <option value="COD_SNGM">COD_SNGM</option>
+                                        
+                                        <option value="CONDUCT_LAB">CONDUCT_LAB</option>
+                                        
+                                        <option value="COT">COT</option>
+                                        
+                                        <option value="Ca">Ca</option>
+                                        
+                                        <option value="Cd">Cd</option>
+                                        
+                                        <option value="Ce">Ce</option>
+                                        
+                                        <option value="Co">Co</option>
+                                        
+                                        <option value="Cr">Cr</option>
+                                        
+                                        <option value="Cs">Cs</option>
+                                        
+                                        <option value="Cu">Cu</option>
+                                        
+                                        <option value="DIAG_STIFF">DIAG_STIFF</option>
+                                        
+                                        <option value="DIOXIDO_CARBONO">DIOXIDO_CARBONO</option>
+                                        
+                                        <option value="Dy">Dy</option>
+                                        
+                                        <option value="Er">Er</option>
+                                        
+                                        <option value="Eu">Eu</option>
+                                        
+                                        <option value="F">F</option>
+                                        
+                                        <option value="Fe">Fe</option>
+                                        
+                                        <option value="Gd">Gd</option>
+                                        
+                                        <option value="Hf">Hf</option>
+                                        
+                                        <option value="Hg">Hg</option>
+                                        
+                                        <option value="Ho">Ho</option>
+                                        
+                                        <option value="K">K</option>
+                                        
+                                        <option value="La">La</option>
+                                        
+                                        <option value="Li">Li</option>
+                                        
+                                        <option value="Lu">Lu</option>
+                                        
+                                        <option value="Mg">Mg</option>
+                                        
+                                        <option value="Mn">Mn</option>
+                                        
+                                        <option value="Mo">Mo</option>
+                                        
+                                        <option value="NITRATO">NITRATO</option>
+                                        
+                                        <option value="NITRITO">NITRITO</option>
+                                        
+                                        <option value="Na">Na</option>
+                                        
+                                        <option value="Nd">Nd</option>
+                                        
+                                        <option value="Ni">Ni</option>
+                                        
+                                        <option value="P">P</option>
+                                        
+                                        <option value="PH_LAB">PH_LAB</option>
+                                        
+                                        <option value="Pb">Pb</option>
+                                        
+                                        <option value="Pr">Pr</option>
+                                        
+                                        <option value="REFERENCIA">REFERENCIA</option>
+                                        
+                                        <option value="Ru">Ru</option>
+                                        
+                                        <option value="SALINIDAD">SALINIDAD</option>
+                                        
+                                        <option value="SDT">SDT</option>
+                                        
+                                        <option value="SULFATO">SULFATO</option>
+                                        
+                                        <option value="Sb">Sb</option>
+                                        
+                                        <option value="Se">Se</option>
+                                        
+                                        <option value="SiO2">SiO2</option>
+                                        
+                                        <option value="Sm">Sm</option>
+                                        
+                                        <option value="Sn">Sn</option>
+                                        
+                                        <option value="Sr">Sr</option>
+                                        
+                                        <option value="TEMP_LAB">TEMP_LAB</option>
+                                        
+                                        <option value="TIPO_AGUA">TIPO_AGUA</option>
+                                        
+                                        <option value="Ta">Ta</option>
+                                        
+                                        <option value="Tb">Tb</option>
+                                        
+                                        <option value="Th">Th</option>
+                                        
+                                        <option value="Tl">Tl</option>
+                                        
+                                        <option value="Tm">Tm</option>
+                                        
+                                        <option value="U">U</option>
+                                        
+                                        <option value="Unnamed: 0">Unnamed: 0</option>
+                                        
+                                        <option value="V">V</option>
+                                        
+                                        <option value="Y">Y</option>
+                                        
+                                        <option value="Yb">Yb</option>
+                                        
+                                        <option value="Zn">Zn</option>
+                                        
+                                        <option value="l">l</option>
+                                        
+                                    </select>
+                                    
+                            </td>
+                            <td>
+                                <p id="aK">Sin validar</p>
+                                    
+                            </td>
+                                
+                        </tr>
+                        
+                            
+                        <tr>
+                            <td>TDS</td>
+                            <td>
+                                    
+                                    <select id="TDS" name="TDS" class="form-select" aria-label="Default select example" required>
+                                        <option value="Sup" selected>Seleccione columna</option>
+                                        
+                                        
+                                        <option value="ALCALINIDAD">ALCALINIDAD</option>
+                                        
+                                        <option value="AMONIO">AMONIO</option>
+                                        
+                                        <option value="Ag">Ag</option>
+                                        
+                                        <option value="Al">Al</option>
+                                        
+                                        <option value="As_">As_</option>
+                                        
+                                        <option value="B">B</option>
+                                        
+                                        <option value="BICARBONATO">BICARBONATO</option>
+                                        
+                                        <option value="Ba">Ba</option>
+                                        
+                                        <option value="Be">Be</option>
+                                        
+                                        <option value="Br">Br</option>
+                                        
+                                        <option value="CARBONATO">CARBONATO</option>
+                                        
+                                        <option value="CLORURO">CLORURO</option>
+                                        
+                                        <option value="CODIGO_MUESTRA">CODIGO_MUESTRA</option>
+                                        
+                                        <option value="COD_SNGM">COD_SNGM</option>
+                                        
+                                        <option value="CONDUCT_LAB">CONDUCT_LAB</option>
+                                        
+                                        <option value="COT">COT</option>
+                                        
+                                        <option value="Ca">Ca</option>
+                                        
+                                        <option value="Cd">Cd</option>
+                                        
+                                        <option value="Ce">Ce</option>
+                                        
+                                        <option value="Co">Co</option>
+                                        
+                                        <option value="Cr">Cr</option>
+                                        
+                                        <option value="Cs">Cs</option>
+                                        
+                                        <option value="Cu">Cu</option>
+                                        
+                                        <option value="DIAG_STIFF">DIAG_STIFF</option>
+                                        
+                                        <option value="DIOXIDO_CARBONO">DIOXIDO_CARBONO</option>
+                                        
+                                        <option value="Dy">Dy</option>
+                                        
+                                        <option value="Er">Er</option>
+                                        
+                                        <option value="Eu">Eu</option>
+                                        
+                                        <option value="F">F</option>
+                                        
+                                        <option value="Fe">Fe</option>
+                                        
+                                        <option value="Gd">Gd</option>
+                                        
+                                        <option value="Hf">Hf</option>
+                                        
+                                        <option value="Hg">Hg</option>
+                                        
+                                        <option value="Ho">Ho</option>
+                                        
+                                        <option value="K">K</option>
+                                        
+                                        <option value="La">La</option>
+                                        
+                                        <option value="Li">Li</option>
+                                        
+                                        <option value="Lu">Lu</option>
+                                        
+                                        <option value="Mg">Mg</option>
+                                        
+                                        <option value="Mn">Mn</option>
+                                        
+                                        <option value="Mo">Mo</option>
+                                        
+                                        <option value="NITRATO">NITRATO</option>
+                                        
+                                        <option value="NITRITO">NITRITO</option>
+                                        
+                                        <option value="Na">Na</option>
+                                        
+                                        <option value="Nd">Nd</option>
+                                        
+                                        <option value="Ni">Ni</option>
+                                        
+                                        <option value="P">P</option>
+                                        
+                                        <option value="PH_LAB">PH_LAB</option>
+                                        
+                                        <option value="Pb">Pb</option>
+                                        
+                                        <option value="Pr">Pr</option>
+                                        
+                                        <option value="REFERENCIA">REFERENCIA</option>
+                                        
+                                        <option value="Ru">Ru</option>
+                                        
+                                        <option value="SALINIDAD">SALINIDAD</option>
+                                        
+                                        <option value="SDT">SDT</option>
+                                        
+                                        <option value="SULFATO">SULFATO</option>
+                                        
+                                        <option value="Sb">Sb</option>
+                                        
+                                        <option value="Se">Se</option>
+                                        
+                                        <option value="SiO2">SiO2</option>
+                                        
+                                        <option value="Sm">Sm</option>
+                                        
+                                        <option value="Sn">Sn</option>
+                                        
+                                        <option value="Sr">Sr</option>
+                                        
+                                        <option value="TEMP_LAB">TEMP_LAB</option>
+                                        
+                                        <option value="TIPO_AGUA">TIPO_AGUA</option>
+                                        
+                                        <option value="Ta">Ta</option>
+                                        
+                                        <option value="Tb">Tb</option>
+                                        
+                                        <option value="Th">Th</option>
+                                        
+                                        <option value="Tl">Tl</option>
+                                        
+                                        <option value="Tm">Tm</option>
+                                        
+                                        <option value="U">U</option>
+                                        
+                                        <option value="Unnamed: 0">Unnamed: 0</option>
+                                        
+                                        <option value="V">V</option>
+                                        
+                                        <option value="Y">Y</option>
+                                        
+                                        <option value="Yb">Yb</option>
+                                        
+                                        <option value="Zn">Zn</option>
+                                        
+                                        <option value="l">l</option>
+                                        
+                                    </select>
+                                    
+                            </td>
+                            <td>
+                                <p id="aTDS">Sin validar</p>
+                                    
+                            </td>
+                                
+                        </tr>
+                        
+                            
+                        
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+<br>
+<div class="btn-text-center">
+    <button id="run" type="button" class="btn btn-primary" pys-onClick="count">Validar</button>
+</div>
+<div class="btn-text-right">
+    <!--<input id= "sgte" type="submit" form="Ftabval" value="Siguiente" disabled="disabled">
+    <button id = "sgte" type="button" onclick= "window.location.href=/Prueba;" disabled>Siguiente</button>-->
+</div>
+<!--Tabla se seleccion Clasificacion-->
+<div class="row">
+    <h2>Seleccione clases para simbología: <br> Clase 1: Color <br>Clase 2: Símbolo</h2>
+    <div class="col-md-6 offset-md-3">
+        
+        
+        <div class="table-responsive">
+            <table class="table table-striped" id="select2">
+                <thead>
+                    <tr>
+                       <th> mg/L</th>
+                       <th>Categorias </th> 
+                       <th>Validación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>Código Muestra</td>
+                        <td>
+                                
+                            <select id="Cod" name="Cod" class="form-select" aria-label="Default select example" required>
+                                <option selected>Ninguno</option>
+                                
+                                <option value="ALCALINIDAD">ALCALINIDAD</option>
+                                
+                                <option value="AMONIO">AMONIO</option>
+                                
+                                <option value="Ag">Ag</option>
+                                
+                                <option value="Al">Al</option>
+                                
+                                <option value="As_">As_</option>
+                                
+                                <option value="B">B</option>
+                                
+                                <option value="BICARBONATO">BICARBONATO</option>
+                                
+                                <option value="Ba">Ba</option>
+                                
+                                <option value="Be">Be</option>
+                                
+                                <option value="Br">Br</option>
+                                
+                                <option value="CARBONATO">CARBONATO</option>
+                                
+                                <option value="CLORURO">CLORURO</option>
+                                
+                                <option value="CODIGO_MUESTRA">CODIGO_MUESTRA</option>
+                                
+                                <option value="COD_SNGM">COD_SNGM</option>
+                                
+                                <option value="CONDUCT_LAB">CONDUCT_LAB</option>
+                                
+                                <option value="COT">COT</option>
+                                
+                                <option value="Ca">Ca</option>
+                                
+                                <option value="Cd">Cd</option>
+                                
+                                <option value="Ce">Ce</option>
+                                
+                                <option value="Co">Co</option>
+                                
+                                <option value="Cr">Cr</option>
+                                
+                                <option value="Cs">Cs</option>
+                                
+                                <option value="Cu">Cu</option>
+                                
+                                <option value="DIAG_STIFF">DIAG_STIFF</option>
+                                
+                                <option value="DIOXIDO_CARBONO">DIOXIDO_CARBONO</option>
+                                
+                                <option value="Dy">Dy</option>
+                                
+                                <option value="Er">Er</option>
+                                
+                                <option value="Eu">Eu</option>
+                                
+                                <option value="F">F</option>
+                                
+                                <option value="Fe">Fe</option>
+                                
+                                <option value="Gd">Gd</option>
+                                
+                                <option value="Hf">Hf</option>
+                                
+                                <option value="Hg">Hg</option>
+                                
+                                <option value="Ho">Ho</option>
+                                
+                                <option value="K">K</option>
+                                
+                                <option value="La">La</option>
+                                
+                                <option value="Li">Li</option>
+                                
+                                <option value="Lu">Lu</option>
+                                
+                                <option value="Mg">Mg</option>
+                                
+                                <option value="Mn">Mn</option>
+                                
+                                <option value="Mo">Mo</option>
+                                
+                                <option value="NITRATO">NITRATO</option>
+                                
+                                <option value="NITRITO">NITRITO</option>
+                                
+                                <option value="Na">Na</option>
+                                
+                                <option value="Nd">Nd</option>
+                                
+                                <option value="Ni">Ni</option>
+                                
+                                <option value="P">P</option>
+                                
+                                <option value="PH_LAB">PH_LAB</option>
+                                
+                                <option value="Pb">Pb</option>
+                                
+                                <option value="Pr">Pr</option>
+                                
+                                <option value="REFERENCIA">REFERENCIA</option>
+                                
+                                <option value="Ru">Ru</option>
+                                
+                                <option value="SALINIDAD">SALINIDAD</option>
+                                
+                                <option value="SDT">SDT</option>
+                                
+                                <option value="SULFATO">SULFATO</option>
+                                
+                                <option value="Sb">Sb</option>
+                                
+                                <option value="Se">Se</option>
+                                
+                                <option value="SiO2">SiO2</option>
+                                
+                                <option value="Sm">Sm</option>
+                                
+                                <option value="Sn">Sn</option>
+                                
+                                <option value="Sr">Sr</option>
+                                
+                                <option value="TEMP_LAB">TEMP_LAB</option>
+                                
+                                <option value="TIPO_AGUA">TIPO_AGUA</option>
+                                
+                                <option value="Ta">Ta</option>
+                                
+                                <option value="Tb">Tb</option>
+                                
+                                <option value="Th">Th</option>
+                                
+                                <option value="Tl">Tl</option>
+                                
+                                <option value="Tm">Tm</option>
+                                
+                                <option value="U">U</option>
+                                
+                                <option value="Unnamed: 0">Unnamed: 0</option>
+                                
+                                <option value="V">V</option>
+                                
+                                <option value="Y">Y</option>
+                                
+                                <option value="Yb">Yb</option>
+                                
+                                <option value="Zn">Zn</option>
+                                
+                                <option value="l">l</option>
+                                
+                            </select>
+                                
+                        </td>
+                        <td>
+                            <p id="aCod">Sin validar</p>
+                                
+                        </td>
+                            
+                    </tr>                            
+                    <tr>
+                        <td>Clase 1</td>
+                        <td>
+                                
+                            <select id="Clase1" name="Clase1" class="form-select" aria-label="Default select example" required>
+                                <option selected>Ninguno</option>
+                                
+                                <option value="ALCALINIDAD">ALCALINIDAD</option>
+                                
+                                <option value="AMONIO">AMONIO</option>
+                                
+                                <option value="Ag">Ag</option>
+                                
+                                <option value="Al">Al</option>
+                                
+                                <option value="As_">As_</option>
+                                
+                                <option value="B">B</option>
+                                
+                                <option value="BICARBONATO">BICARBONATO</option>
+                                
+                                <option value="Ba">Ba</option>
+                                
+                                <option value="Be">Be</option>
+                                
+                                <option value="Br">Br</option>
+                                
+                                <option value="CARBONATO">CARBONATO</option>
+                                
+                                <option value="CLORURO">CLORURO</option>
+                                
+                                <option value="CODIGO_MUESTRA">CODIGO_MUESTRA</option>
+                                
+                                <option value="COD_SNGM">COD_SNGM</option>
+                                
+                                <option value="CONDUCT_LAB">CONDUCT_LAB</option>
+                                
+                                <option value="COT">COT</option>
+                                
+                                <option value="Ca">Ca</option>
+                                
+                                <option value="Cd">Cd</option>
+                                
+                                <option value="Ce">Ce</option>
+                                
+                                <option value="Co">Co</option>
+                                
+                                <option value="Cr">Cr</option>
+                                
+                                <option value="Cs">Cs</option>
+                                
+                                <option value="Cu">Cu</option>
+                                
+                                <option value="DIAG_STIFF">DIAG_STIFF</option>
+                                
+                                <option value="DIOXIDO_CARBONO">DIOXIDO_CARBONO</option>
+                                
+                                <option value="Dy">Dy</option>
+                                
+                                <option value="Er">Er</option>
+                                
+                                <option value="Eu">Eu</option>
+                                
+                                <option value="F">F</option>
+                                
+                                <option value="Fe">Fe</option>
+                                
+                                <option value="Gd">Gd</option>
+                                
+                                <option value="Hf">Hf</option>
+                                
+                                <option value="Hg">Hg</option>
+                                
+                                <option value="Ho">Ho</option>
+                                
+                                <option value="K">K</option>
+                                
+                                <option value="La">La</option>
+                                
+                                <option value="Li">Li</option>
+                                
+                                <option value="Lu">Lu</option>
+                                
+                                <option value="Mg">Mg</option>
+                                
+                                <option value="Mn">Mn</option>
+                                
+                                <option value="Mo">Mo</option>
+                                
+                                <option value="NITRATO">NITRATO</option>
+                                
+                                <option value="NITRITO">NITRITO</option>
+                                
+                                <option value="Na">Na</option>
+                                
+                                <option value="Nd">Nd</option>
+                                
+                                <option value="Ni">Ni</option>
+                                
+                                <option value="P">P</option>
+                                
+                                <option value="PH_LAB">PH_LAB</option>
+                                
+                                <option value="Pb">Pb</option>
+                                
+                                <option value="Pr">Pr</option>
+                                
+                                <option value="REFERENCIA">REFERENCIA</option>
+                                
+                                <option value="Ru">Ru</option>
+                                
+                                <option value="SALINIDAD">SALINIDAD</option>
+                                
+                                <option value="SDT">SDT</option>
+                                
+                                <option value="SULFATO">SULFATO</option>
+                                
+                                <option value="Sb">Sb</option>
+                                
+                                <option value="Se">Se</option>
+                                
+                                <option value="SiO2">SiO2</option>
+                                
+                                <option value="Sm">Sm</option>
+                                
+                                <option value="Sn">Sn</option>
+                                
+                                <option value="Sr">Sr</option>
+                                
+                                <option value="TEMP_LAB">TEMP_LAB</option>
+                                
+                                <option value="TIPO_AGUA">TIPO_AGUA</option>
+                                
+                                <option value="Ta">Ta</option>
+                                
+                                <option value="Tb">Tb</option>
+                                
+                                <option value="Th">Th</option>
+                                
+                                <option value="Tl">Tl</option>
+                                
+                                <option value="Tm">Tm</option>
+                                
+                                <option value="U">U</option>
+                                
+                                <option value="Unnamed: 0">Unnamed: 0</option>
+                                
+                                <option value="V">V</option>
+                                
+                                <option value="Y">Y</option>
+                                
+                                <option value="Yb">Yb</option>
+                                
+                                <option value="Zn">Zn</option>
+                                
+                                <option value="l">l</option>
+                                
+                            </select>
+                                
+                        </td>
+                        <td>
+                            <p id="aClase1">Sin validar</p>
+                                
+                        </td>
+                            
+                    </tr>
+                    <tr>
+                        <td>Clase 2</td>
+                        <td>
+                                
+                            <select id="Clase2" name="Clase2" class="form-select" aria-label="Default select example" required>
+                                <option selected>Ninguno</option>
+                                
+                                <option value="ALCALINIDAD">ALCALINIDAD</option>
+                                
+                                <option value="AMONIO">AMONIO</option>
+                                
+                                <option value="Ag">Ag</option>
+                                
+                                <option value="Al">Al</option>
+                                
+                                <option value="As_">As_</option>
+                                
+                                <option value="B">B</option>
+                                
+                                <option value="BICARBONATO">BICARBONATO</option>
+                                
+                                <option value="Ba">Ba</option>
+                                
+                                <option value="Be">Be</option>
+                                
+                                <option value="Br">Br</option>
+                                
+                                <option value="CARBONATO">CARBONATO</option>
+                                
+                                <option value="CLORURO">CLORURO</option>
+                                
+                                <option value="CODIGO_MUESTRA">CODIGO_MUESTRA</option>
+                                
+                                <option value="COD_SNGM">COD_SNGM</option>
+                                
+                                <option value="CONDUCT_LAB">CONDUCT_LAB</option>
+                                
+                                <option value="COT">COT</option>
+                                
+                                <option value="Ca">Ca</option>
+                                
+                                <option value="Cd">Cd</option>
+                                
+                                <option value="Ce">Ce</option>
+                                
+                                <option value="Co">Co</option>
+                                
+                                <option value="Cr">Cr</option>
+                                
+                                <option value="Cs">Cs</option>
+                                
+                                <option value="Cu">Cu</option>
+                                
+                                <option value="DIAG_STIFF">DIAG_STIFF</option>
+                                
+                                <option value="DIOXIDO_CARBONO">DIOXIDO_CARBONO</option>
+                                
+                                <option value="Dy">Dy</option>
+                                
+                                <option value="Er">Er</option>
+                                
+                                <option value="Eu">Eu</option>
+                                
+                                <option value="F">F</option>
+                                
+                                <option value="Fe">Fe</option>
+                                
+                                <option value="Gd">Gd</option>
+                                
+                                <option value="Hf">Hf</option>
+                                
+                                <option value="Hg">Hg</option>
+                                
+                                <option value="Ho">Ho</option>
+                                
+                                <option value="K">K</option>
+                                
+                                <option value="La">La</option>
+                                
+                                <option value="Li">Li</option>
+                                
+                                <option value="Lu">Lu</option>
+                                
+                                <option value="Mg">Mg</option>
+                                
+                                <option value="Mn">Mn</option>
+                                
+                                <option value="Mo">Mo</option>
+                                
+                                <option value="NITRATO">NITRATO</option>
+                                
+                                <option value="NITRITO">NITRITO</option>
+                                
+                                <option value="Na">Na</option>
+                                
+                                <option value="Nd">Nd</option>
+                                
+                                <option value="Ni">Ni</option>
+                                
+                                <option value="P">P</option>
+                                
+                                <option value="PH_LAB">PH_LAB</option>
+                                
+                                <option value="Pb">Pb</option>
+                                
+                                <option value="Pr">Pr</option>
+                                
+                                <option value="REFERENCIA">REFERENCIA</option>
+                                
+                                <option value="Ru">Ru</option>
+                                
+                                <option value="SALINIDAD">SALINIDAD</option>
+                                
+                                <option value="SDT">SDT</option>
+                                
+                                <option value="SULFATO">SULFATO</option>
+                                
+                                <option value="Sb">Sb</option>
+                                
+                                <option value="Se">Se</option>
+                                
+                                <option value="SiO2">SiO2</option>
+                                
+                                <option value="Sm">Sm</option>
+                                
+                                <option value="Sn">Sn</option>
+                                
+                                <option value="Sr">Sr</option>
+                                
+                                <option value="TEMP_LAB">TEMP_LAB</option>
+                                
+                                <option value="TIPO_AGUA">TIPO_AGUA</option>
+                                
+                                <option value="Ta">Ta</option>
+                                
+                                <option value="Tb">Tb</option>
+                                
+                                <option value="Th">Th</option>
+                                
+                                <option value="Tl">Tl</option>
+                                
+                                <option value="Tm">Tm</option>
+                                
+                                <option value="U">U</option>
+                                
+                                <option value="Unnamed: 0">Unnamed: 0</option>
+                                
+                                <option value="V">V</option>
+                                
+                                <option value="Y">Y</option>
+                                
+                                <option value="Yb">Yb</option>
+                                
+                                <option value="Zn">Zn</option>
+                                
+                                <option value="l">l</option>
+                                
+                            </select>
+                                
+                        </td>
+                        <td>
+                            <p id="aClase2">Sin validar</p>
+                                
+                        </td>
+                            
+                    </tr>
+                    
+                        
+                        
+                    
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</form>
+
+<br>
+<div class="btn-text-center">
+    <button id="run2" type="button" class="btn btn-primary" pys-onClick="count2">Validar</button>
+</div>
+<div class="btn-text-right">
+    <input id= "sgte" type="submit" form="Ftabval" value="Siguiente" disabled="disabled">
+    <!--<button id = "sgte" type="button" onclick= "window.location.href=/Prueba;" disabled>Siguiente</button>-->
+</div>
+
+
+<py-script>
+    import pandas as pd
+    tipograf= "Parámetros Piper"=="Parámetros Schoeller"
+    dtipos= {&#39;ALCALINIDAD&#39;: &#39;float32&#39;, &#39;AMONIO&#39;: &#39;float32&#39;, &#39;Ag&#39;: &#39;float32&#39;, &#39;Al&#39;: &#39;float32&#39;, &#39;As_&#39;: &#39;float32&#39;, &#39;B&#39;: &#39;float32&#39;, &#39;BICARBONATO&#39;: &#39;float32&#39;, &#39;Ba&#39;: &#39;float32&#39;, &#39;Be&#39;: &#39;float32&#39;, &#39;Br&#39;: &#39;float32&#39;, &#39;CARBONATO&#39;: &#39;float32&#39;, &#39;CLORURO&#39;: &#39;float32&#39;, &#39;CODIGO_MUESTRA&#39;: &#39;object&#39;, &#39;COD_SNGM&#39;: &#39;float32&#39;, &#39;CONDUCT_LAB&#39;: &#39;float32&#39;, &#39;COT&#39;: &#39;float32&#39;, &#39;Ca&#39;: &#39;float32&#39;, &#39;Cd&#39;: &#39;float32&#39;, &#39;Ce&#39;: &#39;float32&#39;, &#39;Co&#39;: &#39;float32&#39;, &#39;Cr&#39;: &#39;float32&#39;, &#39;Cs&#39;: &#39;float32&#39;, &#39;Cu&#39;: &#39;float32&#39;, &#39;DIAG_STIFF&#39;: &#39;float32&#39;, &#39;DIOXIDO_CARBONO&#39;: &#39;float32&#39;, &#39;Dy&#39;: &#39;float32&#39;, &#39;Er&#39;: &#39;float32&#39;, &#39;Eu&#39;: &#39;float32&#39;, &#39;F&#39;: &#39;float32&#39;, &#39;Fe&#39;: &#39;float32&#39;, &#39;Gd&#39;: &#39;float32&#39;, &#39;Hf&#39;: &#39;float32&#39;, &#39;Hg&#39;: &#39;float32&#39;, &#39;Ho&#39;: &#39;float32&#39;, &#39;K&#39;: &#39;float32&#39;, &#39;La&#39;: &#39;float32&#39;, &#39;Li&#39;: &#39;float32&#39;, &#39;Lu&#39;: &#39;float32&#39;, &#39;Mg&#39;: &#39;float32&#39;, &#39;Mn&#39;: &#39;float32&#39;, &#39;Mo&#39;: &#39;float32&#39;, &#39;NITRATO&#39;: &#39;float32&#39;, &#39;NITRITO&#39;: &#39;float32&#39;, &#39;Na&#39;: &#39;float32&#39;, &#39;Nd&#39;: &#39;float32&#39;, &#39;Ni&#39;: &#39;float32&#39;, &#39;P&#39;: &#39;float32&#39;, &#39;PH_LAB&#39;: &#39;float32&#39;, &#39;Pb&#39;: &#39;float32&#39;, &#39;Pr&#39;: &#39;float32&#39;, &#39;REFERENCIA&#39;: &#39;object&#39;, &#39;Ru&#39;: &#39;float32&#39;, &#39;SALINIDAD&#39;: &#39;object&#39;, &#39;SDT&#39;: &#39;float32&#39;, &#39;SULFATO&#39;: &#39;float32&#39;, &#39;Sb&#39;: &#39;float32&#39;, &#39;Se&#39;: &#39;float32&#39;, &#39;SiO2&#39;: &#39;float32&#39;, &#39;Sm&#39;: &#39;float32&#39;, &#39;Sn&#39;: &#39;float32&#39;, &#39;Sr&#39;: &#39;float32&#39;, &#39;TEMP_LAB&#39;: &#39;float32&#39;, &#39;TIPO_AGUA&#39;: &#39;object&#39;, &#39;Ta&#39;: &#39;float32&#39;, &#39;Tb&#39;: &#39;float32&#39;, &#39;Th&#39;: &#39;float32&#39;, &#39;Tl&#39;: &#39;float32&#39;, &#39;Tm&#39;: &#39;float32&#39;, &#39;U&#39;: &#39;float32&#39;, &#39;Unnamed: 0&#39;: &#39;float32&#39;, &#39;V&#39;: &#39;float32&#39;, &#39;Y&#39;: &#39;float32&#39;, &#39;Yb&#39;: &#39;float32&#39;, &#39;Zn&#39;: &#39;float32&#39;, &#39;l&#39;: &#39;float32&#39;}
+    def count(*args, **kwargs):
+        check=list()
+        
+        input_text = Element("Cl")    
+        fin="a"+"Cl"
+        op = Element(fin)
+        try: GG= dtipos[input_text.value]== "float64"
+        except: GG= False
+        if GG or tipograf:
+            key= "Válido"
+            if input_text.value == "Sup":
+                key= "Se elimina"
+            check.append(key)
+        else: key = "Revisar valores"
+        number = len(input_text.value)
+        op.write(key)
+        if len(check) == len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)) or tipograf: document.getElementById("sgte").disabled = False
+        elif len(check) != len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)): document.getElementById("sgte").disabled = True
+        
+        input_text = Element("SO4")    
+        fin="a"+"SO4"
+        op = Element(fin)
+        try: GG= dtipos[input_text.value]== "float64"
+        except: GG= False
+        if GG or tipograf:
+            key= "Válido"
+            if input_text.value == "Sup":
+                key= "Se elimina"
+            check.append(key)
+        else: key = "Revisar valores"
+        number = len(input_text.value)
+        op.write(key)
+        if len(check) == len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)) or tipograf: document.getElementById("sgte").disabled = False
+        elif len(check) != len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)): document.getElementById("sgte").disabled = True
+        
+        input_text = Element("HCO3")    
+        fin="a"+"HCO3"
+        op = Element(fin)
+        try: GG= dtipos[input_text.value]== "float64"
+        except: GG= False
+        if GG or tipograf:
+            key= "Válido"
+            if input_text.value == "Sup":
+                key= "Se elimina"
+            check.append(key)
+        else: key = "Revisar valores"
+        number = len(input_text.value)
+        op.write(key)
+        if len(check) == len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)) or tipograf: document.getElementById("sgte").disabled = False
+        elif len(check) != len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)): document.getElementById("sgte").disabled = True
+        
+        input_text = Element("CO3")    
+        fin="a"+"CO3"
+        op = Element(fin)
+        try: GG= dtipos[input_text.value]== "float64"
+        except: GG= False
+        if GG or tipograf:
+            key= "Válido"
+            if input_text.value == "Sup":
+                key= "Se elimina"
+            check.append(key)
+        else: key = "Revisar valores"
+        number = len(input_text.value)
+        op.write(key)
+        if len(check) == len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)) or tipograf: document.getElementById("sgte").disabled = False
+        elif len(check) != len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)): document.getElementById("sgte").disabled = True
+        
+        input_text = Element("Na")    
+        fin="a"+"Na"
+        op = Element(fin)
+        try: GG= dtipos[input_text.value]== "float64"
+        except: GG= False
+        if GG or tipograf:
+            key= "Válido"
+            if input_text.value == "Sup":
+                key= "Se elimina"
+            check.append(key)
+        else: key = "Revisar valores"
+        number = len(input_text.value)
+        op.write(key)
+        if len(check) == len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)) or tipograf: document.getElementById("sgte").disabled = False
+        elif len(check) != len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)): document.getElementById("sgte").disabled = True
+        
+        input_text = Element("Ca")    
+        fin="a"+"Ca"
+        op = Element(fin)
+        try: GG= dtipos[input_text.value]== "float64"
+        except: GG= False
+        if GG or tipograf:
+            key= "Válido"
+            if input_text.value == "Sup":
+                key= "Se elimina"
+            check.append(key)
+        else: key = "Revisar valores"
+        number = len(input_text.value)
+        op.write(key)
+        if len(check) == len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)) or tipograf: document.getElementById("sgte").disabled = False
+        elif len(check) != len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)): document.getElementById("sgte").disabled = True
+        
+        input_text = Element("Mg")    
+        fin="a"+"Mg"
+        op = Element(fin)
+        try: GG= dtipos[input_text.value]== "float64"
+        except: GG= False
+        if GG or tipograf:
+            key= "Válido"
+            if input_text.value == "Sup":
+                key= "Se elimina"
+            check.append(key)
+        else: key = "Revisar valores"
+        number = len(input_text.value)
+        op.write(key)
+        if len(check) == len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)) or tipograf: document.getElementById("sgte").disabled = False
+        elif len(check) != len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)): document.getElementById("sgte").disabled = True
+        
+        input_text = Element("K")    
+        fin="a"+"K"
+        op = Element(fin)
+        try: GG= dtipos[input_text.value]== "float64"
+        except: GG= False
+        if GG or tipograf:
+            key= "Válido"
+            if input_text.value == "Sup":
+                key= "Se elimina"
+            check.append(key)
+        else: key = "Revisar valores"
+        number = len(input_text.value)
+        op.write(key)
+        if len(check) == len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)) or tipograf: document.getElementById("sgte").disabled = False
+        elif len(check) != len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)): document.getElementById("sgte").disabled = True
+        
+        input_text = Element("TDS")    
+        fin="a"+"TDS"
+        op = Element(fin)
+        try: GG= dtipos[input_text.value]== "float64"
+        except: GG= False
+        if GG or tipograf:
+            key= "Válido"
+            if input_text.value == "Sup":
+                key= "Se elimina"
+            check.append(key)
+        else: key = "Revisar valores"
+        number = len(input_text.value)
+        op.write(key)
+        if len(check) == len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)) or tipograf: document.getElementById("sgte").disabled = False
+        elif len(check) != len((&#39;Cl&#39;, &#39;SO4&#39;, &#39;HCO3&#39;, &#39;CO3&#39;, &#39;Na&#39;, &#39;Ca&#39;, &#39;Mg&#39;, &#39;K&#39;, &#39;TDS&#39;)): document.getElementById("sgte").disabled = True
+        
+    
+    def count2(*args, **kwargs):
+        check=list()
+        sel=["Clase1","Clase2"]
+        for i in sel:
+            input_text = Element(i)    
+            fin="a"+i
+            op = Element(fin)
+            if dtipos[input_text.value] == "object":
+                key= "Válido"
+                check.append(key)
+            else: key = "Revisar valores"
+            number = len(input_text.value)
+            op.write(key)
+            
+      
+        
+</py-script>           
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script> 
+
+  </div>
+      
+    
+  <!-- JavaScript Bundle with Popper -->
+
+
+
+
+</body>
+
+</html>

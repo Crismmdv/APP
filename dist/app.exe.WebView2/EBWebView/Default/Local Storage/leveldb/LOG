@@ -1,2 +1,3 @@
-2023/02/17-16:22:22.550 657c Creating DB C:\Users\cristobal.machuca\OneDrive - ug.uchile.cl\APP_02-08\APP\dist\app.exe.WebView2\EBWebView\Default\Local Storage\leveldb since it was missing.
-2023/02/17-16:22:22.564 657c Reusing MANIFEST C:\Users\cristobal.machuca\OneDrive - ug.uchile.cl\APP_02-08\APP\dist\app.exe.WebView2\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001
+2023/02/27-15:50:24.084 2490 Reusing MANIFEST C:\Users\cristobal.machuca\OneDrive - ug.uchile.cl\APP_02-08\APP\dist\app.exe.WebView2\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001
+2023/02/27-15:50:24.087 2490 Recovering log #3
+2023/02/27-15:50:24.089 2490 Reusing old log C:\Users\cristobal.machuca\OneDrive - ug.uchile.cl\APP_02-08\APP\dist\app.exe.WebView2\EBWebView\Default\Local Storage\leveldb/000003.log 

@@ -10,7 +10,7 @@ from wtforms.validators import InputRequired
 
 class Config:
     #SERVER_NAME = 'localhost:5000'
-    DEBUG = False
+    DEBUG = True
 
     
     TEMPLATE_FOLDER ="views/templates/"

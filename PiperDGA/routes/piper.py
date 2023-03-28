@@ -206,10 +206,10 @@ def plot_piper(df,
     plt.text(0.75+offset, h+offset*np.tan(np.pi/3), 'B', ha='center', va='center', rotation=0, fontsize=10)
     plt.text(1.25+1*offset, h+offset*np.tan(np.pi/3), 'C', ha='center', va='center', rotation=0, fontsize=10)
     plt.text(1+offset, h+offset*np.tan(np.pi/3)-0.5/(2)*np.tan(np.pi/3), 'D', ha='center', va='center', rotation=0, fontsize=10)
-
-    plt.text(1.5+offset, (1+offset)*np.tan(np.pi/3), 'A: Sulfatadas y/o cloruradas \n     cálcicas y/o magnésicas \nB: Bicarbonatadas cálcicas \n     y/o magnésicas \nC: Cloruradas y/o sulfatadas\n     sódicas \nD: Bicarbonatadas sódicas', ha='left', va='center', rotation=0, fontsize=10)
-    plt.text(1.5+offset, (1-1.5*offset)*np.tan(np.pi/3), 'a: Magnésicas \nb: Cálcicas \nc: Sódicas \nm: Mixtas', ha='left', va='bottom', rotation=0, fontsize=10)
-    plt.text(1.75+2*offset, (1-1.5*offset)*np.tan(np.pi/3), 'd: Sulfatadas \ne: Bicarbonatadas \nf: Cloruradas \nm: Mixtas', ha='left', va='bottom', rotation=0, fontsize=10)
+    ub=2
+    plt.text(1.5+offset, ub, 'A: sulfatadas y/o cloruradas cálcicas y/o magnésicas \nB: bicarbonatadas cálcicas y/o magnésicas \nC: cloruradas y/o sulfatadas sódicas \nD: bicarbonatadas sódicas', ha='left', va='top', rotation=0, fontsize=10)
+    plt.text(1.5+offset, ub-0.21, 'a: magnésicas \nb: cálcicas \nc: sódicas \nd: sulfatadas \ne: bicarbonatadas \nf : cloruradas', ha='left', va='top', rotation=0, fontsize=10)
+    #plt.text(1.75+2*offset, (1-1.5*offset)*np.tan(np.pi/3), 'd: Sulfatadas \ne: Bicarbonatadas \nf: Cloruradas \nm: Mixtas', ha='left', va='bottom', rotation=0, fontsize=10)
 
     plt.text(0.5, -1.25*offset, 'CATIÓN', ha='center', va='bottom', rotation=0, fontsize=10)
     plt.text(1.5+2*offset, -1.25*offset, 'ANIÓN', ha='center', va='bottom', rotation=0, fontsize=10)
@@ -352,11 +352,11 @@ def plot_piper(df,
                           orientation='vertical', fraction=0.025, pad=0.05)
         cb.ax.set_ylabel('$TDS$' + ' ' + '$(mg/L)$', rotation=90, labelpad=-75, fontsize=10)
     if lyd==list():
-        lgd=plt.legend(bbox_to_anchor=(-0.1, 1.05), markerscale=1, fontsize=10, borderaxespad=1,
+        lgd=plt.legend(bbox_to_anchor=(-0.1, (ub*0.5+0.029)), markerscale=1, fontsize=10, borderaxespad=1,
                 frameon=False, loc="upper left",
                 labelspacing=0.25, handletextpad=0.25,ncol=nc)
     else:
-        lgd=plt.legend(handles=lyd,bbox_to_anchor=(-0.1, 1.05), markerscale=1, fontsize=10, borderaxespad=1,
+        lgd=plt.legend(handles=lyd,bbox_to_anchor=(-0.1, (ub*0.5+0.029)), markerscale=1, fontsize=10, borderaxespad=1,
                 frameon=False, loc="upper left",
                 labelspacing=0.25, handletextpad=0.25,ncol=nc)
     # Display the info

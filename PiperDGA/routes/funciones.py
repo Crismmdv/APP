@@ -263,11 +263,11 @@ def corregir_BD(DATA3):
         except: continue
     return DATA3
 
-def ncolorandom2(j):
+def ncolorandom2(j,cc='tab20'):
     colores=list()
-    clp=cm.get_cmap('tab20') if j <=20 else cm.get_cmap('gist_rainbow')
+    clp=cm.get_cmap(cc) if j <=20 else cm.get_cmap('gist_rainbow')
     for i in range (0,j):
-        colores.append([list(clp(i/j)),])
+        colores.append([list(clp(i/(j-1))),])
     #n=len(colores)
     """ret=list()
     for i in range(0,j,1):
@@ -753,7 +753,7 @@ def grafico_bal(Bal=pd.DataFrame(), v1='Balance %',xv=['TDS'], filt=['Tipo'],fec
     return 'graf bal'
 
 
-def ncolran_dic(Y_df,cla,T=True):
+def ncolran_dic(Y_df,cla,T=True,cc='tab20'):
 
     
     #print (list(Line2D.filled_markers))
@@ -766,7 +766,7 @@ def ncolran_dic(Y_df,cla,T=True):
     clases1=list(Y_df.groupby([cla["Clase1"]]).groups.keys())
     clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
 
-    colores=ncolorandom2(len(clases1))
+    colores=ncolorandom2(len(clases1),cc=cc)
     simbolos=ncolorandom_ord(len(clases2),simb)
     #print (colores)            
             

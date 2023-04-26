@@ -96,7 +96,7 @@ def creardf_piper(Y_df,sz=60, di=dict(),cla="",std=False, dict_col="", dict_sim=
         filtro_1=list()
     if cla=="":
         format_df['Label'] = "Muestras"
-        format_df['Color'] = "gray"
+        format_df['Color'] = "cyan"
         format_df['Marker'] = "o"
         lyd=dict()
         format_df['Label_layout']= format_df['Label']
@@ -150,7 +150,7 @@ def creardf_piper(Y_df,sz=60, di=dict(),cla="",std=False, dict_col="", dict_sim=
                 #clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
                 dict_col=dict(zip(clases1,colores))
                 #dict_sim=dict(zip(clases2,simbolos))
-                lyd=dict()
+                lyd=leyenda_2S(cla, dic_tmp=dict_col)
                 y_seven = Y_df[cla['Clase1']].copy()
                 #y_t = Y_df['Clase2'].copy()
                 for i in clases1:
@@ -168,12 +168,12 @@ def creardf_piper(Y_df,sz=60, di=dict(),cla="",std=False, dict_col="", dict_sim=
                 clases2=list(Y_df.groupby([cla["Clase2"]]).groups.keys())
                 #dict_col=dict(zip(clases1,colores))
                 dict_sim=dict(zip(clases2,simbolos))
-                lyd=dict()
+                lyd=leyenda_2S(cla,dic_mar=dict_sim)
                 #y_seven = Y_df[cla['Clase1']].copy()
                 y_t = Y_df[cla['Clase2']].copy()
                 for i in clases2:
                     format_df.loc[y_t==i, 'Marker'] = dict_sim[i]
-                format_df['Color'] = "blue"
+                format_df['Color'] = "cyan"
                 format_df['Label'] = (Y_df[cla['Clase2']])
                 format_df['Label_layout']= format_df['Label']
     else: 
@@ -862,15 +862,25 @@ def graf_isotopos(ax,rectas_aux=dict(),xlim=(-15,0),ylim=(-110,0),zoom=True,z_do
     return axins
 ################################# FIN FUNC ISOTOPOS ##################################################3
 ### funcion leyenda###
-def leyenda_2S(cla,dic_mar,dic_tmp):
+def leyenda_2S(cla,dic_mar="",dic_tmp=""):
     lgdM=list()
     lgdC=list()
-    if cla['Clase1']==cla['Clase2']:
+    if len(cla)==2 and cla['Clase1']==cla['Clase2']:
             for dc in dic_mar.keys():
                 if isinstance(dc,datetime.date): ndc= conv_fecha(dc)
                 else: ndc=dc
                 
                 lgdM.append(mlines.Line2D([],[],markerfacecolor=dic_tmp[dc][0],markeredgecolor='k',marker=dic_mar[dc],linestyle='None', markersize=8, label=ndc))
+    elif dic_mar=="" :
+         for dc in dic_tmp.keys():
+            if isinstance(dc,datetime.date): ndc= conv_fecha(dc)
+            else: ndc=dc
+            lgdC.append(mlines.Line2D([],[],markerfacecolor=dic_tmp[dc],marker='o',markeredgecolor='k',linestyle='None', markersize=10, label=ndc))
+    elif dic_tmp=="" :
+        for dc in dic_mar.keys():
+            if isinstance(dc,datetime.date): ndc= conv_fecha(dc)
+            else: ndc=dc
+            lgdM.append(mlines.Line2D([],[],markerfacecolor='cyan',markeredgecolor='k',marker=dic_mar[dc],linestyle='None', markersize=8, label=ndc))
     else:
         for dc in dic_mar.keys():
             if isinstance(dc,datetime.date): ndc= conv_fecha(dc)

@@ -1,6 +1,8 @@
 from . import app
-#import webview
-#window=webview.create_window('APPiper',app)
+import webview
+
 if __name__=="__main__":
-    app.run()
-#   webview.start()
+
+    window=webview.create_window('APPiper',app)
+    #app.run()
+    webview.start()

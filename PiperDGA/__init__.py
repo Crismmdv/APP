@@ -87,9 +87,12 @@ def Tablas():
             #dtipo=dtipo | dict(zip(['Eliminar'],['object']))
             session['dtipo']=dtipo
         except:
-            tit = pd.read_csv(ruta, encoding='utf-8', sep=';')
+            try: tit= pd.read_csv(ruta, encoding='utf-8', sep=';')
+            except: tit = pd.read_csv(ruta, encoding='latin', sep=';')
             #session["CSV"]=tit
-            if len(tit.columns.values[0])>30: tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
+            if len(tit.columns.values[0])>30:
+                try:tit = pd.read_csv(ruta, encoding='utf-8', sep=',')
+                except:tit = pd.read_csv(ruta, encoding='latin', sep=',')
             if session['corregir']: 
                 tit=corregir_BD(tit)
             tit.to_csv(ruta, encoding='utf-8', sep=',')

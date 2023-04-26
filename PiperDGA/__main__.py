@@ -2,7 +2,10 @@ from . import app
 import webview
 
 if __name__=="__main__":
+    ## SERVER ##
+    app.run()
 
-    window=webview.create_window('APPiper',app)
-    #app.run()
-    webview.start()
+    #APP
+    #window=webview.create_window('APPiper',app)
+    
+    #webview.start()

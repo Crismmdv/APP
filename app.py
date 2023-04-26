@@ -4,8 +4,9 @@ from flaskwebgui import FlaskUI
 #CORS(app)
 
 if __name__ =="__main__":
-    #app.run()
-    #FlaskUI(app=app, server="flask").run()
+    app.run()
+    
     ### Ativar para app en ventana. Desactivar para server.
-    window=webview.create_window('APPiper',app)
-    webview.start()
+    #FlaskUI(app=app, server="flask").run()
+    #window=webview.create_window('APPiper',app)
+    #webview.start()

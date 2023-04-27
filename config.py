@@ -9,7 +9,7 @@ from wtforms.validators import InputRequired
 #load_dotenv()
 
 class Config:
-    SERVER_NAME = 'localhost:5000'
+    SERVER_NAME = 'localhost.localdomain'
     DEBUG = False
 
     

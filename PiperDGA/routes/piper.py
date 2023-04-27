@@ -207,9 +207,9 @@ def plot_piper(df,
     plt.text(1.25+1*offset, h+offset*np.tan(np.pi/3), 'C', ha='center', va='center', rotation=0, fontsize=10)
     plt.text(1+offset, h+offset*np.tan(np.pi/3)-0.5/(2)*np.tan(np.pi/3), 'D', ha='center', va='center', rotation=0, fontsize=10)
     ub=2
-    plt.text(1.4+offset, ub, 'A: sulfatadas y/o cloruradas cálcicas y/o magnésicas \nB: bicarbonatadas cálcicas y/o magnésicas \nC: cloruradas y/o sulfatadas sódicas \nD: bicarbonatadas sódicas', ha='left', va='top', rotation=0, fontsize=10)
-    plt.text(1.4+offset, ub-0.31, 'a: magnésicas \nb: cálcicas \nc: sódicas', ha='left', va='top', rotation=0, fontsize=10)
-    plt.text(1.65+2*offset, ub-0.31, 'd: sulfatadas \ne: bicarbonatadas \n f: cloruradas', ha='left', va='top', rotation=0, fontsize=10)
+    plt.text(1.38+offset, ub, 'A: sulfatadas y/o cloruradas cálcicas y/o magnésicas \nB: bicarbonatadas cálcicas y/o magnésicas \nC: cloruradas y/o sulfatadas sódicas \nD: bicarbonatadas sódicas', ha='left', va='top', rotation=0, fontsize=10)
+    plt.text(1.38+offset, ub-0.26, 'a: magnésicas \nb: cálcicas \nc: sódicas', ha='left', va='top', rotation=0, fontsize=10)
+    plt.text(1.63+2*offset, ub-0.26, 'd: sulfatadas \ne: bicarbonatadas \n f: cloruradas', ha='left', va='top', rotation=0, fontsize=10)
 
     plt.text(0.5, -1.25*offset, 'CATIÓN', ha='center', va='bottom', rotation=0, fontsize=10)
     plt.text(1.5+2*offset, -1.25*offset, 'ANIÓN', ha='center', va='bottom', rotation=0, fontsize=10)

@@ -8,5 +8,5 @@ if __name__ =="__main__":
     
     ### Ativar para app en ventana. Desactivar para server.
     #FlaskUI(app=app, server="flask").run()
-    #window=webview.create_window('APPiper',app)
+    # #window=webview.create_window('APPiper',app)
     #webview.start()

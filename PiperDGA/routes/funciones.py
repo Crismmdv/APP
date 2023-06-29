@@ -267,7 +267,8 @@ def ncolorandom2(j,cc='tab20'):
     colores=list()
     clp=cm.get_cmap(cc) if j <=20 else cm.get_cmap('gist_rainbow')
     for i in range (0,j):
-        colores.append([list(clp(i/(j-1))),])
+        if j==1: colores.append([[1,0,0,1]])
+        else: colores.append([list(clp(i/(j-1))),])
     #n=len(colores)
     """ret=list()
     for i in range(0,j,1):
